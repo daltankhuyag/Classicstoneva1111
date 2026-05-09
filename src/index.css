@@ -725,8 +725,9 @@ body {
 }
 .footer p {
   font-size: 0.78rem;
-  color: rgba(181,98,30,0.5);
+  color: var(--white);
   letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
 /* ── Nav active link ─────────────────────── */
