@@ -14,16 +14,16 @@ export default function Footer() {
               </p>
               <div className="contact-detail">
                 <span className="contact-detail-label">Phone</span>
-                <span className="contact-detail-val">(540) 555-0182</span>
+                <span className="contact-detail-val">(202) 227-0788</span>
               </div>
               <div className="contact-detail">
                 <span className="contact-detail-label">Email</span>
-                <span className="contact-detail-val">hello@classicstonebuilds.com</span>
+                <span className="contact-detail-val">Classicstoneva@gmail.com</span>
               </div>
               <div className="contact-detail">
                 <span className="contact-detail-label">Location</span>
                 <span className="contact-detail-val">
-                  Serving All of Virginia<br />Office: Charlottesville, VA
+                  Serving Arlington,Fairfax of Virginia<br />Office: Arlington, VA
                 </span>
               </div>
             </div>
