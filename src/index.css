@@ -204,6 +204,40 @@ body {
   gap: 2rem;
   list-style: none;
 }
+.navbar-menu-btn {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(212, 137, 90, 0.4);
+  border-radius: 999px;
+  background: rgba(18, 24, 30, 0.55);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+.navbar-menu-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--white);
+  transition: transform var(--transition), opacity var(--transition);
+}
+.menu-open .navbar-menu-btn {
+  background: rgba(18, 24, 30, 0.9);
+  border-color: var(--copper-light);
+}
+.menu-open .navbar-menu-btn span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-open .navbar-menu-btn span:nth-child(2) {
+  opacity: 0;
+}
+.menu-open .navbar-menu-btn span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
 .navbar-links a {
   color: var(--copper-light);
   font-size: 0.82rem;
@@ -1793,7 +1827,59 @@ body {
   .services-grid,
   .portfolio-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
-  .navbar-links { display: none; }
+  .topbar {
+    padding: 0 1rem;
+    max-height: 64px;
+  }
+  .topbar-inner {
+    gap: 0.75rem;
+    height: 34px;
+  }
+  .topbar-item {
+    font-size: 0.64rem;
+    letter-spacing: 0.03em;
+  }
+  .navbar-bar { padding: 0 1rem; }
+  .navbar-inner {
+    height: 72px;
+    position: relative;
+  }
+  .navbar-logo {
+    font-size: 1.1rem;
+    max-width: calc(100% - 70px);
+  }
+  .navbar-logo span {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+  }
+  .navbar-menu-btn { display: inline-flex; }
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.6rem;
+    background: rgba(28, 38, 46, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 137, 90, 0.24);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(8, 14, 28, 0.32);
+  }
+  .navbar-links.mobile-open { display: flex; }
+  .navbar-links li { list-style: none; }
+  .navbar-links a {
+    display: block;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    letter-spacing: 0.08em;
+  }
+  .navbar-links a:hover,
+  .navbar-links .nav-active {
+    background: rgba(212, 137, 90, 0.12);
+  }
   .portfolio { padding: 4rem 1rem; }
   .pw-materials {
     display: grid;
