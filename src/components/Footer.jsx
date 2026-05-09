@@ -53,7 +53,7 @@ export default function Footer() {
                 <label>Project Type</label>
                 <select>
                   <option value="">Select one...</option>
-                  <option>New Custom Home Build</option>
+                  <option>New Home Build</option>
                   <option>Land + Build Package</option>
                   <option>Addition or Renovation</option>
                   <option>Stone &amp; Masonry Work</option>
