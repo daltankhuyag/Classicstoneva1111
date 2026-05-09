@@ -24,7 +24,7 @@ export default function StonePartners() {
     <section className="sp-section">
       <div className="container">
         <div className="sp-header">
-          <span className="sp-label">Authorized Stone Partners</span>
+          <span className="sp-label"> Stone Partners</span>
           <span className="sp-tagline">
             We source exclusively from industry-leading suppliers — so every slab meets our quality standard.
           </span>
