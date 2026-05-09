@@ -75,7 +75,7 @@ export default function Footer() {
       </section>
 
       <footer className="footer">
-        <p>© 2026 Classic Stone Custom Homes · Charlottesville, Virginia · All Rights Reserved</p>
+        <p>© 2026 Classic Stone Design & Build · Arlington, Virginia · All Rights Reserved</p>
       </footer>
     </>
   )
