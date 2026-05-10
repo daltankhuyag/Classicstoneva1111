@@ -519,6 +519,9 @@ body {
 .pw-swatch {
   height: 52px;
   width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 /* Stone gradients */
 .sw-granite       { background: linear-gradient(135deg, #4e4a46 0%, #3a3632 50%, #5a5450 100%); }

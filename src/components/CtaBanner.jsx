@@ -3,11 +3,11 @@ import { useState, useMemo } from 'react'
 const PROJECTS_PER_PAGE = 3
 
 const MATERIALS = [
-  { name: 'Granite',    desc: 'Heat-resistant · Durable · Low maintenance',   cls: 'sw-granite'    },
-  { name: 'Quartzite',  desc: 'Natural stone · UV-resistant · Elegant',        cls: 'sw-quartzite'  },
-  { name: 'Marble',     desc: 'Timeless beauty · Unique natural veining',      cls: 'sw-marble'     },
-  { name: 'Limestone',  desc: 'Classic Virginia stone · Warm neutral tones',   cls: 'sw-limestone'  },
-  { name: 'Soapstone',  desc: 'Heat-tolerant · Vintage character · Smooth',    cls: 'sw-soapstone'  },
+  { name: 'Granite',    desc: 'Heat-resistant · Durable · Low maintenance',   cls: 'sw-granite',   image: '/Granite.jpg' },
+  { name: 'Quartzite',  desc: 'Natural stone · UV-resistant · Elegant',        cls: 'sw-quartzite', image: '/quartzite.jpg' },
+  { name: 'Marble',     desc: 'Timeless beauty · Unique natural veining',      cls: 'sw-marble',    image: '/marble.jpg' },
+  { name: 'Limestone',  desc: 'Classic Virginia stone · Warm neutral tones',   cls: 'sw-limestone', image: '/limestone.jpg' },
+  { name: 'Soapstone',  desc: 'Heat-tolerant · Vintage character · Smooth',    cls: 'sw-soapstone', image: '/soapstone.jpg' },
 ]
 
 const APP_ICONS = {
@@ -145,7 +145,11 @@ export default function Portfolio() {
         <div className="pw-materials">
           {MATERIALS.map(m => (
             <div className="pw-swatch-card" key={m.name}>
-              <div className={`pw-swatch ${m.cls}`} />
+              <div
+                className={`pw-swatch ${m.cls}`}
+                style={{ backgroundImage: `url("${m.image}")` }}
+                aria-hidden="true"
+              />
               <p className="pw-swatch-name">{m.name}</p>
               <p className="pw-swatch-desc">{m.desc}</p>
             </div>
@@ -208,7 +212,7 @@ export default function Portfolio() {
         {/* Bottom CTA */}
         <div className="pw-bottom-cta">
           <p>Ready to see what stone can do for your home?</p>
-          <a href="/schedule" className="btn btn-fill">Schedule a Stone Consultation</a>
+          <a href="/schedule" className="btn btn-fill">Schedule consultation</a>
         </div>
 
       </div>
