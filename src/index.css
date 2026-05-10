@@ -664,6 +664,94 @@ body {
   font-weight: 500;
 }
 
+/* ── Stone Partners ─────────────────────── */
+.sp-section {
+  padding: 5rem 0;
+  background:
+    radial-gradient(circle at top, rgba(212, 137, 90, 0.1), transparent 45%),
+    linear-gradient(180deg, #fbf8f3 0%, #f3ede5 100%);
+  border-top: 1px solid rgba(181,98,30,0.12);
+  border-bottom: 1px solid rgba(181,98,30,0.12);
+  overflow: hidden;
+}
+.sp-header {
+  display: grid;
+  gap: 0.85rem;
+  justify-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.sp-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.sp-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: var(--slate-deep);
+}
+.sp-tagline {
+  max-width: 760px;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.sp-marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.sp-track {
+  display: flex;
+  width: max-content;
+  gap: 1.15rem;
+  animation: sp-slide 28s linear infinite;
+}
+.sp-card {
+  width: 280px;
+  min-height: 148px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 1.5rem;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(181,98,30,0.16);
+  border-radius: 18px;
+  box-shadow: 0 18px 32px rgba(30, 40, 48, 0.08);
+}
+.sp-logo-wrap {
+  height: 54px;
+  display: flex;
+  align-items: center;
+}
+.sp-logo {
+  display: block;
+  max-width: 100%;
+  max-height: 54px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.sp-meta {
+  display: grid;
+  gap: 0.45rem;
+}
+.sp-sub {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@keyframes sp-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.575rem)); }
+}
+
 /* ── Contact ─────────────────────────────── */
 .contact {
   padding: 6rem 2rem;
@@ -1881,6 +1969,24 @@ body {
     background: rgba(212, 137, 90, 0.12);
   }
   .portfolio { padding: 4rem 1rem; }
+  .sp-section { padding: 4rem 0; }
+  .sp-header {
+    justify-items: flex-start;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  .sp-tagline { font-size: 0.92rem; }
+  .sp-track {
+    gap: 0.85rem;
+    animation-duration: 20s;
+  }
+  .sp-card {
+    width: 240px;
+    min-height: 136px;
+    padding: 1.15rem 1.1rem;
+  }
+  .sp-logo-wrap { height: 44px; }
+  .sp-logo { max-height: 44px; }
   .pw-materials {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1927,4 +2033,8 @@ body {
   }
   .sc-stepbar { gap: 0.3rem; }
   .sc-step-line { width: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-track { animation: none; }
 }

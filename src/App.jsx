@@ -17,6 +17,7 @@ function HomePage() {
       <Features />
       <HowItWorks />
       <CtaBanner />
+      <StonePartners />
     </>
   )
 }
