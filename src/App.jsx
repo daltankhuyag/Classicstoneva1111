@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import FloorPlansPage from './pages/FloorPlansPage'
 import HomeRemodelingPage from './pages/HomeRemodelingPage'
 import SchedulingPage from './pages/SchedulingPage'
+import StoneGalleryPage from './pages/StoneGalleryPage'
 
 function HomePage() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/floor-plans" element={<FloorPlansPage />} />
         <Route path="/remodeling" element={<HomeRemodelingPage />} />
         <Route path="/schedule" element={<SchedulingPage />} />
+        <Route path="/stone-gallery" element={<StoneGalleryPage />} />
       </Routes>
       <Footer />
     </>

@@ -104,7 +104,14 @@ const PROJECTS = [
 
 const APPLICATIONS = ['All', 'Kitchen Countertops', 'Vanity Tops', 'Fireplace', 'Vertical Wall', 'Architectural Stone']
 
-export default function Portfolio() {
+export default function Portfolio({
+  galleryButtonHref = '/stone-gallery',
+  showHeader = true,
+  showFilters = true,
+  showProjectInfo = true,
+  showAppBadge = true,
+  showProjectImages = true,
+}) {
   const [activeApp, setActiveApp] = useState('All')
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -130,16 +137,19 @@ export default function Portfolio() {
       <div className="container">
 
         {/* Header */}
-        <div className="portfolio-header">
-          <p className="section-label">Our Stone Work Portolio</p>
-          <h2 className="section-title">Stone craftsmanship, in every surface.</h2>
-          <div className="divider" />
-          <p className="pw-intro">
-            From kitchen countertops to architectural stone, every project is cut, fitted,
-            and finished by Classic Stone's own craftsmen using Virginia-sourced and
-            premium imported stone.
-          </p>
-        </div>
+        {showHeader && (
+          <div className="portfolio-header">
+            <p className="section-label">Our Stone Work Portolio</p>
+            <h2 className="section-title">Stone craftsmanship, in every surface.</h2>
+            <div className="divider" />
+            <p className="pw-intro">
+              From kitchen countertops to architectural stone, every project is cut, fitted,
+              and finished by Classic Stone's own craftsmen using Virginia-sourced and
+              premium imported stone.
+            </p>
+            <a href={galleryButtonHref} className="btn btn-dark pw-gallery-btn">View Stone Gallery</a>
+          </div>
+        )}
 
         {/* Materials strip */}
         <div className="pw-materials">
@@ -157,43 +167,53 @@ export default function Portfolio() {
         </div>
 
         {/* Application filter */}
-        <div className="pw-filters">
-          {APPLICATIONS.map(a => (
-            <button
-              key={a}
-              className={`fp-filter-btn${activeApp === a ? ' active' : ''}`}
-              onClick={() => handleFilterChange(a)}
-            >
-              {a !== 'All' && <span className="pw-filter-icon">{APP_ICONS[a]}</span>}
-              {a}
-            </button>
-          ))}
-        </div>
+        {showFilters && (
+          <div className="pw-filters">
+            {APPLICATIONS.map(a => (
+              <button
+                key={a}
+                className={`fp-filter-btn${activeApp === a ? ' active' : ''}`}
+                onClick={() => handleFilterChange(a)}
+              >
+                {a !== 'All' && <span className="pw-filter-icon">{APP_ICONS[a]}</span>}
+                {a}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Project grid */}
-        <div className="portfolio-grid">
-          {paginatedProjects.map(p => (
-            <div className="project-card pw-card" key={p.id}>
-              <div className={`project-img pw-img ${p.cls}`}>
-                <span className="pw-app-badge">
-                  {APP_ICONS[p.application]} {p.application}
-                </span>
-              </div>
-              <div className="project-info pw-info">
-                <div className="pw-info-top">
-                  <div>
-                    <span className="pw-material-chip">{p.material}</span>
-                    <h4>{p.name}</h4>
-                    <span className="pw-location">{p.location}</span>
+        {(showProjectImages || showProjectInfo) && (
+          <div className="portfolio-grid" id="stone-gallery">
+            {paginatedProjects.map(p => (
+              <div className="project-card pw-card" key={p.id}>
+                {showProjectImages && (
+                  <div className={`project-img pw-img ${p.cls}`}>
+                    {showAppBadge && (
+                      <span className="pw-app-badge">
+                        {APP_ICONS[p.application]} {p.application}
+                      </span>
+                    )}
                   </div>
-                </div>
-                <p className="pw-desc">{p.desc}</p>
+                )}
+                {showProjectInfo && (
+                  <div className="project-info pw-info">
+                    <div className="pw-info-top">
+                      <div>
+                        <span className="pw-material-chip">{p.material}</span>
+                        <h4>{p.name}</h4>
+                        <span className="pw-location">{p.location}</span>
+                      </div>
+                    </div>
+                    <p className="pw-desc">{p.desc}</p>
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {pageCount > 1 && (
+        {pageCount > 1 && (showProjectImages || showProjectInfo) && (
           <div className="pw-pagination" aria-label="Portfolio pagination">
             {Array.from({ length: pageCount }, (_, index) => index + 1).map((pageNumber) => (
               <button
