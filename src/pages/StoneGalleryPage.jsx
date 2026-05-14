@@ -1,6 +1,23 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import StoneGallery from '../components/StoneGallery'
 
 export default function StoneGalleryPage() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+      return
+    }
+
+    const element = document.querySelector(location.hash)
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'auto', block: 'start' })
+    }
+  }, [location.hash])
+
   return (
     <>
       <div className="fp-page-banner">

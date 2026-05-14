@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 
 const PROJECTS_PER_PAGE = 3
 
@@ -105,7 +106,7 @@ const PROJECTS = [
 const APPLICATIONS = ['All', 'Kitchen Countertops', 'Vanity Tops', 'Fireplace', 'Vertical Wall', 'Architectural Stone']
 
 export default function Portfolio({
-  galleryButtonHref = '/stone-gallery',
+  galleryButtonHref = '/stone-gallery#stone-gallery',
   showHeader = true,
   showFilters = true,
   showProjectInfo = true,
@@ -147,7 +148,7 @@ export default function Portfolio({
               and finished by Classic Stone's own craftsmen using Virginia-sourced and
               premium imported stone.
             </p>
-            <a href={galleryButtonHref} className="btn btn-dark pw-gallery-btn">View Stone Gallery</a>
+            <Link to={galleryButtonHref} className="btn btn-dark pw-gallery-btn">View Stone Gallery</Link>
           </div>
         )}
 
