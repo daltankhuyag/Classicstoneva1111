@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const TYPE_COLORS = {
   granite: { bg: '#2c2c2a', fg: '#d3d1c7', pill: '#f1efe8', pillFg: '#444441' },
@@ -511,7 +512,7 @@ export default function StoneGallery() {
               <p className="stone-gallery-cta-label">Need help choosing?</p>
               <h3>Bring your favorite surfaces into a design consultation.</h3>
             </div>
-            <a href="/schedule" className="btn btn-fill">Schedule consultation</a>
+            <Link to="/schedule" className="btn btn-fill">Schedule consultation</Link>
           </div>
         </div>
       </div>

@@ -1,17 +1,16 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-const PROJECTS_PER_PAGE = 3
 
 const MATERIALS = [
   { name: 'Granite',    desc: 'Heat-resistant · Durable · Low maintenance',   cls: 'sw-granite',   image: '/Granite.jpg' },
-  { name: 'Quartzite',  desc: 'Natural stone · UV-resistant · Elegant',        cls: 'sw-quartzite', image: '/quartzite.jpg' },
+  { name: 'Quartzite',  desc: 'Natural stone · UV-resistant · Elegant',        cls: 'sw-quartz', image: '/quartz.jpg' },
   { name: 'Marble',     desc: 'Timeless beauty · Unique natural veining',      cls: 'sw-marble',    image: '/marble.jpg' },
   { name: 'Limestone',  desc: 'Classic Virginia stone · Warm neutral tones',   cls: 'sw-limestone', image: '/limestone.jpg' },
   { name: 'Soapstone',  desc: 'Heat-tolerant · Vintage character · Smooth',    cls: 'sw-soapstone', image: '/soapstone.jpg' },
 ]
 
 const APP_ICONS = {
+  'Restaurant Countertops': '☕',
   'Kitchen Countertops': '🍳',
   'Vanity Tops':         '🛁',
   'Fireplace':           '🔥',
@@ -22,88 +21,45 @@ const APP_ICONS = {
 const PROJECTS = [
   {
     id: 1,
-    name: 'Morrison Kitchen',
-    location: 'McLean, VA',
-    material: 'Quartzite',
-    application: 'Kitchen Countertops',
-    desc: 'Calacatta quartzite island and perimeter counters with a live-edge waterfall detail.',
-    cls: 'sw-quartzite',
+    name: 'Colada Coffee',
+    location: 'Arlington, VA',
+    material: 'Quartz',
+    application: 'Restaurant Countertops',
+    desc: 'Clean-lined quartz service counter and bar surfaces installed for a busy Arlington cafe interior.',
+    cls: 'sw-quartz',
+    image: '/Project portfolio/Colada_ArligntonVA.jpg',
   },
   {
     id: 2,
-    name: 'Blue Ridge Master Bath',
-    location: 'Charlottesville, VA',
-    material: 'Granite',
-    application: 'Vanity Tops',
-    desc: 'Absolute Black granite double vanity with ogee profile and under-mount sinks.',
-    cls: 'sw-granite',
+    name: 'Restraunt Arligton, VA',
+    location: 'Arlington, VA',
+    material: 'Quartz',
+    application: 'Restaurant Tops',
+    desc: 'Clean-lined quartz service counter and bar surfaces installed for a busy Arlington cafe interior.',
+    cls: 'sw-quartz',
+    image: '/Project portfolio/Restaurant, Arlington, VA.jpg',
   },
   {
     id: 3,
-    name: 'Shenandoah Fireplace',
-    location: 'Front Royal, VA',
-    material: 'Limestone',
-    application: 'Fireplace',
-    desc: 'Virginia limestone full-surround with hand-carved mantel detail and herringbone hearth.',
-    cls: 'sw-limestone',
+    name: 'Gyu-Kaku Japanese Restaurant',
+    location: 'Arlington, VA',
+    material: 'Quartz',
+    application: 'Restaurant Countertops',
+    desc: '_',
+    cls: 'sw-quartz',
+    image: '/Project portfolio/Gyu-Kaku_Arlington,VA.jpg',
   },
   {
     id: 4,
-    name: 'Whitmore Feature Wall',
-    location: 'Arlington, VA',
+    name: 'South East Impression Restaurant',
+    location: 'Fairax, VA',
     material: 'Quartzite',
-    application: 'Vertical Wall',
-    desc: 'Book-matched quartzite floor-to-ceiling accent wall in an open-plan living room.',
-    cls: 'sw-quartzite-alt',
-  },
-  {
-    id: 5,
-    name: 'Ridgeline Entry Arch',
-    location: 'Warrenton, VA',
-    material: 'Granite',
-    application: 'Architectural Stone',
-    desc: 'Carved granite arch columns and entry surround installed on a Craftsman-style home.',
-    cls: 'sw-granite-light',
-  },
-  {
-    id: 6,
-    name: 'Cedar Creek Kitchen',
-    location: 'Winchester, VA',
-    material: 'Granite',
-    application: 'Kitchen Countertops',
-    desc: 'White Galaxy granite counters with farmhouse sink cutout and matching full-height backsplash.',
-    cls: 'sw-granite-light',
-  },
-  {
-    id: 7,
-    name: 'Hillcrest Spa Bath',
-    location: 'Herndon, VA',
-    material: 'Marble',
-    application: 'Vanity Tops',
-    desc: 'Carrara marble vanity top with honed finish, mitered edges, and integrated trough sink.',
-    cls: 'sw-marble',
-  },
-  {
-    id: 8,
-    name: 'Piedmont Stone Mantel',
-    location: 'Culpeper, VA',
-    material: 'Soapstone',
-    application: 'Fireplace',
-    desc: 'Virginia soapstone fireplace surround and raised hearth with traditional carved profile.',
-    cls: 'sw-soapstone',
-  },
-  {
-    id: 9,
-    name: 'Stonewall Dining Feature',
-    location: 'Staunton, VA',
-    material: 'Limestone',
-    application: 'Vertical Wall',
-    desc: 'Stacked Virginia limestone accent wall behind a custom built-in dining buffet.',
-    cls: 'sw-limestone',
+    application: 'Restaurant Countertops',
+    desc: '_',
+    cls: 'sw-quartz',
+    image: '/Project portfolio/South_east.jpg',
   },
 ]
-
-const APPLICATIONS = ['All', 'Kitchen Countertops', 'Vanity Tops', 'Fireplace', 'Vertical Wall', 'Architectural Stone']
 
 export default function Portfolio({
   galleryButtonHref = '/stone-gallery#stone-gallery',
@@ -113,25 +69,13 @@ export default function Portfolio({
   showAppBadge = true,
   showProjectImages = true,
 }) {
-  const [activeApp, setActiveApp] = useState('All')
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const visible = useMemo(() =>
-    activeApp === 'All' ? PROJECTS : PROJECTS.filter(p => p.application === activeApp),
-  [activeApp])
+  const currentProject = PROJECTS[currentSlide]
 
-  const pageCount = Math.ceil(visible.length / PROJECTS_PER_PAGE)
-
-  const paginatedProjects = useMemo(() => {
-    const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE
-
-    return visible.slice(startIndex, startIndex + PROJECTS_PER_PAGE)
-  }, [currentPage, visible])
-
-  const handleFilterChange = (application) => {
-    setActiveApp(application)
-    setCurrentPage(1)
-  }
+  const goToSlide = index => setCurrentSlide(index)
+  const goToPrevious = () => setCurrentSlide(index => (index === 0 ? PROJECTS.length - 1 : index - 1))
+  const goToNext = () => setCurrentSlide(index => (index === PROJECTS.length - 1 ? 0 : index + 1))
 
   return (
     <section className="portfolio" id="portfolio">
@@ -167,73 +111,71 @@ export default function Portfolio({
           ))}
         </div>
 
-        {/* Application filter */}
-        {showFilters && (
-          <div className="pw-filters">
-            {APPLICATIONS.map(a => (
-              <button
-                key={a}
-                className={`fp-filter-btn${activeApp === a ? ' active' : ''}`}
-                onClick={() => handleFilterChange(a)}
-              >
-                {a !== 'All' && <span className="pw-filter-icon">{APP_ICONS[a]}</span>}
-                {a}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Project grid */}
         {(showProjectImages || showProjectInfo) && (
-          <div className="portfolio-grid" id="stone-gallery">
-            {paginatedProjects.map(p => (
-              <div className="project-card pw-card" key={p.id}>
-                {showProjectImages && (
-                  <div className={`project-img pw-img ${p.cls}`}>
-                    {showAppBadge && (
-                      <span className="pw-app-badge">
-                        {APP_ICONS[p.application]} {p.application}
-                      </span>
-                    )}
-                  </div>
-                )}
-                {showProjectInfo && (
-                  <div className="project-info pw-info">
-                    <div className="pw-info-top">
-                      <div>
-                        <span className="pw-material-chip">{p.material}</span>
-                        <h4>{p.name}</h4>
-                        <span className="pw-location">{p.location}</span>
-                      </div>
-                    </div>
-                    <p className="pw-desc">{p.desc}</p>
-                  </div>
-                )}
+          <div className="pw-slider-shell" id="stone-gallery">
+            <div className="pw-slider-head">
+              <p className="pw-slider-kicker">Project gallery</p>
+              <div className="pw-slider-controls" aria-label="Portfolio slider controls">
+                <button type="button" className="pw-slider-btn" onClick={goToPrevious} aria-label="Previous project">
+                  Prev
+                </button>
+                <button type="button" className="pw-slider-btn" onClick={goToNext} aria-label="Next project">
+                  Next
+                </button>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
 
-        {pageCount > 1 && (showProjectImages || showProjectInfo) && (
-          <div className="pw-pagination" aria-label="Portfolio pagination">
-            {Array.from({ length: pageCount }, (_, index) => index + 1).map((pageNumber) => (
-              <button
-                key={pageNumber}
-                type="button"
-                className={`pw-page-btn${currentPage === pageNumber ? ' active' : ''}`}
-                onClick={() => setCurrentPage(pageNumber)}
-                aria-current={currentPage === pageNumber ? 'page' : undefined}
-              >
-                {pageNumber}
-              </button>
-            ))}
+            <div className="project-card pw-card pw-slide-card">
+              {showProjectImages && (
+                <div
+                  className={`project-img pw-img pw-slide-image ${currentProject.cls}`}
+                  style={currentProject.image ? {
+                    backgroundImage: `url("${currentProject.image}")`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  } : undefined}
+                >
+                  {showAppBadge && (
+                    <span className="pw-app-badge">
+                      {APP_ICONS[currentProject.application]} {currentProject.application}
+                    </span>
+                  )}
+                </div>
+              )}
+              {showProjectInfo && (
+                <div className="project-info pw-info pw-slide-info">
+                  <div className="pw-info-top">
+                    <div>
+                      <span className="pw-material-chip">{currentProject.material}</span>
+                      <h4>{currentProject.name}</h4>
+                      <span className="pw-location">{currentProject.location}</span>
+                    </div>
+                  </div>
+                  <p className="pw-desc">{currentProject.desc}</p>
+                </div>
+              )}
+            </div>
+
+            <div className="pw-slider-dots" aria-label="Portfolio slider pagination">
+              {PROJECTS.map((project, index) => (
+                <button
+                  key={project.id}
+                  type="button"
+                  className={`pw-slider-dot${currentSlide === index ? ' active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`View ${project.name}`}
+                  aria-current={currentSlide === index ? 'true' : undefined}
+                />
+              ))}
+            </div>
           </div>
         )}
 
         {/* Bottom CTA */}
         <div className="pw-bottom-cta">
           <p>Ready to see what stone can do for your home?</p>
-          <a href="/schedule" className="btn btn-fill">Schedule consultation</a>
+          <Link to="/schedule" className="btn btn-fill">Schedule consultation</Link>
         </div>
 
       </div>
