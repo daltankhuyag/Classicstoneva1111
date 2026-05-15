@@ -2357,7 +2357,7 @@ body {
 @media (max-width: 900px) {
   .about-grid,
   .contact-grid { grid-template-columns: 1fr; }
-  .services-grid,
+  .services-grid { grid-template-columns: 1fr 1fr; }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
   .fp-card-actions { grid-template-columns: 1fr; }
