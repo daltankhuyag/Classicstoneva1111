@@ -19,6 +19,7 @@
   --white:        #ffffff;
   --border:       #d8d2c8;
   --transition:   0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  --mobile-header-offset: 106px;
 }
 
 html { scroll-behavior: smooth; }
@@ -259,6 +260,15 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+#about,
+#services,
+#portfolio,
+#contact,
+#stone-gallery,
+.fp-page-banner {
+  scroll-margin-top: var(--mobile-header-offset);
 }
 .hero-yt-wrap {
   position: absolute;
@@ -2367,6 +2377,14 @@ body {
 @media (max-width: 600px) {
   .services-grid,
   .form-row { grid-template-columns: 1fr; }
+  .hero {
+    min-height: 100vh;
+    height: auto;
+    padding-top: var(--mobile-header-offset);
+  }
+  .fp-page-banner {
+    padding-top: calc(7rem + var(--mobile-header-offset));
+  }
   .topbar {
     padding: 0 1rem;
     max-height: 64px;
