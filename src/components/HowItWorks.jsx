@@ -1,11 +1,11 @@
 const services = [
   {
-    title: 'Custom Home Design & Build',
-    desc: 'We partner with top Virginia architects and designers to bring your vision to life — from concept sketches to the last coat of paint.',
+    title: 'Home Design & Build',
+    desc: 'We partner with Virginia architects and designers to bring your vision to life — from concept sketches to the last coat of paint.',
   },
   {
-    title: 'Stone & Natural Material Work',
-    desc: 'Our signature stonework — sourced from Virginia quarries — adds timeless character to facades, fireplaces, and foundations.',
+    title: 'Natural Stone & Natural Material Work',
+    desc: 'Our signature stonework — sourced of all types of natural stone — adds timeless character to Kitchen countertops, fireplaces, and bathroom wall vertical application.',
   },
   {
     title: 'Site Planning & Land Prep',

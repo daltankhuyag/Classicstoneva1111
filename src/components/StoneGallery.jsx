@@ -346,6 +346,33 @@ function formatType(type) {
   return type.charAt(0).toUpperCase() + type.slice(1)
 }
 
+async function downloadStoneInfo(stone, modalNode) {
+  if (!modalNode) {
+    throw new Error('Stone details are not ready to download yet.')
+  }
+
+  const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+    import('html2canvas'),
+    import('jspdf'),
+  ])
+
+  const canvas = await html2canvas(modalNode, {
+    backgroundColor: '#ffffff',
+    scale: 2,
+    useCORS: true,
+  })
+
+  const fileName = `${stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-sample-info.pdf`
+  const pdf = new jsPDF({
+    orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
+    unit: 'px',
+    format: [canvas.width, canvas.height],
+  })
+
+  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height)
+  pdf.save(fileName)
+}
+
 function StoneVisual({ stone, className, canvasRef, height, alt }) {
   if (stone.image) {
     return <img src={stone.image} alt={alt} className={className} />
@@ -356,20 +383,42 @@ function StoneVisual({ stone, className, canvasRef, height, alt }) {
 
 export default function StoneGallery() {
   const [activeType, setActiveType] = useState('all')
+  const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedStone, setSelectedStone] = useState(null)
+  const [isDownloading, setIsDownloading] = useState(false)
   const cardCanvasRefs = useRef(new Map())
   const modalCanvasRef = useRef(null)
+  const modalRef = useRef(null)
 
   const visibleStones = useMemo(() => {
-    if (activeType === 'all') {
-      return STONES
-    }
+    const normalizedQuery = searchQuery.trim().toLowerCase()
 
-    return STONES.filter((stone) => stone.type === activeType)
-  }, [activeType])
+    return STONES.filter((stone) => {
+      const matchesType = activeType === 'all' || stone.type === activeType
 
-  const shouldPaginate = activeType !== 'all'
+      if (!matchesType) {
+        return false
+      }
+
+      if (!normalizedQuery) {
+        return true
+      }
+
+      const searchableText = [
+        stone.name,
+        stone.origin,
+        formatType(stone.type),
+        stone.best,
+        stone.desc,
+        ...stone.useLabels,
+      ].join(' ').toLowerCase()
+
+      return searchableText.includes(normalizedQuery)
+    })
+  }, [activeType, searchQuery])
+
+  const shouldPaginate = activeType !== 'all' || searchQuery.trim() !== ''
 
   const pageCount = shouldPaginate ? Math.ceil(visibleStones.length / STONES_PER_PAGE) : 1
 
@@ -384,7 +433,7 @@ export default function StoneGallery() {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [activeType])
+  }, [activeType, searchQuery])
 
   useEffect(() => {
     if (currentPage > pageCount) {
@@ -450,10 +499,23 @@ export default function StoneGallery() {
             ))}
           </div>
 
+          <div className="stone-gallery-search-row">
+            <label className="stone-gallery-search-label" htmlFor="stone-gallery-search">Search samples</label>
+            <input
+              id="stone-gallery-search"
+              type="search"
+              className="stone-gallery-search-input"
+              placeholder="Search by name, origin, type, or use"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
+          </div>
+
           <div className="stone-gallery-divider" />
 
-          <div className="stone-gallery-grid">
-            {paginatedStones.map((stone) => {
+          {paginatedStones.length > 0 ? (
+            <div className="stone-gallery-grid">
+              {paginatedStones.map((stone) => {
               const typeColors = TYPE_COLORS[stone.type]
 
               return (
@@ -489,7 +551,10 @@ export default function StoneGallery() {
                 </button>
               )
             })}
-          </div>
+            </div>
+          ) : (
+            <div className="stone-gallery-empty">No stone samples matched that search.</div>
+          )}
 
           {shouldPaginate && pageCount > 1 && (
             <div className="pw-pagination" aria-label="Stone gallery pagination">
@@ -527,7 +592,7 @@ export default function StoneGallery() {
             }
           }}
         >
-          <div className="stone-gallery-modal" role="dialog" aria-modal="true" aria-labelledby="stone-gallery-modal-title">
+          <div className="stone-gallery-modal" role="dialog" aria-modal="true" aria-labelledby="stone-gallery-modal-title" ref={modalRef}>
             <StoneVisual
               stone={selectedStone}
               alt={selectedStone.name}
@@ -541,14 +606,31 @@ export default function StoneGallery() {
                   <p className="stone-gallery-modal-title" id="stone-gallery-modal-title">{selectedStone.name}</p>
                   <p className="stone-gallery-modal-origin">{selectedStone.origin}</p>
                 </div>
-                <button
-                  type="button"
-                  className="stone-gallery-modal-close"
-                  onClick={() => setSelectedStone(null)}
-                  aria-label="Close stone details"
-                >
-                  x
-                </button>
+                <div className="stone-gallery-modal-actions">
+                  <button
+                    type="button"
+                    className="stone-gallery-modal-download"
+                    onClick={async () => {
+                      try {
+                        setIsDownloading(true)
+                        await downloadStoneInfo(selectedStone, modalRef.current)
+                      } finally {
+                        setIsDownloading(false)
+                      }
+                    }}
+                    disabled={isDownloading}
+                  >
+                    {isDownloading ? 'Preparing PDF...' : 'Download'}
+                  </button>
+                  <button
+                    type="button"
+                    className="stone-gallery-modal-close"
+                    onClick={() => setSelectedStone(null)}
+                    aria-label="Close stone details"
+                  >
+                    x
+                  </button>
+                </div>
               </div>
 
               <span
