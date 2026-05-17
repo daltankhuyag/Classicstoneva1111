@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const MATERIALS = [
   { name: 'Granite',    desc: 'Heat-resistant · Durable · Low maintenance',   cls: 'sw-granite',   image: '/Granite.jpg' },
-  { name: 'Quartzite',  desc: 'Natural stone · UV-resistant · Elegant',        cls: 'sw-quartz', image: '/quartz.jpg' },
+  { name: 'Quartzite',  desc: 'Natural stone · UV-resistant · Elegant',        cls: 'sw-quartzite', image: '/quartzite.jpg' },
   { name: 'Marble',     desc: 'Timeless beauty · Unique natural veining',      cls: 'sw-marble',    image: '/marble.jpg' },
   { name: 'Limestone',  desc: 'Classic Virginia stone · Warm neutral tones',   cls: 'sw-limestone', image: '/limestone.jpg' },
   { name: 'Soapstone',  desc: 'Heat-tolerant · Vintage character · Smooth',    cls: 'sw-soapstone', image: '/soapstone.jpg' },
