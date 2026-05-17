@@ -7,6 +7,7 @@ import CtaBanner from './components/CtaBanner'
 import StonePartners from './components/StonePartners'
 import Footer from './components/Footer'
 import FloorPlansPage from './pages/FloorPlansPage'
+import GalleryPage from './pages/GalleryPage'
 import HomeRemodelingPage from './pages/HomeRemodelingPage'
 import SchedulingPage from './pages/SchedulingPage'
 import StoneGalleryPage from './pages/StoneGalleryPage'
@@ -30,6 +31,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/floor-plans" element={<FloorPlansPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/remodeling" element={<HomeRemodelingPage />} />
         <Route path="/schedule" element={<SchedulingPage />} />
         <Route path="/stone-gallery" element={<StoneGalleryPage />} />

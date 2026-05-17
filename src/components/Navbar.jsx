@@ -74,7 +74,15 @@ export default function Navbar() {
                 Remodeling
               </Link>
             </li>
-            <li><a href={homeHref('#portfolio')} onClick={closeMenu}>Portfolio</a></li>
+            <li>
+              <Link
+                to="/gallery"
+                className={pathname === '/gallery' ? 'nav-active' : ''}
+                onClick={closeMenu}
+              >
+                Gallery
+              </Link>
+            </li>
             <li><a href={homeHref('#contact')} onClick={closeMenu}>Contact</a></li>
             <li>
               <Link

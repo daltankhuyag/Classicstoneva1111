@@ -733,6 +733,47 @@ body {
   font-weight: 500;
 }
 
+/* ── Inspiration Gallery ────────────────── */
+.inspiration-gallery-section {
+  padding: 4.5rem 0 1rem;
+  background: linear-gradient(180deg, #fcfaf7 0%, #f7f3ed 100%);
+}
+.inspiration-gallery-head {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+.inspiration-gallery-intro {
+  font-size: 0.98rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.inspiration-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+.inspiration-gallery-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(30, 40, 48, 0.08);
+}
+.inspiration-gallery-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #ece6dc;
+}
+.inspiration-gallery-caption {
+  padding: 0.95rem 1rem 1.05rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--slate);
+  line-height: 1.5;
+}
+
 /* ── Stone Gallery Page ─────────────────── */
 .stone-gallery-section {
   padding: 4rem 0 6rem;
@@ -2623,6 +2664,7 @@ body {
   .services-grid { grid-template-columns: 1fr 1fr; }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
+  .inspiration-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fp-card-actions { grid-template-columns: 1fr; }
   .pw-materials { gap: 0.7rem; }
   .pw-slide-card { grid-template-columns: 1fr; }
@@ -2750,6 +2792,13 @@ body {
   }
   .pw-slide-info h4 {
     font-size: 1.45rem;
+  }
+  .inspiration-gallery-section {
+    padding: 3.5rem 0 0.5rem;
+  }
+  .inspiration-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .fp-filter-btn {
     width: 100%;
