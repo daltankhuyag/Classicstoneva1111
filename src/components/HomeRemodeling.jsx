@@ -14,8 +14,8 @@ const SERVICES = [
   {
     icon: '🏠',
     title: 'Home Additions',
-    desc: 'Need more space? We design and build seamless additions — master suites, sunrooms, in-law apartments — that look like they were always there.',
-    tags: ['Master suite', 'Sunroom', 'In-law suite'],
+    desc: 'Need more space? We design and build seamless additions — master suites and sunrooms — that look like they were always there.',
+    tags: ['Master suite', 'Sunroom', 'Seamless addition'],
   },
   {
     icon: '🪟',
