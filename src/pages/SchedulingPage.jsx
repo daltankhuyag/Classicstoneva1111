@@ -1,8 +1,13 @@
+import Seo from '../components/Seo'
+import { getPageSeo } from '../data/seo'
 import Scheduler from '../components/Scheduler'
 
 export default function SchedulingPage() {
+  const pageSeo = getPageSeo('/schedule')
+
   return (
     <>
+      <Seo title={pageSeo.title} description={pageSeo.description} path={pageSeo.path} />
       <div className="fp-page-banner">
         <div className="container">
           <p className="section-label">Classic Stone</p>

@@ -1,3 +1,6 @@
+import Seo from '../components/Seo'
+import { getPageSeo } from '../data/seo'
+
 const INSPIRATION_IMAGES = [
   {
     title: 'Brittanicca Living Room',
@@ -58,8 +61,11 @@ const INSPIRATION_IMAGES = [
 ]
 
 export default function GalleryPage() {
+  const pageSeo = getPageSeo('/gallery')
+
   return (
     <>
+      <Seo title={pageSeo.title} description={pageSeo.description} path={pageSeo.path} />
       <div className="fp-page-banner">
         <div className="container">
           <h1 className="fp-page-banner-title">Gallery</h1>

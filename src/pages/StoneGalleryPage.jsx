@@ -1,9 +1,12 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import Seo from '../components/Seo'
 import StoneGallery from '../components/StoneGallery'
+import { getPageSeo } from '../data/seo'
 
 export default function StoneGalleryPage() {
   const location = useLocation()
+  const pageSeo = getPageSeo('/stone-gallery')
 
   useEffect(() => {
     if (!location.hash) {
@@ -20,6 +23,7 @@ export default function StoneGalleryPage() {
 
   return (
     <>
+      <Seo title={pageSeo.title} description={pageSeo.description} path={pageSeo.path} />
       <div className="fp-page-banner">
         <div className="container">
           <h1 className="fp-page-banner-title">Stone Gallery</h1>
