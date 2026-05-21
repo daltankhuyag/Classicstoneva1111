@@ -1,6 +1,10 @@
 const HERO_IMAGE = '/HERO_IMAGE.png'
 
-export default function Hero() {
+export default function Hero({ onOpenNewsletter }) {
+  const handleOpenNewsletter = () => {
+    onOpenNewsletter?.('hero', { triggerType: 'manual' })
+  }
+
   return (
     <section className="hero" id="home">
 
@@ -24,6 +28,9 @@ export default function Hero() {
         </p>
         <div className="hero-actions">
           <a href="#contact" className="btn btn-fill">Get a Free Consultation</a>
+          <button type="button" className="btn" onClick={handleOpenNewsletter}>
+            Get Design Updates
+          </button>
           <a href="#portfolio" className="btn">View Our Work</a>
         </div>
       </div>
@@ -32,3 +39,5 @@ export default function Hero() {
     </section>
   )
 }
+
+

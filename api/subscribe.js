@@ -1,5 +1,5 @@
 import { ContactError } from '../server/email.js'
-import { sendContactEmail } from '../server/contact.js'
+import { sendSubscribeEmail } from '../server/subscribe.js'
 
 function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json')
@@ -13,13 +13,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    await sendContactEmail(req.body || {}, process.env)
+    await sendSubscribeEmail(req.body || {}, process.env)
     return json(res, 200, { ok: true })
   } catch (error) {
     if (error instanceof ContactError) {
       return json(res, error.status, { ok: false, error: error.message })
     }
 
-    return json(res, 500, { ok: false, error: 'The server could not send your message.' })
+    return json(res, 500, { ok: false, error: 'The server could not process the subscription.' })
   }
 }

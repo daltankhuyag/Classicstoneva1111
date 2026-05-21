@@ -1,14 +1,7 @@
 import nodemailer from 'nodemailer'
+import { buildTransport, ContactError, escapeHtml } from './email.js'
 
 const REQUIRED_FIELDS = ['firstName', 'lastName', 'email', 'phone', 'projectType', 'vision']
-
-export class ContactError extends Error {
-  constructor(status, message) {
-    super(message)
-    this.name = 'ContactError'
-    this.status = status
-  }
-}
 
 export function validateContactForm(form) {
   const missingField = REQUIRED_FIELDS.find(field => !String(form[field] || '').trim())
@@ -26,29 +19,6 @@ export function validateContactForm(form) {
   }
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
-
-function buildTransport(env) {
-  const port = Number(env.SMTP_PORT || 465)
-
-  return nodemailer.createTransport({
-    host: env.SMTP_HOST,
-    port,
-    secure: env.SMTP_SECURE ? env.SMTP_SECURE === 'true' : port === 465,
-    auth: {
-      user: env.SMTP_USER,
-      pass: env.SMTP_PASS,
-    },
-  })
-}
-
 export async function sendContactEmail(form, env = process.env) {
   if (!env.SMTP_HOST || !env.SMTP_USER || !env.SMTP_PASS) {
     throw new ContactError(500, 'Contact form email is not configured on the server.')
@@ -56,7 +26,7 @@ export async function sendContactEmail(form, env = process.env) {
 
   validateContactForm(form)
 
-  const transporter = buildTransport(env)
+  const transporter = buildTransport(nodemailer, env)
   const recipient = env.CONTACT_FORM_TO_EMAIL || 'Classicstoneva@gmail.com'
   const fromAddress = env.CONTACT_FORM_FROM_EMAIL || env.SMTP_FROM || env.SMTP_USER
 

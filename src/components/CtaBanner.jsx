@@ -68,6 +68,7 @@ export default function Portfolio({
   showProjectInfo = true,
   showAppBadge = true,
   showProjectImages = true,
+  onOpenNewsletter,
 }) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
@@ -76,6 +77,7 @@ export default function Portfolio({
   const goToSlide = index => setCurrentSlide(index)
   const goToPrevious = () => setCurrentSlide(index => (index === 0 ? PROJECTS.length - 1 : index - 1))
   const goToNext = () => setCurrentSlide(index => (index === PROJECTS.length - 1 ? 0 : index + 1))
+  const handleOpenNewsletter = () => onOpenNewsletter?.('portfolio-cta', { triggerType: 'manual' })
 
   return (
     <section className="portfolio" id="portfolio">
@@ -175,10 +177,17 @@ export default function Portfolio({
         {/* Bottom CTA */}
         <div className="pw-bottom-cta">
           <p>Ready to see what stone can do for your home?</p>
-          <Link to="/schedule" className="btn btn-fill">Schedule consultation</Link>
+          <div className="pw-bottom-actions">
+            <button type="button" className="btn" onClick={handleOpenNewsletter}>
+              Get Design Updates
+            </button>
+            <Link to="/schedule" className="btn btn-fill">Schedule consultation</Link>
+          </div>
         </div>
 
       </div>
     </section>
   )
 }
+
+
