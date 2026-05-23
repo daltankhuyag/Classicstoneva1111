@@ -9,7 +9,7 @@ const TYPE_COLORS = {
   soapstone: { bg: '#0f6e56', fg: '#e1f5ee', pill: '#e1f5ee', pillFg: '#085041' },
 }
 
-const STONES = [
+export const STONES = [
   {
     name: 'Absolute Black',
     origin: 'South India',
@@ -537,7 +537,7 @@ function drawSwatch(canvas, stone, height) {
   }
 }
 
-function formatType(type) {
+export function formatType(type) {
   return type.charAt(0).toUpperCase() + type.slice(1)
 }
 
@@ -626,6 +626,9 @@ export default function StoneGallery() {
     return visibleStones.slice(startIndex, startIndex + STONES_PER_PAGE)
   }, [currentPage, shouldPaginate, visibleStones])
 
+  const featuredStones = useMemo(() => STONES, [])
+  const marqueeStones = useMemo(() => [...featuredStones, ...featuredStones], [featuredStones])
+
   useEffect(() => {
     setCurrentPage(1)
   }, [activeType, searchQuery])
@@ -677,6 +680,31 @@ export default function StoneGallery() {
               Filter by material family, inspect the movement, and open any surface for a closer look at origin,
               maintenance, durability, and best-fit applications.
             </p>
+          </div>
+
+          <div className="stone-gallery-marquee" aria-label="Featured stone samples">
+            <div className="stone-gallery-track">
+              {marqueeStones.map((stone, index) => (
+                <button
+                  key={`${stone.name}-${index}`}
+                  type="button"
+                  className="stone-gallery-preview-card"
+                  onClick={() => setSelectedStone(stone)}
+                  aria-hidden={index >= featuredStones.length}
+                  tabIndex={index >= featuredStones.length ? -1 : undefined}
+                >
+                  <div
+                    className="stone-gallery-preview-image"
+                    style={{ backgroundImage: `url("${stone.image}")` }}
+                    aria-hidden="true"
+                  />
+                  <span className="stone-gallery-preview-copy">
+                    <span className="stone-gallery-preview-type">{formatType(stone.type)}</span>
+                    <span className="stone-gallery-preview-name">{stone.name}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="stone-gallery-filter-label">Stone type</div>

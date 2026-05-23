@@ -557,6 +557,10 @@ body {
 .pw-gallery-btn {
   margin-top: 1.4rem;
 }
+.pw-stone-marquee {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
 
 /* Materials swatch strip */
 .pw-materials {
@@ -801,6 +805,44 @@ body {
   color: var(--muted);
   line-height: 1.8;
 }
+.inspiration-gallery-marquee {
+  position: relative;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.inspiration-gallery-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: inspiration-gallery-slide 54s linear infinite;
+}
+.inspiration-gallery-marquee:hover .inspiration-gallery-track,
+.inspiration-gallery-marquee:focus-within .inspiration-gallery-track {
+  animation-play-state: paused;
+}
+.inspiration-gallery-preview-card {
+  width: 240px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 210, 200, 0.95);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 36px rgba(30, 40, 48, 0.08);
+}
+.inspiration-gallery-preview-image {
+  display: block;
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  background: #ece6dc;
+}
+.inspiration-gallery-preview-caption {
+  padding: 0.85rem 1rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--slate);
+}
 .inspiration-gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -847,6 +889,75 @@ body {
 .stone-gallery-copy {
   max-width: 760px;
   margin-bottom: 1.8rem;
+}
+
+.stone-gallery-marquee {
+  position: relative;
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.stone-gallery-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: stone-gallery-slide 48s linear infinite;
+}
+
+.stone-gallery-marquee:hover .stone-gallery-track,
+.stone-gallery-marquee:focus-within .stone-gallery-track {
+  animation-play-state: paused;
+}
+
+.stone-gallery-preview-card {
+  width: 240px;
+  display: block;
+  padding: 0;
+  border: 1px solid rgba(181, 98, 30, 0.16);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 28px rgba(30, 40, 48, 0.08);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.stone-gallery-preview-card:hover,
+.stone-gallery-preview-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px rgba(30, 40, 48, 0.14);
+  border-color: rgba(181, 98, 30, 0.34);
+}
+
+.stone-gallery-preview-image {
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.stone-gallery-preview-copy {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.stone-gallery-preview-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.stone-gallery-preview-name {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--slate);
 }
 
 .stone-gallery-intro {
@@ -1489,6 +1600,16 @@ body {
 @keyframes sp-slide {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-50% - 0.575rem)); }
+}
+
+@keyframes stone-gallery-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.5rem)); }
+}
+
+@keyframes inspiration-gallery-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.5rem)); }
 }
 
 /* ── Contact ─────────────────────────────── */
@@ -2908,6 +3029,7 @@ body {
   .services-grid { grid-template-columns: 1fr 1fr; }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
+  .inspiration-gallery-preview-card { width: 220px; }
   .inspiration-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fp-card-actions { grid-template-columns: 1fr; }
   .pw-materials { gap: 0.7rem; }
@@ -3040,6 +3162,12 @@ body {
   .inspiration-gallery-section {
     padding: 3.5rem 0 0.5rem;
   }
+  .inspiration-gallery-preview-card {
+    width: 200px;
+  }
+  .inspiration-gallery-preview-image {
+    height: 390px;
+  }
   .inspiration-gallery-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -3101,6 +3229,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .inspiration-gallery-track,
   .hero-bg,
   .hero-overlay,
   .hero-glow,
@@ -3108,6 +3237,7 @@ body {
     transition: none;
   }
 
+  .inspiration-gallery-track,
   .scroll-hint::after {
     animation: none;
   }

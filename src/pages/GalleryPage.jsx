@@ -62,6 +62,7 @@ const INSPIRATION_IMAGES = [
 
 export default function GalleryPage() {
   const pageSeo = getPageSeo('/gallery')
+  const gallerySlides = [...INSPIRATION_IMAGES, ...INSPIRATION_IMAGES]
 
   return (
     <>
@@ -86,6 +87,26 @@ export default function GalleryPage() {
               Explore a curated set of interiors and surfaces that capture the look, tone,
               and material direction many clients use as inspiration for their own projects.
             </p>
+          </div>
+
+          <div className="inspiration-gallery-marquee" aria-label="Featured gallery inspiration">
+            <div className="inspiration-gallery-track">
+              {gallerySlides.map((item, index) => (
+                <article
+                  key={`${item.image}-${index}`}
+                  className="inspiration-gallery-preview-card"
+                  aria-hidden={index >= INSPIRATION_IMAGES.length}
+                >
+                  <img
+                    src={item.image}
+                    alt={index >= INSPIRATION_IMAGES.length ? '' : item.title}
+                    className="inspiration-gallery-preview-image"
+                    loading="lazy"
+                  />
+                  <div className="inspiration-gallery-preview-caption">{item.title}</div>
+                </article>
+              ))}
+            </div>
           </div>
 
           <div className="inspiration-gallery-grid">

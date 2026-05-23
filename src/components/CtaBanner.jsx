@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { STONES, formatType } from './StoneGallery'
 
 const MATERIALS = [
   { name: 'Granite',    desc: 'Heat-resistant · Durable · Low maintenance',   cls: 'sw-granite',   image: '/Granite.jpg' },
@@ -73,6 +74,7 @@ export default function Portfolio({
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const currentProject = PROJECTS[currentSlide]
+  const marqueeStones = [...STONES, ...STONES]
 
   const goToSlide = index => setCurrentSlide(index)
   const goToPrevious = () => setCurrentSlide(index => (index === 0 ? PROJECTS.length - 1 : index - 1))
@@ -95,6 +97,29 @@ export default function Portfolio({
               premium imported stone.
             </p>
             <Link to={galleryButtonHref} className="btn btn-dark pw-gallery-btn">View Stone Gallery</Link>
+            <div className="stone-gallery-marquee pw-stone-marquee" aria-label="Featured stone samples">
+              <div className="stone-gallery-track">
+                {marqueeStones.map((stone, index) => (
+                  <Link
+                    key={`${stone.name}-${index}`}
+                    to={galleryButtonHref}
+                    className="stone-gallery-preview-card"
+                    aria-hidden={index >= STONES.length}
+                    tabIndex={index >= STONES.length ? -1 : undefined}
+                  >
+                    <div
+                      className="stone-gallery-preview-image"
+                      style={{ backgroundImage: `url("${stone.image}")` }}
+                      aria-hidden="true"
+                    />
+                    <span className="stone-gallery-preview-copy">
+                      <span className="stone-gallery-preview-type">{formatType(stone.type)}</span>
+                      <span className="stone-gallery-preview-name">{stone.name}</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
