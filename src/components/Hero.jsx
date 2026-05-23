@@ -2,30 +2,6 @@ import { useRef } from 'react'
 
 const HERO_IMAGE = '/HERO_IMAGE.png'
 
-const HOTSPOTS = [
-  {
-    title: 'Crafted Homes',
-    detail: 'See how Classic Stone approaches timeless residential design.',
-    href: '#about',
-    top: '95%',
-    left: '28%',
-  },
-  {
-    title: 'Material Library',
-    detail: 'Browse stone selections and finish directions.',
-    href: '#stone-gallery',
-    top: '95%',
-    left: '50%',
-  },
-  {
-    title: 'Start the Visit',
-    detail: 'Book a consultation and walk the project together.',
-    href: '#contact',
-    top: '95%',
-    left: '72%',
-  },
-]
-
 export default function Hero({ onOpenNewsletter }) {
   const heroRef = useRef(null)
 
@@ -110,20 +86,6 @@ export default function Hero({ onOpenNewsletter }) {
             Get Design Updates
           </button>
           <a href="#portfolio" className="btn">View Our Work</a>
-        </div>
-
-        <div className="hero-hotspots" aria-label="Featured paths through the hero image">
-          {HOTSPOTS.map((hotspot) => (
-            <a
-              key={hotspot.title}
-              className="hero-hotspot"
-              href={hotspot.href}
-              style={{ '--hotspot-top': hotspot.top, '--hotspot-left': hotspot.left }}
-            >
-              <span className="hero-hotspot-title">{hotspot.title}</span>
-              <span className="hero-hotspot-detail">{hotspot.detail}</span>
-            </a>
-          ))}
         </div>
       </div>
 
