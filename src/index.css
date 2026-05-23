@@ -304,7 +304,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
-  transform: translate3d(calc(var(--hero-shift-x) * -0.55), calc(var(--hero-shift-y) * -0.55), 0) scale(1.06);
+  transform: translate3d(calc(var(--hero-shift-x) * -0.35), calc(var(--hero-shift-y) * -0.35), 0) scale(1.02);
   transition: transform 180ms ease-out, filter 220ms ease-out;
   filter: brightness(1.18) saturate(0.99) contrast(1.01);
   will-change: transform;
