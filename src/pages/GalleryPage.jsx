@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Seo from '../components/Seo'
 import { getPageSeo } from '../data/seo'
 
@@ -63,6 +64,28 @@ const INSPIRATION_IMAGES = [
 export default function GalleryPage() {
   const pageSeo = getPageSeo('/gallery')
   const gallerySlides = [...INSPIRATION_IMAGES, ...INSPIRATION_IMAGES]
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  useEffect(() => {
+    if (!selectedImage) {
+      return undefined
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setSelectedImage(null)
+      }
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedImage])
 
   return (
     <>
@@ -92,10 +115,13 @@ export default function GalleryPage() {
           <div className="inspiration-gallery-marquee" aria-label="Featured gallery inspiration">
             <div className="inspiration-gallery-track">
               {gallerySlides.map((item, index) => (
-                <article
+                <button
                   key={`${item.image}-${index}`}
+                  type="button"
                   className="inspiration-gallery-preview-card"
+                  onClick={() => setSelectedImage(item)}
                   aria-hidden={index >= INSPIRATION_IMAGES.length}
+                  tabIndex={index >= INSPIRATION_IMAGES.length ? -1 : undefined}
                 >
                   <img
                     src={item.image}
@@ -104,7 +130,7 @@ export default function GalleryPage() {
                     loading="lazy"
                   />
                   <div className="inspiration-gallery-preview-caption">{item.title}</div>
-                </article>
+                </button>
               ))}
             </div>
           </div>
@@ -119,6 +145,42 @@ export default function GalleryPage() {
           </div>
         </div>
       </section>
+
+      {selectedImage && (
+        <div
+          className="inspiration-gallery-modal-overlay"
+          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedImage(null)
+            }
+          }}
+        >
+          <div
+            className="inspiration-gallery-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="inspiration-gallery-modal-title"
+          >
+            <button
+              type="button"
+              className="inspiration-gallery-modal-close"
+              onClick={() => setSelectedImage(null)}
+              aria-label="Close gallery image"
+            >
+              x
+            </button>
+            <img
+              src={selectedImage.image}
+              alt={selectedImage.title}
+              className="inspiration-gallery-modal-image"
+            />
+            <p className="inspiration-gallery-modal-caption" id="inspiration-gallery-modal-title">
+              {selectedImage.title}
+            </p>
+          </div>
+        </div>
+      )}
     </>
   )
 }
