@@ -902,7 +902,7 @@ body {
   display: flex;
   width: max-content;
   gap: 1rem;
-  animation: stone-gallery-slide 48s linear infinite;
+  animation: stone-gallery-slide 90s linear infinite;
 }
 
 .stone-gallery-marquee:hover .stone-gallery-track,
