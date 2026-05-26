@@ -490,7 +490,8 @@ const PLANS = [
   },
 ]
 
-const STYLES = ['All styles', 'Craftsman', 'Farmhouse', 'Contemporary', 'Colonial']
+const ALL_MODELS_LABEL = 'All models'
+const MODEL_FILTERS = [ALL_MODELS_LABEL, ...PLANS.map((plan) => plan.name)]
 
 const SORT_OPTIONS = [
   { label: 'Most popular',       value: 'popular'    },
@@ -746,21 +747,21 @@ function PlanDetail({ plan, onClose }) {
 }
 
 export default function FloorPlans() {
-  const [activeStyle, setActiveStyle] = useState('All styles')
+  const [activeModel, setActiveModel] = useState(ALL_MODELS_LABEL)
   const [sort, setSort] = useState('popular')
   const [selected, setSelected] = useState(null)
 
   const filtered = useMemo(() => {
-    let list = activeStyle === 'All styles'
+    let list = activeModel === ALL_MODELS_LABEL
       ? [...PLANS]
-      : PLANS.filter(p => p.style === activeStyle)
+      : PLANS.filter((plan) => plan.name === activeModel)
 
     if (sort === 'popular')    list.sort((a, b) => (a.badgeType === 'popular' ? -1 : b.badgeType === 'popular' ? 1 : 0))
     if (sort === 'new')        list.sort((a, b) => (a.badgeType === 'new' ? -1 : b.badgeType === 'new' ? 1 : 0))
     if (sort === 'price-asc')  list.sort((a, b) => a.priceNum - b.priceNum)
     if (sort === 'price-desc') list.sort((a, b) => b.priceNum - a.priceNum)
     return list
-  }, [activeStyle, sort])
+  }, [activeModel, sort])
 
   return (
     <>
@@ -782,13 +783,13 @@ export default function FloorPlans() {
           </div>
 
           <div className="fp-filters">
-            {STYLES.map(s => (
+            {MODEL_FILTERS.map((modelName) => (
               <button
-                key={s}
-                className={`fp-filter-btn${activeStyle === s ? ' active' : ''}`}
-                onClick={() => setActiveStyle(s)}
+                key={modelName}
+                className={`fp-filter-btn${activeModel === modelName ? ' active' : ''}`}
+                onClick={() => setActiveModel(modelName)}
               >
-                {s}
+                {modelName}
               </button>
             ))}
           </div>
