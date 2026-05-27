@@ -44,6 +44,38 @@ const INSPIRATION_IMAGES = [
     image: '/Inspiration Gallery/ivybridge-kitchen-dodd-001-24.avif',
   },
   {
+    title: 'Sculpted Waterfall Marble Island',
+    image: '/Kitchen island design/0.1.jpg',
+  },
+  {
+    title: 'Honey Veined Stone Island with Brass Fixtures',
+    image: '/Kitchen island design/0.2.jpg',
+  },
+  {
+    title: 'Charcoal Waterfall Island with Globe Pendants',
+    image: '/Kitchen island design/0.3.jpg',
+  },
+  {
+    title: 'Backlit Charcoal Stone Entertaining Island',
+    image: '/Kitchen island design/0.4.jpg',
+  },
+  {
+    title: 'Curved Fluted Marble Kitchen Island',
+    image: '/Kitchen island design/0.5.jpg',
+  },
+  {
+    title: 'Dramatic Black Veined Stone Island',
+    image: '/Kitchen island design/0.6.jpg',
+  },
+  {
+    title: 'Warm Taupe Waterfall Island with Pendant Trio',
+    image: '/Kitchen island design/0.7.jpg',
+  },
+  {
+    title: 'Symmetrical Limestone Kitchen Island',
+    image: '/Kitchen island design/0.8.jpg',
+  },
+  {
     title: 'Macbeth Bathroom',
     image: '/Inspiration Gallery/macbeth-bathroom-design-001-24_IG-1240x1240.avif',
   },
