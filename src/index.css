@@ -508,11 +508,22 @@ body {
   padding: 6rem 2rem;
   background: var(--white);
 }
+.services-featured-section {
+  background: var(--cream);
+  padding-top: 3rem;
+}
 .services-header { margin-bottom: 3rem; }
+.services-featured-section .services-header {
+  margin-bottom: 3.5rem;
+}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.4rem;
+}
+.services-grid-featured {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
 }
 .service-card {
   padding: 2rem 1.6rem;
@@ -3093,6 +3104,7 @@ body {
   .about-grid,
   .contact-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid-featured { grid-template-columns: 1fr 1fr; }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
   .inspiration-gallery-preview-card { width: 220px; }
@@ -3113,6 +3125,7 @@ body {
 }
 @media (max-width: 600px) {
   .services-grid,
+  .services-grid-featured,
   .form-row { grid-template-columns: 1fr; }
   .hero {
     min-height: 100vh;
