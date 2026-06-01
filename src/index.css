@@ -509,8 +509,24 @@ body {
   background: var(--white);
 }
 .services-featured-section {
-  background: var(--cream);
+  position: relative;
+  isolation: isolate;
+  background: var(--services-featured-bg) center center / cover fixed;
   padding-top: 3rem;
+  overflow: hidden;
+}
+.services-featured-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 244, 0.16), rgba(245, 242, 238, 0.34)),
+    linear-gradient(180deg, rgba(30, 40, 48, 0.04), rgba(30, 40, 48, 0.1));
+  z-index: 0;
+}
+.services-featured-section .container {
+  position: relative;
+  z-index: 1;
 }
 .services-header { margin-bottom: 3rem; }
 .services-featured-section .services-header {
@@ -551,6 +567,11 @@ body {
   font-size: 0.88rem;
   color: var(--muted);
   line-height: 1.75;
+}
+.services-featured-section .service-card {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 18px 48px rgba(44, 53, 64, 0.12);
 }
 
 /* ── Portfolio / Our Work ────────────────── */
@@ -3105,6 +3126,7 @@ body {
   .contact-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .services-grid-featured { grid-template-columns: 1fr 1fr; }
+  .services-featured-section { background-attachment: scroll; }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
   .inspiration-gallery-preview-card { width: 220px; }
@@ -3317,6 +3339,12 @@ body {
   }
   .sc-stepbar { gap: 0.3rem; }
   .sc-step-line { width: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-featured-section {
+    background-attachment: scroll;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

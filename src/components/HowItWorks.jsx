@@ -44,6 +44,9 @@ const stoneServices = [
   },
 ]
 
+const stoneServicesBackground =
+  "url('/Inspiration Gallery/inverness-bristol-bay-kitchen-modern-001-23_IG-1240x1240.avif')"
+
 export default function Services() {
   return (
     <>
@@ -65,7 +68,11 @@ export default function Services() {
           </div>
         </div>
       </section>
-      <section className="services services-featured-section" aria-labelledby="stone-services-title">
+      <section
+        className="services services-featured-section"
+        aria-labelledby="stone-services-title"
+        style={{ '--services-featured-bg': stoneServicesBackground }}
+      >
         <div className="container">
           <div className="services-header">
             <p className="section-label">Stone Products & Services</p>
