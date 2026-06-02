@@ -95,8 +95,18 @@ const INSPIRATION_IMAGES = [
 
 export default function GalleryPage() {
   const pageSeo = getPageSeo('/gallery')
-  const gallerySlides = [...INSPIRATION_IMAGES, ...INSPIRATION_IMAGES]
   const [selectedImage, setSelectedImage] = useState(null)
+  const [carouselIndex, setCarouselIndex] = useState(0)
+
+  useEffect(() => {
+    const timerId = window.setInterval(() => {
+      setCarouselIndex(currentIndex => (currentIndex + 1) % INSPIRATION_IMAGES.length)
+    }, 4500)
+
+    return () => {
+      window.clearInterval(timerId)
+    }
+  }, [])
 
   useEffect(() => {
     if (!selectedImage) {
@@ -118,6 +128,28 @@ export default function GalleryPage() {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [selectedImage])
+
+  const shiftCarousel = direction => {
+    setCarouselIndex(currentIndex => {
+      const nextIndex = currentIndex + direction
+
+      if (nextIndex < 0) {
+        return INSPIRATION_IMAGES.length - 1
+      }
+
+      return nextIndex % INSPIRATION_IMAGES.length
+    })
+  }
+
+  const carouselSlides = [-2, -1, 0, 1, 2].map(offset => {
+    const imageIndex = (carouselIndex + offset + INSPIRATION_IMAGES.length) % INSPIRATION_IMAGES.length
+
+    return {
+      ...INSPIRATION_IMAGES[imageIndex],
+      imageIndex,
+      offset,
+    }
+  })
 
   return (
     <>
@@ -144,28 +176,78 @@ export default function GalleryPage() {
             </p>
           </div>
 
-          <div className="inspiration-gallery-marquee" aria-label="Featured gallery inspiration">
-            <div className="inspiration-gallery-track">
-              {gallerySlides.map((item, index) => (
+          <section className="inspiration-gallery-carousel" aria-label="Featured gallery inspiration">
+            <div className="inspiration-gallery-carousel-head">
+              <p className="inspiration-gallery-carousel-kicker">Featured Slider</p>
+              <div className="inspiration-gallery-carousel-controls" aria-label="Gallery slider controls">
                 <button
-                  key={`${item.image}-${index}`}
                   type="button"
-                  className="inspiration-gallery-preview-card"
-                  onClick={() => setSelectedImage(item)}
-                  aria-hidden={index >= INSPIRATION_IMAGES.length}
-                  tabIndex={index >= INSPIRATION_IMAGES.length ? -1 : undefined}
+                  className="inspiration-gallery-carousel-btn"
+                  onClick={() => shiftCarousel(-1)}
+                  aria-label="Previous gallery slide"
                 >
-                  <img
-                    src={item.image}
-                    alt={index >= INSPIRATION_IMAGES.length ? '' : item.title}
-                    className="inspiration-gallery-preview-image"
-                    loading="lazy"
-                  />
-                  <div className="inspiration-gallery-preview-caption">{item.title}</div>
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  className="inspiration-gallery-carousel-btn"
+                  onClick={() => shiftCarousel(1)}
+                  aria-label="Next gallery slide"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+
+            <div className="inspiration-gallery-carousel-stage">
+              {carouselSlides.map(item => (
+                <button
+                  key={`${item.image}-${item.offset}`}
+                  type="button"
+                  className="inspiration-gallery-carousel-card"
+                  data-offset={item.offset}
+                  aria-current={item.offset === 0 ? 'true' : undefined}
+                  aria-label={item.offset === 0 ? `Open ${item.title}` : `View ${item.title}`}
+                  onClick={() => {
+                    if (item.offset === 0) {
+                      setSelectedImage(item)
+                      return
+                    }
+
+                    setCarouselIndex(item.imageIndex)
+                  }}
+                >
+                  <div className="inspiration-gallery-carousel-image-shell">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="inspiration-gallery-carousel-image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="inspiration-gallery-carousel-caption">
+                    <span className="inspiration-gallery-carousel-index">
+                      {String(item.imageIndex + 1).padStart(2, '0')}
+                    </span>
+                    <span className="inspiration-gallery-carousel-title">{item.title}</span>
+                  </div>
                 </button>
               ))}
             </div>
-          </div>
+
+            <div className="inspiration-gallery-carousel-dots" aria-label="Gallery slide indicators">
+              {INSPIRATION_IMAGES.map((item, index) => (
+                <button
+                  key={item.image}
+                  type="button"
+                  className={`inspiration-gallery-carousel-dot${index === carouselIndex ? ' active' : ''}`}
+                  onClick={() => setCarouselIndex(index)}
+                  aria-label={`Go to ${item.title}`}
+                  aria-pressed={index === carouselIndex}
+                />
+              ))}
+            </div>
+          </section>
 
           <div className="inspiration-gallery-grid">
             {INSPIRATION_IMAGES.map(item => (

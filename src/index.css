@@ -847,55 +847,159 @@ body {
   color: var(--muted);
   line-height: 1.8;
 }
-.inspiration-gallery-marquee {
+.inspiration-gallery-carousel {
   position: relative;
-  margin-bottom: 2rem;
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  margin-bottom: 3rem;
+  padding: 2rem 0 1rem;
 }
-.inspiration-gallery-track {
+.inspiration-gallery-carousel-head {
   display: flex;
-  width: max-content;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  animation: inspiration-gallery-slide 54s linear infinite;
+  margin-bottom: 1.6rem;
 }
-.inspiration-gallery-marquee:hover .inspiration-gallery-track,
-.inspiration-gallery-marquee:focus-within .inspiration-gallery-track {
-  animation-play-state: paused;
+.inspiration-gallery-carousel-kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 700;
 }
-.inspiration-gallery-preview-card {
-  width: 240px;
-  display: block;
+.inspiration-gallery-carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.inspiration-gallery-carousel-btn {
+  border: 1px solid rgba(44, 53, 64, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--slate);
+  border-radius: 999px;
+  padding: 0.7rem 1.05rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.inspiration-gallery-carousel-btn:hover,
+.inspiration-gallery-carousel-btn:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(181, 98, 30, 0.4);
+  box-shadow: 0 12px 26px rgba(30, 40, 48, 0.12);
+}
+.inspiration-gallery-carousel-stage {
+  position: relative;
+  min-height: 44rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+.inspiration-gallery-carousel-card {
+  position: absolute;
+  width: min(31vw, 27rem);
   padding: 0;
+  border: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 30px 60px rgba(17, 25, 33, 0.18);
+  cursor: pointer;
   text-align: left;
   color: inherit;
-  cursor: pointer;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(216, 210, 200, 0.95);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 16px 36px rgba(30, 40, 48, 0.08);
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  transform-origin: center center;
+  transition: transform 420ms ease, opacity 320ms ease, filter 320ms ease, box-shadow 320ms ease;
 }
-.inspiration-gallery-preview-card:hover,
-.inspiration-gallery-preview-card:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 42px rgba(30, 40, 48, 0.14);
-  border-color: rgba(181, 98, 30, 0.34);
+.inspiration-gallery-carousel-card[data-offset="0"] {
+  transform: translateX(0) scale(1) rotateY(0deg);
+  opacity: 1;
+  filter: blur(0);
+  z-index: 5;
 }
-.inspiration-gallery-preview-image {
+.inspiration-gallery-carousel-card[data-offset="-1"] {
+  transform: translateX(-21rem) scale(0.9) rotateY(22deg);
+  opacity: 0.82;
+  filter: blur(0.4px);
+  z-index: 4;
+}
+.inspiration-gallery-carousel-card[data-offset="1"] {
+  transform: translateX(21rem) scale(0.9) rotateY(-22deg);
+  opacity: 0.82;
+  filter: blur(0.4px);
+  z-index: 4;
+}
+.inspiration-gallery-carousel-card[data-offset="-2"] {
+  transform: translateX(-36rem) scale(0.76) rotateY(30deg);
+  opacity: 0.4;
+  filter: blur(1.4px);
+  z-index: 3;
+}
+.inspiration-gallery-carousel-card[data-offset="2"] {
+  transform: translateX(36rem) scale(0.76) rotateY(-30deg);
+  opacity: 0.4;
+  filter: blur(1.4px);
+  z-index: 3;
+}
+.inspiration-gallery-carousel-card[aria-current="true"] {
+  box-shadow: 0 38px 76px rgba(17, 25, 33, 0.24);
+}
+.inspiration-gallery-carousel-image-shell {
+  padding: 1rem;
+  background: linear-gradient(180deg, #f7f2ea 0%, #ede5d9 100%);
+}
+.inspiration-gallery-carousel-image {
   display: block;
   width: 100%;
-  height: 450px;
+  height: 34rem;
   object-fit: cover;
-  background: #ece6dc;
+  object-position: center;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fbf7f0 0%, #eee6da 100%);
 }
-.inspiration-gallery-preview-caption {
-  padding: 0.85rem 1rem 0.95rem;
-  font-size: 0.82rem;
+.inspiration-gallery-carousel-caption {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem 1.2rem;
+}
+.inspiration-gallery-carousel-index {
+  font-size: 0.74rem;
   font-weight: 700;
-  line-height: 1.5;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.inspiration-gallery-carousel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
   color: var(--slate);
+}
+.inspiration-gallery-carousel-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.4rem;
+}
+.inspiration-gallery-carousel-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(44, 53, 64, 0.2);
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+.inspiration-gallery-carousel-dot.active,
+.inspiration-gallery-carousel-dot:hover,
+.inspiration-gallery-carousel-dot:focus-visible {
+  background: var(--copper);
+  transform: scale(1.15);
 }
 .inspiration-gallery-grid {
   display: grid;
@@ -3149,7 +3253,13 @@ body {
   }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
-  .inspiration-gallery-preview-card { width: 220px; }
+  .inspiration-gallery-carousel-stage { min-height: 36rem; }
+  .inspiration-gallery-carousel-card { width: min(40vw, 22rem); }
+  .inspiration-gallery-carousel-card[data-offset="-1"] { transform: translateX(-14rem) scale(0.86) rotateY(18deg); }
+  .inspiration-gallery-carousel-card[data-offset="1"] { transform: translateX(14rem) scale(0.86) rotateY(-18deg); }
+  .inspiration-gallery-carousel-card[data-offset="-2"] { transform: translateX(-23rem) scale(0.72) rotateY(24deg); opacity: 0.24; }
+  .inspiration-gallery-carousel-card[data-offset="2"] { transform: translateX(23rem) scale(0.72) rotateY(-24deg); opacity: 0.24; }
+  .inspiration-gallery-carousel-image { height: 27rem; }
   .inspiration-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fp-card-actions { grid-template-columns: 1fr; }
   .pw-materials { gap: 0.7rem; }
@@ -3318,11 +3428,46 @@ body {
   .inspiration-gallery-section {
     padding: 3.5rem 0 0.5rem;
   }
-  .inspiration-gallery-preview-card {
-    width: 200px;
+  .inspiration-gallery-carousel {
+    padding-top: 1.2rem;
   }
-  .inspiration-gallery-preview-image {
-    height: 390px;
+  .inspiration-gallery-carousel-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .inspiration-gallery-carousel-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .inspiration-gallery-carousel-stage {
+    min-height: 29rem;
+  }
+  .inspiration-gallery-carousel-card {
+    width: min(78vw, 20rem);
+    border-radius: 22px;
+  }
+  .inspiration-gallery-carousel-card[data-offset="-1"] {
+    transform: translateX(-7.5rem) scale(0.82) rotateY(14deg);
+    opacity: 0.3;
+  }
+  .inspiration-gallery-carousel-card[data-offset="1"] {
+    transform: translateX(7.5rem) scale(0.82) rotateY(-14deg);
+    opacity: 0.3;
+  }
+  .inspiration-gallery-carousel-card[data-offset="-2"],
+  .inspiration-gallery-carousel-card[data-offset="2"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .inspiration-gallery-carousel-image {
+    height: 21rem;
+    border-radius: 16px;
+  }
+  .inspiration-gallery-carousel-caption {
+    padding: 0.9rem 0.95rem 1rem;
+  }
+  .inspiration-gallery-carousel-title {
+    font-size: 0.92rem;
   }
   .inspiration-gallery-grid {
     grid-template-columns: 1fr;
@@ -3399,6 +3544,9 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .services-featured-section {
     background-attachment: scroll;
+  }
+  .inspiration-gallery-carousel-card {
+    transition: none;
   }
 }
 

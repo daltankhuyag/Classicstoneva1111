@@ -96,7 +96,7 @@ export default function Portfolio({
               and finished by Classic Stone's own craftsmen using Virginia-sourced and
               premium imported stone.
             </p>
-            <Link to={galleryButtonHref} className="btn btn-dark pw-gallery-btn">View Stone Gallery</Link>
+            <Link to={galleryButtonHref} className="btn btn-fill pw-gallery-btn">View Stone Gallery</Link>
             <div className="stone-gallery-marquee pw-stone-marquee" aria-label="Featured stone samples">
               <div className="stone-gallery-track">
                 {marqueeStones.map((stone, index) => (
