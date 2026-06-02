@@ -512,9 +512,9 @@ body {
   position: relative;
   isolation: isolate;
   background: var(--services-featured-bg) center center / cover fixed;
-  min-height: 780px;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  min-height: 920px;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
   overflow: hidden;
 }
 .services-featured-section::before {
@@ -3136,7 +3136,17 @@ body {
   .contact-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .services-grid-featured { grid-template-columns: 1fr 1fr; }
-  .services-featured-section { background-attachment: scroll; }
+  .services-featured-section {
+    background-attachment: scroll;
+    background-position: center right;
+    min-height: 760px;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .services-featured-section .services-header {
+    max-width: 640px;
+    margin-bottom: 2.75rem;
+  }
   .about-visual { height: 260px; }
   .fp-grid { grid-template-columns: 1fr; }
   .inspiration-gallery-preview-card { width: 220px; }
@@ -3159,6 +3169,41 @@ body {
   .services-grid,
   .services-grid-featured,
   .form-row { grid-template-columns: 1fr; }
+  .services-featured-section {
+    background-position: 60% center;
+    min-height: 680px;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+  .services-featured-section::before {
+    background:
+      linear-gradient(135deg, rgba(16, 22, 28, 0.34), rgba(16, 22, 28, 0.58)),
+      linear-gradient(180deg, rgba(12, 18, 24, 0.24), rgba(12, 18, 24, 0.42));
+  }
+  .services-featured-section .services-header {
+    max-width: none;
+    margin-bottom: 2.25rem;
+  }
+  .services-featured-section .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+  }
+  .services-featured-section .section-title {
+    font-size: 1.9rem;
+    line-height: 1.18;
+  }
+  .services-featured-section .service-card {
+    padding: 1.5rem 1.2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+  }
+  .services-featured-section .service-card h3 {
+    font-size: 0.98rem;
+  }
+  .services-featured-section .service-card p {
+    font-size: 0.92rem;
+    line-height: 1.68;
+  }
   .hero {
     min-height: 100vh;
     height: auto;
