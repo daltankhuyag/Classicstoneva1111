@@ -490,6 +490,11 @@ const TYPES = [
 ]
 
 const STONES_PER_PAGE = 8
+const STONE_PDF_MARGIN = 52
+const STONE_PDF_TEXT = [30, 40, 48]
+const STONE_PDF_MUTED = [107, 115, 123]
+const STONE_PDF_COPPER = [181, 98, 30]
+const STONE_PDF_BORDER = [227, 221, 214]
 
 function drawSwatch(canvas, stone, height) {
   if (!canvas) {
@@ -497,7 +502,7 @@ function drawSwatch(canvas, stone, height) {
   }
 
   const context = canvas.getContext('2d')
-  const width = canvas.clientWidth || canvas.offsetWidth || 500
+  const width = canvas.clientWidth || canvas.offsetWidth || canvas.width || 500
   canvas.width = width
   canvas.height = height
 
@@ -541,30 +546,203 @@ export function formatType(type) {
   return type.charAt(0).toUpperCase() + type.slice(1)
 }
 
-async function downloadStoneInfo(stone, modalNode) {
-  if (!modalNode) {
-    throw new Error('Stone details are not ready to download yet.')
+function buildSiteUrl() {
+  const configuredUrl = import.meta.env.VITE_SITE_URL
+
+  if (configuredUrl) {
+    return configuredUrl.replace(/\/$/, '')
   }
 
-  const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
-    import('html2canvas'),
-    import('jspdf'),
-  ])
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin.replace(/\/$/, '')
+  }
 
-  const canvas = await html2canvas(modalNode, {
-    backgroundColor: '#ffffff',
-    scale: 2,
-    useCORS: true,
+  return 'https://classicstoneva.com'
+}
+
+function loadImageForPdf(src, options = {}) {
+  if (!src) {
+    return Promise.resolve(null)
+  }
+
+  const {
+    maxWidth = 1800,
+    mimeType = 'image/jpeg',
+    quality = 0.96,
+    background = '#ffffff',
+  } = options
+
+  return new Promise((resolve) => {
+    const image = new Image()
+    image.crossOrigin = 'anonymous'
+    image.decoding = 'async'
+
+    image.onload = () => {
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d', { alpha: false })
+
+      if (!context) {
+        resolve(null)
+        return
+      }
+
+      const scale = Math.min(1, maxWidth / image.naturalWidth)
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale))
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale))
+
+      context.fillStyle = background
+      context.fillRect(0, 0, canvas.width, canvas.height)
+      context.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+      resolve({
+        dataUrl: canvas.toDataURL(mimeType, quality),
+        width: canvas.width,
+        height: canvas.height,
+      })
+    }
+
+    image.onerror = () => resolve(null)
+    image.src = src
   })
+}
+
+function buildGeneratedStoneVisual(stone) {
+  const canvas = document.createElement('canvas')
+  canvas.width = 1600
+  drawSwatch(canvas, stone, 900)
+
+  return {
+    dataUrl: canvas.toDataURL('image/jpeg', 0.96),
+    width: canvas.width,
+    height: canvas.height,
+  }
+}
+
+async function downloadStoneInfo(stone) {
+  const [{ jsPDF }, stoneImage] = await Promise.all([
+    import('jspdf'),
+    stone.image ? loadImageForPdf(stone.image) : Promise.resolve(buildGeneratedStoneVisual(stone)),
+  ])
 
   const fileName = `${stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-sample-info.pdf`
   const pdf = new jsPDF({
-    orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
-    unit: 'px',
-    format: [canvas.width, canvas.height],
+    orientation: 'portrait',
+    unit: 'pt',
+    format: 'a4',
+    compress: true,
   })
 
-  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height)
+  const pageWidth = pdf.internal.pageSize.getWidth()
+  const pageHeight = pdf.internal.pageSize.getHeight()
+  const contentWidth = pageWidth - STONE_PDF_MARGIN * 2
+  const details = [
+    ['Material', formatType(stone.type)],
+    ['Origin', stone.origin],
+    ['Maintenance', stone.maint],
+    ['Best For', stone.best],
+    ['Durability', stone.dur],
+    ['Applications', stone.useLabels.join(', ')],
+  ]
+
+  pdf.setFillColor(255, 255, 255)
+  pdf.rect(0, 0, pageWidth, pageHeight, 'F')
+
+  let cursorY = 52
+
+  pdf.setFont('times', 'bold')
+  pdf.setFontSize(22)
+  pdf.setTextColor(...STONE_PDF_TEXT)
+  pdf.text('Classic Stone Granite & Marble LLC', pageWidth / 2, cursorY, { align: 'center' })
+
+  pdf.setFont('times', 'normal')
+  pdf.setFontSize(26)
+  pdf.setTextColor(...STONE_PDF_COPPER)
+  pdf.text(stone.name.toUpperCase(), pageWidth / 2, cursorY + 42, { align: 'center' })
+
+  cursorY += 66
+  pdf.setFont('helvetica', 'normal')
+  pdf.setFontSize(10)
+  pdf.setTextColor(...STONE_PDF_MUTED)
+  pdf.text(`${formatType(stone.type)} • ${stone.origin}`, pageWidth / 2, cursorY, { align: 'center' })
+
+  cursorY += 22
+
+  if (stoneImage) {
+    const maxImageWidth = contentWidth
+    const maxImageHeight = 260
+    const imageRatio = stoneImage.width / stoneImage.height
+    let imageWidth = maxImageWidth
+    let imageHeight = imageWidth / imageRatio
+
+    if (imageHeight > maxImageHeight) {
+      imageHeight = maxImageHeight
+      imageWidth = imageHeight * imageRatio
+    }
+
+    const imageX = (pageWidth - imageWidth) / 2
+    pdf.setDrawColor(210, 210, 210)
+    pdf.setLineWidth(0.7)
+    pdf.rect(imageX, cursorY, imageWidth, imageHeight)
+    pdf.addImage(
+      stoneImage.dataUrl,
+      'JPEG',
+      imageX,
+      cursorY,
+      imageWidth,
+      imageHeight,
+      undefined,
+      'MEDIUM'
+    )
+    cursorY += imageHeight + 28
+  }
+
+  pdf.setFont('times', 'normal')
+  pdf.setFontSize(20)
+  pdf.setTextColor(...STONE_PDF_TEXT)
+  pdf.text('Stone Details', pageWidth / 2, cursorY, { align: 'center' })
+
+  cursorY += 14
+  pdf.setDrawColor(...STONE_PDF_BORDER)
+  pdf.setLineWidth(1)
+  pdf.line(STONE_PDF_MARGIN, cursorY, pageWidth - STONE_PDF_MARGIN, cursorY)
+
+  cursorY += 28
+
+  const labelX = STONE_PDF_MARGIN + 8
+  const valueX = pageWidth / 2 - 8
+  const valueWidth = pageWidth - STONE_PDF_MARGIN - valueX
+
+  details.forEach(([label, value]) => {
+    pdf.setFont('helvetica', 'normal')
+    pdf.setFontSize(11)
+    pdf.setTextColor(...STONE_PDF_TEXT)
+    pdf.text(label, labelX, cursorY)
+
+    pdf.setFont('helvetica', 'bold')
+    pdf.setFontSize(11)
+    const lines = pdf.splitTextToSize(value, valueWidth)
+    pdf.text(lines, valueX, cursorY)
+    cursorY += Math.max(28, lines.length * 14 + 8)
+  })
+
+  const footerTop = pageHeight - 88
+  pdf.setDrawColor(...STONE_PDF_BORDER)
+  pdf.line(STONE_PDF_MARGIN, footerTop, pageWidth - STONE_PDF_MARGIN, footerTop)
+
+  pdf.setFont('times', 'bold')
+  pdf.setFontSize(15)
+  pdf.setTextColor(...STONE_PDF_TEXT)
+  pdf.text('Classic Stone Granite & Marble LLC', pageWidth / 2, footerTop + 28, { align: 'center' })
+
+  pdf.setFont('helvetica', 'normal')
+  pdf.setFontSize(9)
+  pdf.setTextColor(...STONE_PDF_MUTED)
+  pdf.text('Email: classicstoneva@gmail.com', pageWidth / 2, footerTop + 46, {
+    align: 'center',
+  })
+  pdf.text('Phone#: 202-227-0788', pageWidth / 2, footerTop + 60, { align: 'center' })
+  pdf.text('Website: www.classicstoneva.com', pageWidth / 2, footerTop + 74, { align: 'center' })
+
   pdf.save(fileName)
 }
 
@@ -836,7 +1014,7 @@ export default function StoneGallery() {
                     onClick={async () => {
                       try {
                         setIsDownloading(true)
-                        await downloadStoneInfo(selectedStone, modalRef.current)
+                        await downloadStoneInfo(selectedStone)
                       } finally {
                         setIsDownloading(false)
                       }

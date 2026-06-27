@@ -1326,6 +1326,49 @@ body {
   text-transform: uppercase;
 }
 
+.pw-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+}
+
+.pw-page-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 0.85rem;
+  border: 1px solid rgba(216, 210, 200, 0.95);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--slate);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.pw-page-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(181, 98, 30, 0.42);
+  box-shadow: 0 10px 22px rgba(30, 40, 48, 0.08);
+}
+
+.pw-page-btn.active,
+.pw-page-btn[aria-current='page'] {
+  background: var(--copper);
+  border-color: var(--copper);
+  color: var(--cream);
+  box-shadow: 0 12px 24px rgba(181, 98, 30, 0.2);
+}
+
+.pw-page-btn:focus-visible {
+  outline: none;
+  border-color: rgba(181, 98, 30, 0.72);
+  box-shadow: 0 0 0 3px rgba(181, 98, 30, 0.14);
+}
+
 .stone-gallery-cta {
   margin-top: 2rem;
   padding: 1.4rem 1.5rem;
