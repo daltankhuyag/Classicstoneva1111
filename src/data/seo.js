@@ -56,6 +56,14 @@ export const SEO_PAGES = [
     changeFrequency: 'weekly',
     priority: '0.8',
   },
+  {
+    path: '/financial-forecasting',
+    title: 'Financial Forecasting | Classic Stone',
+    description:
+      'Model a single-home construction budget with editable forecasting inputs for finish level, site conditions, contingency, and financing.',
+    changeFrequency: 'monthly',
+    priority: '0.7',
+  },
 ]
 
 export function getPageSeo(path) {
