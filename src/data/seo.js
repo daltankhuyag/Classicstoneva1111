@@ -57,10 +57,10 @@ export const SEO_PAGES = [
     priority: '0.8',
   },
   {
-    path: '/financial-forecasting',
-    title: 'Financial Forecasting | Classic Stone',
+    path: '/builder-pro-forma',
+    title: 'Builder Pro Forma | Classic Stone',
     description:
-      'Model a single-home construction budget with editable forecasting inputs for finish level, site conditions, contingency, and financing.',
+      'Review a builder-side single-home pro forma with editable cost categories, margin targets, overhead modes, and monthly phase cash flow.',
     changeFrequency: 'monthly',
     priority: '0.7',
   },

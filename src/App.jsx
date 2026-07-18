@@ -12,7 +12,7 @@ import Footer from './components/Footer'
 import Seo from './components/Seo'
 import { getPageSeo } from './data/seo'
 import FloorPlansPage from './pages/FloorPlansPage'
-import FinancialForecastingPage from './pages/FinancialForecastingPage'
+import BuilderProFormaPage from './pages/FinancialForecastingPage'
 import GalleryPage from './pages/GalleryPage'
 import HomeRemodelingPage from './pages/HomeRemodelingPage'
 import SchedulingPage from './pages/SchedulingPage'
@@ -127,7 +127,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage onOpenNewsletter={openNewsletter} />} />
         <Route path="/floor-plans" element={<FloorPlansPage />} />
-        <Route path="/financial-forecasting" element={<FinancialForecastingPage />} />
+        <Route path="/builder-pro-forma" element={<BuilderProFormaPage />} />
+        <Route path="/financial-forecasting" element={<BuilderProFormaPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/remodeling" element={<HomeRemodelingPage />} />
         <Route path="/schedule" element={<SchedulingPage />} />
