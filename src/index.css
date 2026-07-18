@@ -2419,13 +2419,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+  position: sticky;
+  top: 6.75rem;
+  align-self: start;
 }
 
 .forecast-main {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.35rem;
   min-width: 0;
+}
+
+.forecast-control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .forecast-presets {
@@ -2561,7 +2570,7 @@ body {
 
 .forecast-comparison-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
 }
 
@@ -2659,10 +2668,47 @@ body {
   gap: 1rem;
 }
 
+.forecast-form-section {
+  padding: 1rem;
+  border: 1px solid rgba(226, 219, 210, 0.9);
+  border-radius: 18px;
+  background: rgba(250, 247, 242, 0.72);
+}
+
+.forecast-form-section + .forecast-form-section {
+  margin-top: 0.1rem;
+}
+
+.forecast-form-section-head {
+  margin-bottom: 0.95rem;
+}
+
+.forecast-form-section-head h4 {
+  color: var(--slate);
+  font-size: 0.98rem;
+  margin-bottom: 0.25rem;
+}
+
+.forecast-form-section-head p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.forecast-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
 .forecast-field {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
+}
+
+.forecast-field--full {
+  grid-column: 1 / -1;
 }
 
 .forecast-field span {
@@ -2814,6 +2860,51 @@ body {
 
 .forecast-total-card p {
   font-size: 0.92rem;
+}
+
+.forecast-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.forecast-workspace-card {
+  min-height: 100%;
+}
+
+.forecast-workspace-card--accent {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 242, 234, 0.92) 100%);
+  border-color: rgba(181, 98, 30, 0.28);
+}
+
+.forecast-workspace-stats {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.forecast-workspace-stats div {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.forecast-workspace-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.forecast-workspace-stats strong {
+  display: block;
+  margin-top: 0.42rem;
+  color: var(--slate);
+  font-size: 0.98rem;
+  line-height: 1.45;
 }
 
 .forecast-affordability-card {
@@ -4069,11 +4160,17 @@ body {
   .forecast-dashboard {
     grid-template-columns: 1fr;
   }
+  .forecast-sidebar {
+    position: static;
+  }
   .forecast-kpis,
   .forecast-grid,
+  .forecast-form-grid,
   .forecast-results-grid,
   .forecast-insights,
-  .forecast-two-up {
+  .forecast-two-up,
+  .forecast-workspace-grid,
+  .forecast-workspace-stats {
     grid-template-columns: 1fr;
   }
   .forecast-market-grid {
