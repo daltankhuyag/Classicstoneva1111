@@ -305,7 +305,7 @@ function getGapTone(value) {
   return value >= 8 ? 'good' : 'alert'
 }
 
-export function FinancialForecastingSection() {
+export function BuilderProFormaSection() {
   const [squareFeet, setSquareFeet] = useState(2800)
   const [finishLevel, setFinishLevel] = useState('premium')
   const [finishCostPerSqft, setFinishCostPerSqft] = useState(FINISH_LEVELS.premium.costPerSqft)
@@ -903,7 +903,7 @@ export default function BuilderProFormaPage() {
           </p>
         </div>
       </div>
-      <FinancialForecastingSection />
+      <BuilderProFormaSection />
     </>
   )
 }

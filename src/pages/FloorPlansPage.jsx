@@ -1,7 +1,7 @@
 import Seo from '../components/Seo'
 import { getPageSeo } from '../data/seo'
 import FloorPlans from '../components/FloorPlans'
-import { FinancialForecastingSection } from './FinancialForecastingPage'
+import { BuilderProFormaSection } from './BuilderProFormaPage'
 
 export default function FloorPlansPage() {
   const pageSeo = getPageSeo('/floor-plans')
@@ -20,7 +20,7 @@ export default function FloorPlansPage() {
         </div>
       </div>
       <FloorPlans />
-      <FinancialForecastingSection />
+      <BuilderProFormaSection />
     </>
   )
 }
