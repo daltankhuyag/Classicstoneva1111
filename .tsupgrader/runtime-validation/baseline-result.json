@@ -1,0 +1,71 @@
+{
+  "planHash": "8a79bbf851b556f76fa73d308f85f51b655d7b5eeff95cbc06fd8dc85b11f901",
+  "phase": "baseline",
+  "recordedAtUtc": "2026-07-18T20:02:11.7731976Z",
+  "retryCount": 0,
+  "resetBaseline": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 1665,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "dev-server-serves-home",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 404\n",
+        "durationMs": 12
+      },
+      {
+        "name": "gallery-route-serves",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 404\n",
+        "durationMs": 13
+      },
+      {
+        "name": "schedule-route-serves",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 404\n",
+        "durationMs": 11
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E ClassicStone@1.0.0 test\r\n\u003E node --test server/email.test.js\r\n\r\nTAP version 13\r\n# Subtest: email helpers escape html-sensitive characters\r\nok 1 - email helpers escape html-sensitive characters\r\n  ---\r\n  duration_ms: 0.9271\r\n  ...\r\n# Subtest: email helpers create a secure transport by default for port 465\r\nok 2 - email helpers create a secure transport by default for port 465\r\n  ---\r\n  duration_ms: 0.7058\r\n  ...\r\n1..2\r\n# tests 2\r\n# suites 0\r\n# pass 2\r\n# fail 0\r\n# cancelled 0\r\n# skipped 0\r\n# todo 0\r\n# duration_ms 80.8184\r\n",
+        "durationMs": 655,
+        "testResults": {
+          "testFramework": "unknown",
+          "runnerDetectedFrom": "none",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      }
+    ]
+  }
+}
