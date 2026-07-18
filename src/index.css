@@ -2659,6 +2659,25 @@ body {
   gap: 1rem;
 }
 
+.forecast-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  padding: 1rem;
+  border: 1px solid rgba(226, 219, 210, 0.9);
+  border-radius: 16px;
+  background: #fffdf9;
+}
+
+.forecast-form-group h4 {
+  margin: 0;
+  color: var(--slate);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .forecast-field {
   display: flex;
   flex-direction: column;

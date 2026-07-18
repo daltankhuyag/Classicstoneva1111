@@ -555,110 +555,118 @@ export function FinancialForecastingSection() {
               </div>
 
               <form className="forecast-panel forecast-form" onSubmit={event => event.preventDefault()}>
-              <div className="forecast-panel-head">
-                <h3>Forecast inputs</h3>
-                <p>Change the cost stack and pricing assumptions to model a realistic internal job pro forma.</p>
-              </div>
-
-                <label className="forecast-field">
-                  <span>Conditioned square footage</span>
-                  <input type="number" min="600" step="50" value={squareFeet} onChange={event => setSquareFeet(event.target.value)} />
-                </label>
-
-                <label className="forecast-field">
-                  <span>Finish level</span>
-                  <select value={finishLevel} onChange={event => {
-                    const value = event.target.value
-                    setFinishLevel(value)
-                    setFinishCostPerSqft(FINISH_LEVELS[value].costPerSqft)
-                  }}>
-                    {Object.entries(FINISH_LEVELS).map(([value, option]) => (
-                      <option key={value} value={value}>{option.label} · {formatCurrency(option.costPerSqft)}/sq ft</option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="forecast-field">
-                  <span>Base construction cost per sq ft</span>
-                  <input type="number" min="1" step="5" value={finishCostPerSqft} onChange={event => setFinishCostPerSqft(event.target.value)} />
-                </label>
-
-                <label className="forecast-field">
-                  <span>Lot and site condition</span>
-                  <select value={siteCondition} onChange={event => {
-                    const value = event.target.value
-                    setSiteCondition(value)
-                    setSiteWorkCost(SITE_CONDITIONS[value].cost)
-                  }}>
-                    {Object.entries(SITE_CONDITIONS).map(([value, option]) => (
-                      <option key={value} value={value}>{option.label} · {formatCurrency(option.cost)}</option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="forecast-field">
-                  <span>Site work allowance</span>
-                  <input type="number" min="0" step="1000" value={siteWorkCost} onChange={event => setSiteWorkCost(event.target.value)} />
-                </label>
-
-                <label className="forecast-field">
-                  <span>Garage program</span>
-                  <select value={garageType} onChange={event => {
-                    const value = event.target.value
-                    setGarageType(value)
-                    setGarageCost(GARAGE_OPTIONS[value].cost)
-                  }}>
-                    {Object.entries(GARAGE_OPTIONS).map(([value, option]) => (
-                      <option key={value} value={value}>{option.label} · {formatCurrency(option.cost)}</option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="forecast-field">
-                  <span>Garage allowance</span>
-                  <input type="number" min="0" step="1000" value={garageCost} onChange={event => setGarageCost(event.target.value)} />
-                </label>
-
-                <label className="forecast-field">
-                  <span>Utilities and driveway allowance per sq ft</span>
-                  <input type="number" min="0" step="1" value={utilitiesAllowancePerSqft} onChange={event => setUtilitiesAllowancePerSqft(event.target.value)} />
-                </label>
-
-                <div className="forecast-two-up">
-                  <label className="forecast-field">
-                    <span>Design and permits %</span>
-                    <input type="number" min="4" max="20" step="0.5" value={designPercent} onChange={event => setDesignPercent(event.target.value)} />
-                  </label>
-                  <div className="forecast-field">
-                    <span>Contingency</span>
-                    <div className="forecast-mode-toggle" role="group" aria-label="Contingency mode">
-                      <button type="button" className={contingencyMode === COST_MODES.percent ? 'is-active' : ''} onClick={() => setContingencyMode(COST_MODES.percent)}>Percent</button>
-                      <button type="button" className={contingencyMode === COST_MODES.fixed ? 'is-active' : ''} onClick={() => setContingencyMode(COST_MODES.fixed)}>Fixed</button>
-                    </div>
-                    <input type="number" min="0" max={contingencyMode === COST_MODES.percent ? '25' : undefined} step={contingencyMode === COST_MODES.percent ? '0.5' : '1000'} value={contingencyPercent} onChange={event => setContingencyPercent(event.target.value)} />
-                  </div>
+                <div className="forecast-panel-head">
+                  <h3>Forecast inputs</h3>
+                  <p>Change the cost stack and pricing assumptions to model a realistic internal job pro forma.</p>
                 </div>
 
-                <div className="forecast-two-up">
+                <div className="forecast-form-group">
+                  <h4>Project scope and allowances</h4>
+
                   <label className="forecast-field">
-                    <span>Target gross margin %</span>
-                    <input type="number" min="1" max="45" step="0.5" value={targetMarginPercent} onChange={event => setTargetMarginPercent(event.target.value)} />
+                    <span>Conditioned square footage</span>
+                    <input type="number" min="600" step="50" value={squareFeet} onChange={event => setSquareFeet(event.target.value)} />
                   </label>
-                  <div className="forecast-field">
-                    <span>Builder overhead</span>
-                    <div className="forecast-mode-toggle" role="group" aria-label="Overhead mode">
-                      <button type="button" className={overheadMode === COST_MODES.percent ? 'is-active' : ''} onClick={() => setOverheadMode(COST_MODES.percent)}>Percent</button>
-                      <button type="button" className={overheadMode === COST_MODES.fixed ? 'is-active' : ''} onClick={() => setOverheadMode(COST_MODES.fixed)}>Fixed</button>
-                    </div>
-                    <input type="number" min="0" max={overheadMode === COST_MODES.percent ? '25' : undefined} step={overheadMode === COST_MODES.percent ? '0.5' : '1000'} value={overheadPercent} onChange={event => setOverheadPercent(event.target.value)} />
-                  </div>
+
+                  <label className="forecast-field">
+                    <span>Finish level</span>
+                    <select value={finishLevel} onChange={event => {
+                      const value = event.target.value
+                      setFinishLevel(value)
+                      setFinishCostPerSqft(FINISH_LEVELS[value].costPerSqft)
+                    }}>
+                      {Object.entries(FINISH_LEVELS).map(([value, option]) => (
+                        <option key={value} value={value}>{option.label} · {formatCurrency(option.costPerSqft)}/sq ft</option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="forecast-field">
+                    <span>Base construction cost per sq ft</span>
+                    <input type="number" min="1" step="5" value={finishCostPerSqft} onChange={event => setFinishCostPerSqft(event.target.value)} />
+                  </label>
+
+                  <label className="forecast-field">
+                    <span>Lot and site condition</span>
+                    <select value={siteCondition} onChange={event => {
+                      const value = event.target.value
+                      setSiteCondition(value)
+                      setSiteWorkCost(SITE_CONDITIONS[value].cost)
+                    }}>
+                      {Object.entries(SITE_CONDITIONS).map(([value, option]) => (
+                        <option key={value} value={value}>{option.label} · {formatCurrency(option.cost)}</option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="forecast-field">
+                    <span>Site work allowance</span>
+                    <input type="number" min="0" step="1000" value={siteWorkCost} onChange={event => setSiteWorkCost(event.target.value)} />
+                  </label>
+
+                  <label className="forecast-field">
+                    <span>Garage program</span>
+                    <select value={garageType} onChange={event => {
+                      const value = event.target.value
+                      setGarageType(value)
+                      setGarageCost(GARAGE_OPTIONS[value].cost)
+                    }}>
+                      {Object.entries(GARAGE_OPTIONS).map(([value, option]) => (
+                        <option key={value} value={value}>{option.label} · {formatCurrency(option.cost)}</option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="forecast-field">
+                    <span>Garage allowance</span>
+                    <input type="number" min="0" step="1000" value={garageCost} onChange={event => setGarageCost(event.target.value)} />
+                  </label>
+
+                  <label className="forecast-field">
+                    <span>Utilities and driveway allowance per sq ft</span>
+                    <input type="number" min="0" step="1" value={utilitiesAllowancePerSqft} onChange={event => setUtilitiesAllowancePerSqft(event.target.value)} />
+                  </label>
                 </div>
 
-                <div className="forecast-two-up">
-                  <label className="forecast-field">
-                    <span>Projected schedule in months</span>
-                    <input type="number" min="1" max="36" step="1" value={scheduleMonths} onChange={event => setScheduleMonths(event.target.value)} />
-                  </label>
+                <div className="forecast-form-group">
+                  <h4>Margin, risk, and schedule</h4>
+
+                  <div className="forecast-two-up">
+                    <label className="forecast-field">
+                      <span>Design and permits %</span>
+                      <input type="number" min="4" max="20" step="0.5" value={designPercent} onChange={event => setDesignPercent(event.target.value)} />
+                    </label>
+                    <div className="forecast-field">
+                      <span>Contingency</span>
+                      <div className="forecast-mode-toggle" role="group" aria-label="Contingency mode">
+                        <button type="button" className={contingencyMode === COST_MODES.percent ? 'is-active' : ''} onClick={() => setContingencyMode(COST_MODES.percent)}>Percent</button>
+                        <button type="button" className={contingencyMode === COST_MODES.fixed ? 'is-active' : ''} onClick={() => setContingencyMode(COST_MODES.fixed)}>Fixed</button>
+                      </div>
+                      <input type="number" min="0" max={contingencyMode === COST_MODES.percent ? '25' : undefined} step={contingencyMode === COST_MODES.percent ? '0.5' : '1000'} value={contingencyPercent} onChange={event => setContingencyPercent(event.target.value)} />
+                    </div>
+                  </div>
+
+                  <div className="forecast-two-up">
+                    <label className="forecast-field">
+                      <span>Target gross margin %</span>
+                      <input type="number" min="1" max="45" step="0.5" value={targetMarginPercent} onChange={event => setTargetMarginPercent(event.target.value)} />
+                    </label>
+                    <div className="forecast-field">
+                      <span>Builder overhead</span>
+                      <div className="forecast-mode-toggle" role="group" aria-label="Overhead mode">
+                        <button type="button" className={overheadMode === COST_MODES.percent ? 'is-active' : ''} onClick={() => setOverheadMode(COST_MODES.percent)}>Percent</button>
+                        <button type="button" className={overheadMode === COST_MODES.fixed ? 'is-active' : ''} onClick={() => setOverheadMode(COST_MODES.fixed)}>Fixed</button>
+                      </div>
+                      <input type="number" min="0" max={overheadMode === COST_MODES.percent ? '25' : undefined} step={overheadMode === COST_MODES.percent ? '0.5' : '1000'} value={overheadPercent} onChange={event => setOverheadPercent(event.target.value)} />
+                    </div>
+                  </div>
+
+                  <div className="forecast-two-up">
+                    <label className="forecast-field">
+                      <span>Projected schedule in months</span>
+                      <input type="number" min="1" max="36" step="1" value={scheduleMonths} onChange={event => setScheduleMonths(event.target.value)} />
+                    </label>
+                  </div>
                 </div>
 
                 <div className="forecast-note">
