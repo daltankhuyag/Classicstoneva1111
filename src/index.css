@@ -257,7 +257,7 @@ body {
   --hero-glow-x: 58%;
   --hero-glow-y: 34%;
   --hero-overlay-opacity: 0.72;
-  height: min(88vh, 780px);
+  height: 100svh;
   min-height: 520px;
   background: #26221d;
   position: relative;
@@ -2570,7 +2570,7 @@ body {
 
 @media (max-width: 900px) {
   .hero {
-    min-height: 100vh;
+    height: 100svh;
   }
 
   .hero-content {
@@ -2604,7 +2604,7 @@ body {
 @media (max-width: 640px) {
   .hero {
     min-height: 460px;
-    height: 78vh;
+    height: 100svh;
   }
 
   .hero-content {
