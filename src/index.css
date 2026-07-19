@@ -1158,6 +1158,513 @@ body {
   padding: 0.85rem 1rem 1rem;
 }
 
+/* ── Fabuwood Door Styles ───────────────── */
+.fds-section {
+  --fds-door: #f4f1ec;
+  --fds-door-dark: #d9d4cb;
+  --fds-door-edge: rgba(0, 0, 0, 0.14);
+  --fds-grain: none;
+  padding: 5.5rem 0;
+  background:
+    radial-gradient(circle at top left, rgba(181, 98, 30, 0.08), transparent 28%),
+    linear-gradient(180deg, #f8f5f0 0%, #f3efe8 100%);
+}
+
+.fds-header {
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+}
+
+.fds-intro {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.fds-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.fds-control-label {
+  margin-bottom: 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fds-filters {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.fds-filter-btn {
+  padding: 0.8rem 1rem;
+  border: 0;
+  border-left: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.fds-filter-btn:first-child {
+  border-left: 0;
+}
+
+.fds-filter-btn:hover,
+.fds-filter-btn:focus-visible,
+.fds-filter-btn.active {
+  background: var(--slate);
+  color: var(--white);
+}
+
+.fds-filter-btn:focus-visible {
+  outline: none;
+}
+
+.fds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2.2rem 1.6rem;
+}
+
+.fds-door-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.fds-door-card:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 4px;
+}
+
+.fds-door-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 2.4rem 0;
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, #e8e4dd 0%, #c9c2b6 130%);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.fds-door-card:hover .fds-door-stage,
+.fds-door-card.selected .fds-door-stage {
+  box-shadow: 0 0 0 1px var(--slate) inset, 0 22px 44px rgba(30, 40, 48, 0.08);
+}
+
+.fds-door-card.selected .fds-door-stage::after {
+  content: 'Selected';
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: var(--slate);
+  color: var(--white);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fds-door {
+  position: relative;
+  width: 180px;
+  height: 252px;
+  border-radius: 2px;
+  background: var(--fds-door);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.36) inset,
+    0 14px 30px -12px rgba(28, 27, 25, 0.42),
+    0 2px 6px rgba(28, 27, 25, 0.18);
+}
+
+.fds-door::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--fds-door-edge);
+}
+
+.fds-panel {
+  position: absolute;
+  border-radius: 2px;
+  background: var(--fds-door-dark);
+  box-shadow:
+    inset 2px 3px 5px rgba(0, 0, 0, 0.22),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px var(--fds-door-edge);
+}
+
+.fds-frame-std .fds-panel {
+  inset: 32px;
+}
+
+.fds-frame-slim .fds-panel {
+  inset: 20px;
+}
+
+.fds-frame-wide .fds-panel {
+  inset: 44px;
+}
+
+.fds-frame-micro .fds-panel {
+  inset: 12px;
+}
+
+.fds-edge-detail .fds-panel::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 5.5px rgba(0, 0, 0, 0.08);
+}
+
+.fds-edge-bevel .fds-panel::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,.28), rgba(0,0,0,.12));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 6px;
+}
+
+.fds-panel-raised .fds-panel::after {
+  content: '';
+  position: absolute;
+  inset: 15px;
+  border-radius: 2px;
+  background: var(--fds-door);
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.fds-slab {
+  background-image: linear-gradient(105deg, rgba(255,255,255,.10), rgba(0,0,0,.05));
+}
+
+.fds-slab .fds-panel {
+  display: none;
+}
+
+.fds-surface-gloss {
+  background-image:
+    linear-gradient(112deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.06) 34%, rgba(255,255,255,0) 52%, rgba(255,255,255,.16) 78%, rgba(255,255,255,.02) 100%);
+}
+
+.fds-surface-matte {
+  background-image: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.03));
+}
+
+.fds-pull {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 5px;
+  height: 58px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #98928a 0%, #645f57 100%);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+.fds-door-meta {
+  padding: 1rem 0.2rem 0;
+}
+
+.fds-meta-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.fds-door-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.fds-door-tag {
+  flex-shrink: 0;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fds-door-desc {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.fds-card-hint {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.fds-detail-section {
+  padding: 5rem 0 6rem;
+  background:
+    radial-gradient(circle at top left, rgba(181, 98, 30, 0.08), transparent 28%),
+    linear-gradient(180deg, #fcfaf7 0%, #f3efe8 100%);
+}
+
+.fds-detail-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.fds-back-link {
+  color: var(--slate);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.fds-detail-tag {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fds-detail-hero {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(260px, 1fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.fds-detail-preview-stage {
+  display: flex;
+  justify-content: center;
+  padding: 2.8rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: linear-gradient(160deg, #e8e4dd 0%, #c9c2b6 130%);
+  box-shadow: 0 24px 50px rgba(30, 40, 48, 0.08);
+}
+
+.fds-detail-door {
+  width: 230px;
+  height: 320px;
+}
+
+.fds-detail-copy {
+  max-width: 540px;
+}
+
+.fds-detail-label {
+  margin-bottom: 0.4rem;
+  color: var(--copper);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.fds-detail-title {
+  color: var(--slate);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.fds-detail-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.fds-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.fds-finishes-panel {
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+}
+
+.fds-finishes-head {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+
+.fds-finish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.fds-finish-section + .fds-finish-section {
+  margin-top: 2.5rem;
+}
+
+.fds-finish-section-head {
+  margin-bottom: 1.25rem;
+}
+
+.fds-finish-section-title {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  color: var(--slate);
+}
+
+.fds-finish-card {
+  padding: 0;
+  border: 1px solid rgba(216, 210, 200, 0.95);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.fds-finish-card:hover,
+.fds-finish-card:focus-visible,
+.fds-finish-card.selected {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(30, 40, 48, 0.1);
+  border-color: rgba(181, 98, 30, 0.45);
+}
+
+.fds-finish-card:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 4px;
+}
+
+.fds-finish-preview {
+  display: flex;
+  justify-content: center;
+  padding: 1.6rem 1rem;
+  background: linear-gradient(160deg, #e8e4dd 0%, #c9c2b6 130%);
+}
+
+.fds-finish-door {
+  width: 150px;
+  height: 210px;
+}
+
+.fds-finish-body {
+  padding: 1rem 1rem 1.1rem;
+}
+
+.fds-note {
+  max-width: 760px;
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.fds-cta {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.fds-cta-kicker {
+  margin-bottom: 0.35rem;
+  color: var(--copper);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.fds-cta-title {
+  max-width: 22ch;
+  color: var(--slate);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  line-height: 1.35;
+}
+
+@media (max-width: 720px) {
+  .fds-section {
+    padding: 4.5rem 0;
+  }
+
+  .fds-controls {
+    gap: 1.4rem;
+  }
+
+  .fds-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fds-detail-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .fds-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .stone-gallery-preview-type {
   font-size: 0.7rem;
   font-weight: 700;

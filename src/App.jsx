@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import Features from './components/Features'
 import HowItWorks from './components/HowItWorks'
 import CtaBanner from './components/CtaBanner'
+import FabuwoodDoorStyles from './components/FabuwoodDoorStyles'
 import { trackAnalyticsEvent } from './components/AnalyticsTracker'
 import NewsletterPopup from './components/NewsletterPopup'
 import StonePartners from './components/StonePartners'
@@ -17,6 +18,7 @@ import GalleryPage from './pages/GalleryPage'
 import HomeRemodelingPage from './pages/HomeRemodelingPage'
 import SchedulingPage from './pages/SchedulingPage'
 import StoneGalleryPage from './pages/StoneGalleryPage'
+import DoorStylePage from './pages/DoorStylePage'
 
 const NEWSLETTER_DISMISS_KEY = 'classicstone.newsletter.dismissed'
 const NEWSLETTER_AUTO_DELAY_MS = 12000
@@ -49,6 +51,7 @@ function HomePage({ onOpenNewsletter }) {
       <Features />
       <HowItWorks />
       <CtaBanner onOpenNewsletter={onOpenNewsletter} />
+      <FabuwoodDoorStyles />
       <StonePartners />
     </>
   )
@@ -133,6 +136,7 @@ export default function App() {
         <Route path="/remodeling" element={<HomeRemodelingPage />} />
         <Route path="/schedule" element={<SchedulingPage />} />
         <Route path="/stone-gallery" element={<StoneGalleryPage />} />
+        <Route path="/door-styles/:styleId" element={<DoorStylePage />} />
       </Routes>
       <Footer />
       <NewsletterPopup
