@@ -8,6 +8,28 @@ import {
   getFinishesForDoorStyle,
 } from '../data/fabuwoodDoorStyles'
 
+function getFinishType(label) {
+  const normalizedLabel = label.toLowerCase()
+
+  if (normalizedLabel.includes('stain')) {
+    return 'Stained'
+  }
+
+  if (normalizedLabel.includes('textured')) {
+    return 'Textured'
+  }
+
+  if (normalizedLabel.includes('gloss')) {
+    return 'Gloss'
+  }
+
+  if (normalizedLabel.includes('matte')) {
+    return 'Matte'
+  }
+
+  return 'Painted'
+}
+
 export default function DoorStylePage() {
   const { styleId } = useParams()
   const style = getDoorStyleById(styleId)
@@ -48,7 +70,7 @@ export default function DoorStylePage() {
 
   const selectedFinish = availableFinishes.find(finish => finish.id === selectedFinishId) || DEFAULT_FINISH
   const pagePath = `/door-styles/${style.id}`
-  const selectedFinishType = selectedFinish.label.toLowerCase().includes('stain') ? 'Stained' : 'Painted'
+  const selectedFinishType = getFinishType(selectedFinish.label)
   const selectedFinishImage = selectedFinish.media?.image
 
   return (
@@ -141,7 +163,7 @@ export default function DoorStylePage() {
                     <div className="fds-finish-grid">
                       {section.finishes.map(finish => {
                         const isSelected = finish.id === selectedFinish.id
-                        const finishType = finish.label.toLowerCase().includes('stain') ? 'Stained' : 'Painted'
+                        const finishType = getFinishType(finish.label)
 
                         return (
                           <button

@@ -56,14 +56,6 @@ export const SEO_PAGES = [
     changeFrequency: 'weekly',
     priority: '0.8',
   },
-  {
-    path: '/builder-pro-forma',
-    title: 'Builder Pro Forma | Classic Stone',
-    description:
-      'Review a builder-side single-home pro forma with editable cost categories, margin targets, overhead modes, and monthly phase cash flow.',
-    changeFrequency: 'monthly',
-    priority: '0.7',
-  },
 ]
 
 export function getPageSeo(path) {
