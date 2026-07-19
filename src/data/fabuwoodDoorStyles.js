@@ -1153,6 +1153,9 @@ export const DOOR_STYLES = [
     ],
   },
   {
+      id: 'luxe',
+      name: 'Luxe',
+      tag: 'Slab',
     family: 'slab',
     variant: 'fds-slab fds-surface-gloss',
     description: 'A flat slab face for sleek, contemporary kitchens where hardware and finish do the talking.',
@@ -1271,8 +1274,20 @@ export const DOOR_STYLES = [
   },
 ]
 
+function normalizeDoorStyleKey(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[_\s]+/g, '-')
+}
+
 export function getDoorStyleById(styleId) {
-  return DOOR_STYLES.find(style => style.id === styleId) || null
+  const normalizedStyleId = normalizeDoorStyleKey(styleId)
+
+  return DOOR_STYLES.find(style => {
+    return normalizeDoorStyleKey(style.id) === normalizedStyleId
+      || normalizeDoorStyleKey(style.name) === normalizedStyleId
+  }) || null
 }
 
 function getFinishWithMedia(style, finishId) {
