@@ -241,7 +241,7 @@ body {
 }
 .navbar-links a {
   color: var(--copper-light);
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
@@ -5070,6 +5070,7 @@ body {
     display: block;
     padding: 0.9rem 1rem;
     border-radius: 10px;
+    font-size: 0.96rem;
     letter-spacing: 0.08em;
   }
   .navbar-links a:hover,
