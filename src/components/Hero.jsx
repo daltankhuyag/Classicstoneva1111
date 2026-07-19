@@ -12,7 +12,7 @@ const HERO_SLIDES = [
       'Granite, quartz, and marble are templated, cut, polished, and installed by our own crew for one continuous standard from selection to final fit.',
     ctaLabel: 'Browse our stone',
     ctaHref: '/stone-gallery#stone-gallery',
-    image: '/HERO_IMAGE.png',
+    image: '/Inspiration Gallery/hermitage-kitchen-alex-lukey-soda-pop-design-001-25_IG-1240x1240.avif',
     progressLabel: 'Slide 1: Stone gallery',
   },
   {
@@ -23,7 +23,7 @@ const HERO_SLIDES = [
       'Compare shaker and slab cabinet profiles, then open each style to review the real finish collections before making your final selection.',
     ctaLabel: 'Explore door profiles',
     ctaHref: '/#door-profiles',
-    image: '/Inspiration Gallery/inverness-frost-kitchen-struxture-004-24_IG-1240x1240.avif',
+    image: '/Inspiration Gallery/inverness-bristol-bay-kitchen-modern-001-23_IG-1240x1240.avif',
     progressLabel: 'Slide 2: Door profiles',
   },
   {
@@ -34,7 +34,7 @@ const HERO_SLIDES = [
       'Review installed kitchens, hospitality projects, and custom surfaces to see how materials, edges, and layouts come together in finished spaces.',
     ctaLabel: 'View our portfolio',
     ctaHref: '/#portfolio',
-    image: '/Project portfolio/Colada_ArligntonVA.jpg',
+    image: '/Inspiration Gallery/seacourt-kitchen-carter-dodd-001-24_IG-1240x1240.avif',
     progressLabel: 'Slide 3: Portfolio',
   },
 ]
