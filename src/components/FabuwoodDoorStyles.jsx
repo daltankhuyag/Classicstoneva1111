@@ -11,6 +11,7 @@ export default function FabuwoodDoorStyles() {
 
   return (
     <section
+      id="door-profiles"
       className="fds-section"
       style={{
         '--fds-door': DEFAULT_FINISH.door,
@@ -21,7 +22,7 @@ export default function FabuwoodDoorStyles() {
     >
       <div className="container">
         <div className="fds-header">
-          <p className="section-label">Fabuwood Door Styles</p>
+          <p className="section-label">Cabinet Door styles we offer</p>
           <h2 className="section-title">Compare cabinet profiles before you choose your kitchen look.</h2>
           <div className="divider" />
           <p className="fds-intro">

@@ -88,7 +88,7 @@ export default function Portfolio({
         {/* Header */}
         {showHeader && (
           <div className="portfolio-header">
-            <p className="section-label">Our Stone Work Portolio</p>
+            <p className="section-label">Our Stone Portolio</p>
             <h2 className="section-title">Stone craftsmanship, in every surface.</h2>
             <div className="divider" />
             <p className="pw-intro">

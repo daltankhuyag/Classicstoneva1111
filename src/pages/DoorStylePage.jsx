@@ -52,7 +52,7 @@ export default function DoorStylePage() {
         />
         <div className="fp-page-banner">
           <div className="container">
-            <p className="section-label">Fabuwood Door Styles</p>
+            <p className="section-label">Cabinet Door styles we offer</p>
             <h1 className="fp-page-banner-title">Door profile not found.</h1>
             <p className="fp-page-banner-sub">
               Return to the style gallery to choose a valid cabinet profile.
@@ -101,7 +101,7 @@ export default function DoorStylePage() {
       >
         <div className="container">
           <div className="fds-detail-topbar">
-            <Link to="/" className="fds-back-link">Back to door profiles</Link>
+            <a href="/#door-profiles" className="fds-back-link">Back to door profiles</a>
             <span className="fds-detail-tag">{style.tag}</span>
           </div>
 
