@@ -319,6 +319,130 @@ export const DOOR_FINISHES = [
   },
 ]
 
+export const DOOR_STYLE_FINISH_MEDIA = {
+  galaxy: {
+    timber: { image: 'https://images.ctfassets.net/79jq1weass0y/2cWwHirrTYxuZMMe1Girf3/728d7d6bb1254a6f7f45c94ba893ee16/Galaxy_Timber_092524.png?w=256&h=256&fm=webp&q=80' },
+    nickel: { image: 'https://images.ctfassets.net/79jq1weass0y/1V63CpLqh6LqUgdTGwjYa4/e311d3f60301c74d1dd4fb6fd7908255/Galaxy_Nickel_092624.png?w=256&h=256&fm=webp&q=80' },
+    dove: { image: 'https://images.ctfassets.net/79jq1weass0y/25vtiWtVv7nlGq2TPtObGC/0190d739a6986b8dacde952704120bc6/Galaxy_Dove.png?w=256&h=256&fm=webp&q=80' },
+    cobblestone: { image: 'https://images.ctfassets.net/79jq1weass0y/30fwoDMwewUyBgxSUd1aTt/326e2f1296b482dbaf4614e0833aae46/Galaxy_Cobblestone_100724.png?w=256&h=256&fm=webp&q=80' },
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/39HCTIJ63OwbnK7bMLhUaW/99e406cb6790efe6bd83c8c38cf0e806/Galaxy_Frost_092524.png?w=256&h=256&fm=webp&q=80' },
+    linen: { image: 'https://images.ctfassets.net/79jq1weass0y/6IFkkXahqQQCjZlqmboade/1c9e6db48f8c1b4424df67ffdd35e5e7/Galaxy_Linen_092524.png?w=256&h=256&fm=webp&q=80' },
+    mocha: { image: 'https://images.ctfassets.net/79jq1weass0y/1t72ymDGkCjkXNwyXmpqUg/a17d30bcc0090d81a7b239ae5c876724/Galaxy_Mocha_100724.png?w=256&h=256&fm=webp&q=80' },
+    indigo: { image: 'https://images.ctfassets.net/79jq1weass0y/4JB4HpvwyjWnqIR8QQAIgn/279eb8593f8f0447ac8d6844e2ef75c8/Galaxy_Indigo_092524.png?w=256&h=256&fm=webp&q=80' },
+    horizon: { image: 'https://images.ctfassets.net/79jq1weass0y/6OV0yZ7rzlc1BcSeAcFasp/be99e96ef20ef0c9fe9034577ff31800/Galaxy_Horizon.jpg?w=256&h=256&fm=webp&q=80' },
+    'desert-oak': { image: 'https://images.ctfassets.net/79jq1weass0y/3UyKh9u1yV0q7HBEXVz43l/cc5af5a66ef75affad191c1d0baf3418/GALAXY-WEB.jpg?w=256&h=256&fm=webp&q=80' },
+    'pitch-black': { image: 'https://images.ctfassets.net/79jq1weass0y/d5L10zOplbQhMKdPdnHqj/ed24ab323adf58aa79f5c98db40c07c9/Galaxy_Pitch_Black-Current_View.jpg?w=256&h=256&fm=webp&q=80' },
+    'pistachio-green': { image: 'https://images.ctfassets.net/79jq1weass0y/6KNw9KtGhAJWt2n8TJE8GR/7d67c546ad098352598ef66869be0ee5/Galaxy_Pistachio_Green.png?w=256&h=256&fm=webp&q=80' },
+    truffle: { image: 'https://images.ctfassets.net/79jq1weass0y/3r7lpGDYCfMqPegdYBtv9m/9665afafaa0a06fef02b47266d17ee7e/Galaxy_Truffle.png?w=256&h=256&fm=webp&q=80' },
+    'sage-green': { image: 'https://images.ctfassets.net/79jq1weass0y/7mgXyBUCokoIOY2gonfkZg/01737fa1432c654a824285dbf48b4304/Galaxy_Sage_Green-Current_View.jpg?w=256&h=256&fm=webp&q=80' },
+    'cloud-white': { image: 'https://images.ctfassets.net/79jq1weass0y/Skb8wBufTas9PkruldcdS/7397b7960cc2409135be82510a6ae8cf/Galaxy_Cloud_White-New_Updated.jpg?w=256&h=256&fm=webp&q=80' },
+    'denim-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/7J0Bd4BpcnedH93rScRcwu/273c9dbb3a7a6cf16481928edc4cfef1/Galaxy_Denim_Blue.jpg?w=256&h=256&fm=webp&q=80' },
+    'hunter-green': { image: 'https://images.ctfassets.net/79jq1weass0y/1FIiuTlUXWcNIu2uvzPNAL/6815bdd1d8b69ec1ce8264c2648666f8/Galaxy_Hunter_Green-Current_View.jpg?w=256&h=256&fm=webp&q=80' },
+    'graphite-black': { image: 'https://images.ctfassets.net/79jq1weass0y/3GsClfaCWVo6DKYIluc8cM/0d33651f11a784b74bb55d3d2a5ede6c/Galaxy_Graphite_Black.jpg?w=256&h=256&fm=webp&q=80' },
+    'cabernet-red': { image: 'https://images.ctfassets.net/79jq1weass0y/2lToankzKzTlu0RrL6V3pT/1f23799faf395a942fb7ae30b7d7a7b6/Galaxy_Cabernet_Red.png?w=256&h=256&fm=webp&q=80' },
+    'forest-green': { image: 'https://images.ctfassets.net/79jq1weass0y/VomS0JJuSWa2fXDQBQlHe/7de6fe7657ff63936e66409eba98fc78/Galaxy_Forest_Green.png?w=256&h=256&fm=webp&q=80' },
+    'macadamia-beige': { image: 'https://images.ctfassets.net/79jq1weass0y/4KiThOZP3Gf0JssnnC1bnn/f2361b8f10d71fec19d0dfaaab406564/Galaxy_Macadamia_Beige.png?w=256&h=256&fm=webp&q=80' },
+    'mint-green': { image: 'https://images.ctfassets.net/79jq1weass0y/5x0H7vI7Amw6ppL7DxHmyP/8332a1637c48c20a5682bb3e2290b75e/Galaxy_Mint_Green.png?w=256&h=256&fm=webp&q=80' },
+    'orchid-purple': { image: 'https://images.ctfassets.net/79jq1weass0y/374nbQWboLTTF2LRLLSFSX/e3d3277582241ccb66e4a5171c28982e/Galaxy_Orchid_Purple.png?w=256&h=256&fm=webp&q=80' },
+    'izel-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/5KbHpSLyX0g0IDobWIItM9/89f4de8b3f6cad72212d4add219df674/Galaxy_Izel_Blue__BM_1677_.png?w=256&h=256&fm=webp&q=80' },
+  },
+  luna: {
+    timber: { image: 'https://images.ctfassets.net/79jq1weass0y/5zkRJcA3Glwy6KsQrKNdjU/69dd37dd32da5fe7f5f672ff16dfdc94/Luna_Timber_092524.png?w=256&h=256&fm=webp&q=80' },
+    dove: { image: 'https://images.ctfassets.net/79jq1weass0y/7wvxuDhfX9YiZSlDpPsdTe/c5b6f1da5aee302e513b3f0b5d19ad5e/Luna_Dove.png?w=256&h=256&fm=webp&q=80' },
+    indigo: { image: 'https://images.ctfassets.net/79jq1weass0y/4mFKpb9WIF4mnO4qpXWFur/738ba9037639e8fbfcc0d53c9a05cd6e/Luna_Indigo_092524.png?w=256&h=256&fm=webp&q=80' },
+    kona: { image: 'https://images.ctfassets.net/79jq1weass0y/5KkezkXa97CDopZRI4K68p/dad282542f3a88803c861de92bded707/Luna_Kona_092624.png?w=256&h=256&fm=webp&q=80' },
+    'desert-oak': { image: 'https://images.ctfassets.net/79jq1weass0y/2ivZ3mQAMRhHUfVHquGX6w/2b17c8c54111689c0267722c154f1001/Luna_Desert_Oak_021325.png?w=256&h=256&fm=webp&q=80' },
+    truffle: { image: 'https://images.ctfassets.net/79jq1weass0y/4oBYDvb2SYmqv1iEoRYgWS/3eea3cd46c871be2bf828a693d5c332c/Luna_Truffle__1_.png?w=256&h=256&fm=webp&q=80' },
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/4JQzGTWIEiZKih019XMOm5/63ee050d75a98653b7b6e805c12a9feb/Luna_Frost.png?w=256&h=256&fm=webp&q=80' },
+    nickel: { image: 'https://images.ctfassets.net/79jq1weass0y/3pxLtvB64igMcpL76SaWY5/f4e21c9eefd2e2fc26b30f2744b6ba0a/Luna_Nickel.png?w=256&h=256&fm=webp&q=80' },
+    linen: { image: 'https://images.ctfassets.net/79jq1weass0y/3wOxsXLFFb6ouLjgVA5n35/236075c1e6f75cb9d88d4aadb894a78a/Luna_Linen.png?w=256&h=256&fm=webp&q=80' },
+    stone: { image: 'https://images.ctfassets.net/79jq1weass0y/jcahnhewqR71YgQ3zHW3n/3bf727a5a0e7e81503c14af66156f1d5/Luna_Stone.png?w=256&h=256&fm=webp&q=80' },
+    oyster: { image: 'https://images.ctfassets.net/79jq1weass0y/3Spujoi5vXMbFUwxmoKqWX/822db35f1f68be744978d2ff4a50af5d/Luna_Oyster.png?w=256&h=256&fm=webp&q=80' },
+    'pitch-black': { image: 'https://images.ctfassets.net/79jq1weass0y/7pfdmfQZpX0ZWA8sLP8sjI/6a8f283177e831204d2ea544251437ae/Luna_Pitch_Black.png?w=256&h=256&fm=webp&q=80' },
+    'pistachio-green': { image: 'https://images.ctfassets.net/79jq1weass0y/4iUOPDohcQuXd3oSZCTVc0/8db991f81bc4a9ab66217a635a515c52/Luna_Pistachio_Green.png?w=256&h=256&fm=webp&q=80' },
+    'hunter-green': { image: 'https://images.ctfassets.net/79jq1weass0y/6U1LrvZLvz9OkPdxWJQbzr/283a2aea541cc81c626d68f41f7624eb/Luna_Hunter_Green2.png?w=256&h=256&fm=webp&q=80' },
+    'sage-green': { image: 'https://images.ctfassets.net/79jq1weass0y/4DigECnlW9XFQCA714Zy05/ca186ef14f9fdff345fad3e6f025232f/Luna_Sage_Green-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    'cloud-white': { image: 'https://images.ctfassets.net/79jq1weass0y/533MlsuixT7qKGDF4fIvF1/b5bce5c20e928cc35e5821cb281dc928/image__1_.jfif?w=256&h=256&fm=webp&q=80' },
+    'denim-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/6K4p03009TRyr6ftk4lOBZ/d1cefc96c2f99d67fb81076ec24cdcb1/Luna_Denim_Blue_091124.png?w=256&h=256&fm=webp&q=80' },
+    'graphite-black': { image: 'https://images.ctfassets.net/79jq1weass0y/4Z0LP4UMLVsAweDpPMirXr/9251b2937e4cfcbbf58bfb4ab5070448/Luna_Graphite_Black_091224.png?w=256&h=256&fm=webp&q=80' },
+    'cabernet-red': { image: 'https://images.ctfassets.net/79jq1weass0y/4Z7dvL8N43wL2fHM5R4gWz/23c38feae07e1d9c99fc501a46d77f05/Luna_Cabernet_Red.png?w=256&h=256&fm=webp&q=80' },
+    'forest-green': { image: 'https://images.ctfassets.net/79jq1weass0y/6QOSYg8Q2i0LbP2TwNz96a/d02adb727d95a390dec66e36dbdc6c1b/Luna_Forest_Green.png?w=256&h=256&fm=webp&q=80' },
+    'macadamia-beige': { image: 'https://images.ctfassets.net/79jq1weass0y/5zlAUmLNqqCUkTxvYFtNl2/261120ace644c3dd331ebb1dfbafb8ae/Luna_Macadamia_Beige.png?w=256&h=256&fm=webp&q=80' },
+    'mint-green': { image: 'https://images.ctfassets.net/79jq1weass0y/7KkLxLWiTwMBqqIBqfkGY7/1053076df9364fa29bcba74e258411e4/Luna_Mint_Green.png?w=256&h=256&fm=webp&q=80' },
+    'orchid-purple': { image: 'https://images.ctfassets.net/79jq1weass0y/kznwzdrkd3L6sdWsUvq08/7430e76729dcf10aa5a9208492b77619/Luna_Orchid_Purple.png?w=256&h=256&fm=webp&q=80' },
+  },
+  fusion: {
+    dove: { image: 'https://images.ctfassets.net/79jq1weass0y/1DZxgEjeFkT6s483fpBMzL/689f04e02737c9d40a21f7332f42dcee/Fusion_Dove_092524.png?w=256&h=256&fm=webp&q=80' },
+    kona: { image: 'https://images.ctfassets.net/79jq1weass0y/5EigURoH9wLYD9ChZxtj4w/dcdb6a2eadbc5dd67d0cefcdc04709fe/Fusion_Kona_092624.png?w=256&h=256&fm=webp&q=80' },
+    nickel: { image: 'https://images.ctfassets.net/79jq1weass0y/4KTopqDByk7eUOmtXVRXaB/cc3e5a0073181fa4bcccc44d06b8011f/Fusion_Nickel_092624.png?w=256&h=256&fm=webp&q=80' },
+    oyster: { image: 'https://images.ctfassets.net/79jq1weass0y/6MFeUwR6A7gehBMrOv3J35/ac97c94a1b0853c2ef9020f8378d78a8/Fusion_Oyster_092624.png?w=256&h=256&fm=webp&q=80' },
+    timber: { image: 'https://images.ctfassets.net/79jq1weass0y/3VbtIkjBKwxAiaJkV94Ind/340f0d1b465b75771039e31ce2a88bb4/Fusion_Timber_091724__1_.png?w=256&h=256&fm=webp&q=80' },
+    stone: { image: 'https://images.ctfassets.net/79jq1weass0y/15opK7yVBzYL5vSUyqwToF/1260120f42f1bd46bf3e06a5a65f79ee/Fusion_Stone_092624.png?w=256&h=256&fm=webp&q=80' },
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/2orOy9sbICf8C5rJsysqVS/905e902f61719bac33f53bb61e11acfb/Fusion_Frost-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    indigo: { image: 'https://images.ctfassets.net/79jq1weass0y/2zWtxys8Psi2bSq6KpjI4o/6a73af7bb155bb20a5e5113b6462b337/Fusion_Indigo-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    linen: { image: 'https://images.ctfassets.net/79jq1weass0y/1HzpVwzyaZ5BOHTDvwwPtw/9d624929a952a86735028f66a70de871/Fusion_Linen-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    'pitch-black': { image: 'https://images.ctfassets.net/79jq1weass0y/6y9B5Syab2YdfUVC6TyIE9/aee2bebb27c8e638a4e38ae9602e2d86/Fusion_Pitch_Black-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    'pistachio-green': { image: 'https://images.ctfassets.net/79jq1weass0y/1Ey64phZw1Hk67xO4a5QF5/f8903e20f2f85c9a35b0d0f113f75610/Fusion_Pistachio_Green.png?w=256&h=256&fm=webp&q=80' },
+    'sage-green': { image: 'https://images.ctfassets.net/79jq1weass0y/7pCy2FGeub0XlS2RkgPP2y/f73251f8fe4cbb6c25763dd048528ab0/Fusion_Sage_Green-Current_View.jpg?w=256&h=256&fm=webp&q=80' },
+    'cloud-white': { image: 'https://images.ctfassets.net/79jq1weass0y/dE8EiDhebu2FMhuRYAaIZ/5e394d326cd13e99c247a3eefb9574aa/Fusion_Cloud_White_091124.png?w=256&h=256&fm=webp&q=80' },
+    'denim-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/5fIo11x5WcvPWZByW7MT8E/e0ae809c9bf9a154246412ded6139667/Fusion_Denim_Blue-Current_View.jpg?w=256&h=256&fm=webp&q=80' },
+    'hunter-green': { image: 'https://images.ctfassets.net/79jq1weass0y/sI3zgyRXD8RszTMxmWbfP/c185370d68ef11ffc28a1f097b4a93cf/Fusion_Hunter_Green-Current_View.jpg?w=256&h=256&fm=webp&q=80' },
+    'graphite-black': { image: 'https://images.ctfassets.net/79jq1weass0y/6OllR0eAqQBcSzyHLgu3fR/0faf5c12a8b90c7cbdf2b2c3a7997d76/Fusion_Graphite_Black.jpg?w=256&h=256&fm=webp&q=80' },
+    'cabernet-red': { image: 'https://images.ctfassets.net/79jq1weass0y/7iT0CUBiMrRHkvUDKboP6Y/0eaca8f694e47a316564814902499abe/Fusion_Cabernet_Red.png?w=256&h=256&fm=webp&q=80' },
+    'forest-green': { image: 'https://images.ctfassets.net/79jq1weass0y/3zJRoUUnmG7n9abNRhMi1J/124e2c0a3d7d693226c1028a07ad242c/Fusion_Forest_Green.png?w=256&h=256&fm=webp&q=80' },
+    'macadamia-beige': { image: 'https://images.ctfassets.net/79jq1weass0y/3RLTWINoMlXB9bziTfVTuW/ea0b9329115a23d0fa47f1b09ac78df7/Fusion_Macadamia_Beige.png?w=256&h=256&fm=webp&q=80' },
+    'mint-green': { image: 'https://images.ctfassets.net/79jq1weass0y/35KGPpq6PZ71WZ18MXiEVE/1477c8595ae895037c70cd29e4498561/Fusion_Mint_Green.png?w=256&h=256&fm=webp&q=80' },
+    'orchid-purple': { image: 'https://images.ctfassets.net/79jq1weass0y/7BlvZBiOj6MBV8BD9Vc3xV/40c4955ee3375897ca0871b6815ad805/Fusion_Orchid_Purple.png?w=256&h=256&fm=webp&q=80' },
+    'izel-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/4pGBarZIYDCSHqeHFtmT1h/049c0ccb102ac754c3f87070dd159409/Fusion_Izel_Blue__BM_1677_.png?w=256&h=256&fm=webp&q=80' },
+  },
+  nexus: {
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/5cX6tlqljXi1AKrMdePzYg/2b997aa19f258f4b068f5b15b0b92438/Nexus_Frost_092524.png?w=256&h=256&fm=webp&q=80' },
+    dove: { image: 'https://images.ctfassets.net/79jq1weass0y/5CyWDdq6UE397zezkedna5/49fd1d0ba51fd839ce2a4db4eadc82db/Nexus_Dove-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    indigo: { image: 'https://images.ctfassets.net/79jq1weass0y/3cSsWDvPf3iPWldPiqbciT/7239bc0935fda91c7916dc0d5dbba2d6/Nexus_Indigo-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    nickel: { image: 'https://images.ctfassets.net/79jq1weass0y/1JovgMQD6D39E4sY8MnIwl/e059a3bb47f9b39d2833f5d58572a2c3/Nexus_Nickel-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    linen: { image: 'https://images.ctfassets.net/79jq1weass0y/6qJ438aL8tQ7BeoQpVhnWz/79b7fee16f738e608551cba78d001d9f/Nexus_Linen-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    stone: { image: 'https://images.ctfassets.net/79jq1weass0y/48VHqDyNzbpeIXiZQB6Nt/df6adf516ec6fb67eadda1a209463a38/Nexus_Stone-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    oyster: { image: 'https://images.ctfassets.net/79jq1weass0y/6CwLwZBH76t6c8wx8aE5AU/1377a8fee50f881f96f5c1a49198f398/Nexus_Oyster-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    'pitch-black': { image: 'https://images.ctfassets.net/79jq1weass0y/50MqjtkMTYNwR984xAYQGi/54ae181f0f4f6471b75f8cff6edb2145/Nexus_Pitch_Black-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    'pistachio-green': { image: 'https://images.ctfassets.net/79jq1weass0y/2wyImeucVwWYctJWisI2tU/2d7c2eb95ea330534453ee902555f3c8/Nexus_pistachio_green.png?w=256&h=256&fm=webp&q=80' },
+    'sage-green': { image: 'https://images.ctfassets.net/79jq1weass0y/3fu9f2NymIgSZoEubCG98B/ff6506881589211ea3c0cb9165107575/Nexus_Sage_Green-Current_View.png?w=256&h=256&fm=webp&q=80' },
+    'cloud-white': { image: 'https://images.ctfassets.net/79jq1weass0y/6H81h6yZZygqYDrNoBaS8u/25dd67a22e0a91fe2a13310bb228dbe9/Nexus_Cloud_White_091124.png?w=256&h=256&fm=webp&q=80' },
+    'denim-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/kEB2XNYj8JYqSCv6wgKSN/ce81d94744e07d6d88ec875c10def3b0/Nexus_Denim_Blue_091124.png?w=256&h=256&fm=webp&q=80' },
+    'hunter-green': { image: 'https://images.ctfassets.net/79jq1weass0y/3YA6XJDrIrCQhFtNKf96t2/e6d8c2ca92a84b882a873e92e08def11/Nexus_Hunter_Green2.png?w=256&h=256&fm=webp&q=80' },
+    'graphite-black': { image: 'https://images.ctfassets.net/79jq1weass0y/WH9ifNlGf2Zs3oegqOOYH/58226d762655ff718d48ed2a3226b8cc/Nexus_Graphite_Black__091224.png?w=256&h=256&fm=webp&q=80' },
+    'cabernet-red': { image: 'https://images.ctfassets.net/79jq1weass0y/1rmUPAHexoq3BQpED78vPz/37190603271f370967a64c9dcc3c7787/Nexus_Cabernet_Red.png?w=256&h=256&fm=webp&q=80' },
+    'forest-green': { image: 'https://images.ctfassets.net/79jq1weass0y/SKi0NWDfbmhRmtCSH8eJd/12bb18ed74224204530f51baab410439/Nexus_Forest_Green.png?w=256&h=256&fm=webp&q=80' },
+    'macadamia-beige': { image: 'https://images.ctfassets.net/79jq1weass0y/2ytrsqMccRFELM3WMsIUKk/6be20485c24b80c2b533cfda9ff485a4/Nexus_Macadamia_Beige.png?w=256&h=256&fm=webp&q=80' },
+    'mint-green': { image: 'https://images.ctfassets.net/79jq1weass0y/10URDDJQCxKGq0f4Y51m31/88ca1089792f43079ba2cdee0ec3bef3/Nexus_Mint_Green.png?w=256&h=256&fm=webp&q=80' },
+    'orchid-purple': { image: 'https://images.ctfassets.net/79jq1weass0y/ODzTLU5qq7aSYrtt9SKSP/74f542016691f83d4423b60c19b79f9c/Nexus_Orchid_Purple.png?w=256&h=256&fm=webp&q=80' },
+    'izel-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/2SPQnCco9qIUq8Y6EgihJj/af0beb0be231a10b6754f917b52acb3a/Nexus_Izel_Blue__BM_1677_.png?w=256&h=256&fm=webp&q=80' },
+  },
+  luxe: {
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/4CjyVr8Mi9r8eEB8kYPyeb/ce58574121258cf0634340846743912f/Luxe_Frost_-_Large.png?w=256&h=256&fm=webp&q=80' },
+    'desert-oak': { image: 'https://images.ctfassets.net/79jq1weass0y/7xvelmbmqKXu2aoISv0LHw/9c8ceea84dd24de2dc60ed921f84b3aa/Luxe_Desert_Oak_071625.png?w=256&h=256&fm=webp&q=80' },
+    'canyon-oak': { image: 'https://images.ctfassets.net/79jq1weass0y/qLxBQraSBOaDrSlomzjom/4f142725f03afe3863308a2ad67c7ed5/Luxe_Canyon_Oak.png?w=256&h=256&fm=webp&q=80' },
+    indigo: { image: 'https://images.ctfassets.net/79jq1weass0y/n53EdkpIeWNjbrtuHXG40/79c2fdbf101eeee4ff78d1ee97555853/Luxe_Indigo.png?w=256&h=256&fm=webp&q=80' },
+    dove: { image: 'https://images.ctfassets.net/79jq1weass0y/27FPcEpCRhVsHO3JeYFmbM/697b5fc15f3d16fd341fc394862041da/Luxe_Dove.png?w=256&h=256&fm=webp&q=80' },
+    linen: { image: 'https://images.ctfassets.net/79jq1weass0y/1UnZDr8xCzXZEoT4HU9Wzw/b5739221d11e264577a4edd85441d3ba/Luxe_Linen.png?w=256&h=256&fm=webp&q=80' },
+    nickel: { image: 'https://images.ctfassets.net/79jq1weass0y/ce17p84bGLrTTVBcZ5gzi/d299d90ecbc903a1e4d399494cab9166/Luxe_Nickel.png?w=256&h=256&fm=webp&q=80' },
+    oyster: { image: 'https://images.ctfassets.net/79jq1weass0y/5XZKR7SaLfVqprkv7dLFyD/78708769ab717f08a26f47d4538234c6/Luxe_Oyster.png?w=256&h=256&fm=webp&q=80' },
+    'pitch-black': { image: 'https://images.ctfassets.net/79jq1weass0y/5Lvv8Vz0k1FPk3mXWqtbn7/dc114aa8e1bc269ce3b136304aaddd76/Luxe_Pitch_Black.png?w=256&h=256&fm=webp&q=80' },
+    stone: { image: 'https://images.ctfassets.net/79jq1weass0y/16Ux7v7OvNU5AOpdcdCPbs/9442bde0e1183cace2e4280ef7ea14a5/Luxe_Stone.png?w=256&h=256&fm=webp&q=80' },
+    'pistachio-green': { image: 'https://images.ctfassets.net/79jq1weass0y/55LnyEhqSDdtCfSSNP3uuH/2e4e4453ac1c35667c5be83f59090739/Luxe_Pistachio_Green.png?w=256&h=256&fm=webp&q=80' },
+    'cabernet-red': { image: 'https://images.ctfassets.net/79jq1weass0y/0N0yFSAyNpmnMgNpPUXMq/37dff77cb4b7c6b978a56cbda9fe3f15/Luxe_Cabernet_Red.png?w=256&h=256&fm=webp&q=80' },
+    'cloud-white': { image: 'https://images.ctfassets.net/79jq1weass0y/3yXEgOOzsQW9oS4Ns9nqve/30c523df7d58a7aa6a342162c9991f2e/Luxe_Cloud_White.png?w=256&h=256&fm=webp&q=80' },
+    'denim-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/1UIuUCIDwLQYOjN0XdaRRl/a0bf0bc6fc88eb24f9ed57731d354b05/Luxe_Denim_Blue.png?w=256&h=256&fm=webp&q=80' },
+    'forest-green': { image: 'https://images.ctfassets.net/79jq1weass0y/5GoPyMoRE10xzSp5MWr8of/d9b3cff2fa9b21015d16e64f81bdeaf1/Luxe_Forest_Green.png?w=256&h=256&fm=webp&q=80' },
+    'graphite-black': { image: 'https://images.ctfassets.net/79jq1weass0y/2zXrHOgRKNwEuaSPMDgWuL/36749e8d14f7ac7e330d42222fc6260d/Luxe_Graphite_Black.png?w=256&h=256&fm=webp&q=80' },
+    'hunter-green': { image: 'https://images.ctfassets.net/79jq1weass0y/3a3D81BuVysxGoxFOf7U2h/d511861d73b7e309ddfadb2a17b167fd/Luxe_Hunter_Green.png?w=256&h=256&fm=webp&q=80' },
+    'izel-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/7y5ztYy9eRsJuUxy7lX0iW/9a09162268d466c5201045964b247542/Luxe_Izel_Blue__BM_1677_.png?w=256&h=256&fm=webp&q=80' },
+    'macadamia-beige': { image: 'https://images.ctfassets.net/79jq1weass0y/6yJotESld15iZUL81IKQXd/ecde396d818afb16e1b31e8869ccfd48/Luxe_Macadamia_Beige.png?w=256&h=256&fm=webp&q=80' },
+    'mint-green': { image: 'https://images.ctfassets.net/79jq1weass0y/363rPaeSQNhThVhEAReQI7/bc454ec64a2f178b463ea8f073ad9fc7/Luxe_Mint_Green.png?w=256&h=256&fm=webp&q=80' },
+    'orchid-purple': { image: 'https://images.ctfassets.net/79jq1weass0y/3WIh9ka7d6V8rbNz8LyGZW/deb5e85905629a1cf5e2fbedd2169adc/Luxe_Orchid_Purple.png?w=256&h=256&fm=webp&q=80' },
+    'sage-green': { image: 'https://images.ctfassets.net/79jq1weass0y/7Bj7sqb9cYNzvTInu3d5Oe/b84591837f920826b92b8e88a4eedaba/Luxe_Sage_Green.png?w=256&h=256&fm=webp&q=80' },
+  },
+}
+
 export const DEFAULT_FINISH = DOOR_FINISHES[0]
 
 export const DOOR_STYLES = [
@@ -530,6 +654,18 @@ export function getDoorStyleById(styleId) {
   return DOOR_STYLES.find(style => style.id === styleId) || null
 }
 
+function getFinishWithMedia(style, finishId) {
+  const finish = DOOR_FINISHES.find(item => item.id === finishId)
+
+  if (!finish) {
+    return null
+  }
+
+  const media = DOOR_STYLE_FINISH_MEDIA[style.id]?.[finishId]
+
+  return media ? { ...finish, media } : finish
+}
+
 export function getFinishesForDoorStyle(style) {
   if (!style) {
     return []
@@ -538,7 +674,7 @@ export function getFinishesForDoorStyle(style) {
   const finishIds = style.finishIds || style.finishSections?.flatMap(section => section.finishIds) || []
 
   return finishIds
-    .map(finishId => DOOR_FINISHES.find(finish => finish.id === finishId))
+    .map(finishId => getFinishWithMedia(style, finishId))
     .filter(Boolean)
 }
 
@@ -552,7 +688,7 @@ export function getFinishSectionsForDoorStyle(style) {
       .map(section => ({
         ...section,
         finishes: section.finishIds
-          .map(finishId => DOOR_FINISHES.find(finish => finish.id === finishId))
+          .map(finishId => getFinishWithMedia(style, finishId))
           .filter(Boolean),
       }))
       .filter(section => section.finishes.length)

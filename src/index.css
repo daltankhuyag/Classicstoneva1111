@@ -1509,16 +1509,26 @@ body {
 .fds-detail-preview-stage {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 2.5rem 2.5rem 1.75rem;
   border: 1px solid var(--border);
   border-radius: 0;
   background: #f7f5f1;
   box-shadow: none;
+  overflow: hidden;
 }
 
 .fds-detail-door {
   width: 220px;
   height: 320px;
+}
+
+.fds-detail-preview-image {
+  display: block;
+  width: min(100%, 360px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  filter: saturate(1.02) contrast(1.02);
 }
 
 .fds-detail-copy {
@@ -1659,6 +1669,7 @@ body {
 }
 
 .fds-finish-chip {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 0.72;
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -1670,17 +1681,26 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
     inset 0 -8px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 }
 
 .fds-finish-chip::after {
   content: '';
+  position: absolute;
+  inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.1),
     inset 10px 0 14px rgba(255, 255, 255, 0.06),
     inset -10px 0 14px rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+}
+
+.fds-finish-chip-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .fds-finish-body {

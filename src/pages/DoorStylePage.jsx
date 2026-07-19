@@ -49,6 +49,7 @@ export default function DoorStylePage() {
   const selectedFinish = availableFinishes.find(finish => finish.id === selectedFinishId) || DEFAULT_FINISH
   const pagePath = `/door-styles/${style.id}`
   const selectedFinishType = selectedFinish.label.toLowerCase().includes('stain') ? 'Stained' : 'Painted'
+  const selectedFinishImage = selectedFinish.media?.image
 
   return (
     <>
@@ -86,10 +87,18 @@ export default function DoorStylePage() {
             <aside className="fds-detail-sidebar">
               <div className="fds-door-panel">
                 <div className="fds-detail-preview-stage">
-                  <div className={`fds-door fds-detail-door ${style.variant}`} aria-hidden="true">
-                    <div className="fds-panel" />
-                    <div className="fds-pull" />
-                  </div>
+                  {selectedFinishImage ? (
+                    <img
+                      className="fds-detail-preview-image"
+                      src={selectedFinishImage}
+                      alt={`${style.name} in ${selectedFinish.name} finish`}
+                    />
+                  ) : (
+                    <div className={`fds-door fds-detail-door ${style.variant}`} aria-hidden="true">
+                      <div className="fds-panel" />
+                      <div className="fds-pull" />
+                    </div>
+                  )}
                 </div>
 
                 <div className="fds-detail-copy">
@@ -144,11 +153,20 @@ export default function DoorStylePage() {
                           >
                             <div
                               className="fds-finish-chip"
-                              style={{
+                              style={finish.media ? undefined : {
                                 '--fds-chip': finish.door,
                                 '--fds-chip-dark': finish.doorDark,
                               }}
-                            />
+                            >
+                              {finish.media ? (
+                                <img
+                                  className="fds-finish-chip-image"
+                                  src={finish.media.image}
+                                  alt=""
+                                  loading="lazy"
+                                />
+                              ) : null}
+                            </div>
                             <div className="fds-finish-body">
                               <span className="fds-finish-name">{finish.name}</span>
                               <span className="fds-finish-kind">{finishType}</span>
