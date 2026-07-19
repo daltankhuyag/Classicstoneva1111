@@ -441,6 +441,34 @@ export const DOOR_STYLE_FINISH_MEDIA = {
     'orchid-purple': { image: 'https://images.ctfassets.net/79jq1weass0y/3WIh9ka7d6V8rbNz8LyGZW/deb5e85905629a1cf5e2fbedd2169adc/Luxe_Orchid_Purple.png?w=256&h=256&fm=webp&q=80' },
     'sage-green': { image: 'https://images.ctfassets.net/79jq1weass0y/7Bj7sqb9cYNzvTInu3d5Oe/b84591837f920826b92b8e88a4eedaba/Luxe_Sage_Green.png?w=256&h=256&fm=webp&q=80' },
   },
+  echo: {
+    timber: { image: 'https://images.ctfassets.net/79jq1weass0y/1JZJpqDF2T1uYDyEMj3rlF/04999d466208e9ad3b88635d6b0a32a7/Echo_Timber_-_Large.png?w=256&h=256&fm=webp&q=80' },
+    mocha: { image: 'https://images.ctfassets.net/79jq1weass0y/66pGX0ufhkDGOP72qxfSNn/6abeebdc239ef1ea1aeec8dc87927a96/Echo_Mocha_-_Large.png?w=256&h=256&fm=webp&q=80' },
+    dove: { image: 'https://images.ctfassets.net/79jq1weass0y/4j5ViO56hFf8FGQhqm5Gil/02b3ba47162c5a502255fb186c880a00/Echo_Dove_-_Large.png?w=256&h=256&fm=webp&q=80' },
+    frost: { image: 'https://images.ctfassets.net/jysqq5mscnen/3MPNzT86EgUTCoaeTa0wBR/cbdceaefb6465acb61166cbe6bbf4ecc/Echo_Frost_063025.png?w=256&h=256&fm=webp&q=80' },
+    indigo: { image: 'https://images.ctfassets.net/79jq1weass0y/2wEdjBUr00EYJT3Yi76mBE/2b528366779fdfbcf933004fe84bbc48/Echo_Indigo.png?w=256&h=256&fm=webp&q=80' },
+    linen: { image: 'https://images.ctfassets.net/79jq1weass0y/3JYyEcNV8xom1ILU5uzAda/ceacf50ad7efdbda048f891338de2127/Echo_Linen.png?w=256&h=256&fm=webp&q=80' },
+    nickel: { image: 'https://images.ctfassets.net/79jq1weass0y/2Bl4NMDBGp99PgruQoLKAA/946ba9b9be346c6f2ac4d751646cdacc/Echo_Nickel.png?w=256&h=256&fm=webp&q=80' },
+    oyster: { image: 'https://images.ctfassets.net/79jq1weass0y/5InNVCXNMlK978oxISHAt1/f811e0fe701d1be31ab53cb3dd5273d5/Echo_Oyster.png?w=256&h=256&fm=webp&q=80' },
+    'pitch-black': { image: 'https://images.ctfassets.net/79jq1weass0y/zJgIF1gNk2LpUrzxzvej3/163b4a0fb8ee99a2f1b88fac516d9449/Echo_Pitch_Black.png?w=256&h=256&fm=webp&q=80' },
+    stone: { image: 'https://images.ctfassets.net/79jq1weass0y/4aTxPZPJ9a0mlVUYOlhLhB/3e831c5a80f373332a59cc74c04fc5ad/Echo_Stone.png?w=256&h=256&fm=webp&q=80' },
+    'pistachio-green': { image: 'https://images.ctfassets.net/79jq1weass0y/3bKJ4lDoVoPSMAGSW3mFmX/381cebf0503429802f39a8ec77ab7f48/Echo_Pistachio_Green.png?w=256&h=256&fm=webp&q=80' },
+    'cabernet-red': { image: 'https://images.ctfassets.net/79jq1weass0y/2I9sIlmFZs5ufuMk58HvZ8/8503304ed1ea47660305129dab75ee92/Echo_Cabernet_Red.png?w=256&h=256&fm=webp&q=80' },
+    'cloud-white': { image: 'https://images.ctfassets.net/79jq1weass0y/42DeW7AvYJ45rIfZfmzETV/ec583d876bb3cf7746abb006e3c7fcbe/Echo_Cloud_White.png?w=256&h=256&fm=webp&q=80' },
+    'forest-green': { image: 'https://images.ctfassets.net/79jq1weass0y/7Ik5Bb3vV1tka7WwdVZM3r/da69311f3d754d68e20c8b7d67e3f6d6/Echo_Forest_Green.png?w=256&h=256&fm=webp&q=80' },
+    'izel-blue': { image: 'https://images.ctfassets.net/79jq1weass0y/1Md3gljN6rDZcXGHt97pB3/1cd6623810e2c6eb60030fba59c1fc47/Echo_Izel_Blue__BM_1677_.png?w=256&h=256&fm=webp&q=80' },
+  },
+  metro: {
+    java: { image: 'https://images.ctfassets.net/79jq1weass0y/2lxfOks6iWPEpoWV9241CP/5b2ddc4d0537afaa763a2e5447a7c800/Metro_Java.jpg?w=256&h=256&fm=webp&q=80' },
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/1kxmjVjjpfZKlteSSwl4CJ/4363793e7d8b5195e8b57a895b01dba7/Metro_Frost.png?w=256&h=256&fm=webp&q=80' },
+    mist: { image: 'https://images.ctfassets.net/79jq1weass0y/diixGqvmP1KWfdvR0lQFc/4b448d14720aa6bb9e5f5f0af1c07629/Metro_Mist.jpg?w=256&h=256&fm=webp&q=80' },
+  },
+  discovery: {
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/1iuLJZbk8VJ6pAF7wTLWUi/ad71297a862c7309e0867bb5c5cd67d0/Discovery_Frost.jpg?w=256&h=256&fm=webp&q=80' },
+  },
+  hallmark: {
+    frost: { image: 'https://images.ctfassets.net/79jq1weass0y/2E8SksG4rFoHkPwDpM26pD/fd0b7c0381835d35d17a459ff4ec56f2/Hallmark_Frost.png?w=256&h=256&fm=webp&q=80' },
+  },
 }
 
 export const DEFAULT_FINISH = DOOR_FINISHES[0]
@@ -601,7 +629,29 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-micro fds-edge-detail',
     description: 'Micro-shaker framing that bridges clean-lined modern cabinetry with a little depth.',
-    finishIds: ['frost', 'dove', 'oyster', 'latte'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['timber', 'mocha', 'dove'],
+      },
+      {
+        id: 'signature-select',
+        kicker: 'Signature Select Finishes',
+        title: 'Expanded finish options, made to order with extended lead times.',
+        note: 'Additional made-to-order finishes for broader palette flexibility.',
+        finishIds: ['frost', 'indigo', 'linen', 'nickel', 'oyster', 'pitch-black', 'stone', 'pistachio-green'],
+      },
+      {
+        id: 'designer',
+        kicker: 'Designer Finishes',
+        title: 'Curated designer-inspired colors, made to order.',
+        note: 'Custom-order designer colors for a more expressive Echo palette.',
+        finishIds: ['cabernet-red', 'cloud-white', 'denim-blue', 'forest-green', 'graphite-black', 'hunter-green', 'izel-blue', 'macadamia-beige', 'mint-green', 'orchid-purple'],
+      },
+    ],
   },
   {
     id: 'tuscany',
@@ -628,7 +678,15 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-slim fds-edge-detail',
     description: 'A crisp, urban frame profile for kitchens that want a sharp silhouette without going fully slab.',
-    finishIds: ['frost', 'dove', 'indigo', 'onyx'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['java', 'frost', 'mist'],
+      },
+    ],
   },
   {
     id: 'discovery',
@@ -637,7 +695,15 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-std',
     description: 'Another timeless framed option with a balanced inside panel reveal and broad design flexibility.',
-    finishIds: ['frost', 'dove', 'oyster', 'latte'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['frost'],
+      },
+    ],
   },
   {
     id: 'hallmark',
@@ -646,7 +712,15 @@ export const DOOR_STYLES = [
     family: 'raised',
     variant: 'fds-frame-std fds-panel-raised fds-edge-detail',
     description: 'A more traditional raised center panel that suits formal kitchens and heritage-inspired homes.',
-    finishIds: ['frost', 'dove', 'oyster', 'onyx'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['frost'],
+      },
+    ],
   },
 ]
 
