@@ -48,9 +48,9 @@ function HomePage({ onOpenNewsletter }) {
       />
       <Hero onOpenNewsletter={onOpenNewsletter} />
       <Features />
+      <FabuwoodDoorStyles />
       <HowItWorks />
       <CtaBanner onOpenNewsletter={onOpenNewsletter} />
-      <FabuwoodDoorStyles />
       <StonePartners />
     </>
   )
