@@ -127,6 +127,36 @@ export const DOOR_FINISHES = [
     grain: 'repeating-linear-gradient(90deg, rgba(130,90,48,.16) 0 2px, rgba(222,191,149,.14) 2px 7px)',
   },
   {
+    id: 'canyon-oak',
+    name: 'Canyon Oak',
+    label: 'Warm Oak Stain',
+    note: 'A warm, contemporary oak stain that gives slab cabinetry a natural feel without losing its clean-lined look.',
+    door: '#af865f',
+    doorDark: '#936c49',
+    edge: 'rgba(83, 55, 27, .2)',
+    grain: 'none',
+  },
+  {
+    id: 'kona',
+    name: 'Kona',
+    label: 'Deep Walnut Stain',
+    note: 'A dark, grounded stain that adds tailored contrast while keeping the warmth of real wood tone.',
+    door: '#5d4536',
+    doorDark: '#463429',
+    edge: 'rgba(255,255,255,.06)',
+    grain: 'repeating-linear-gradient(90deg, rgba(64,43,30,.18) 0 2px, rgba(118,87,63,.1) 2px 7px)',
+  },
+  {
+    id: 'stone',
+    name: 'Stone',
+    label: 'Muted Beige Paint',
+    note: 'A calm painted neutral that bridges crisp whites and warmer natural finishes in transitional kitchens.',
+    door: '#c9beaf',
+    doorDark: '#b2a492',
+    edge: 'rgba(77, 63, 48, .16)',
+    grain: 'none',
+  },
+  {
     id: 'pitch-black',
     name: 'Pitch Black',
     label: 'Black Paint',
@@ -299,7 +329,22 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-std',
     description: 'Classic shaker proportions with a familiar framed look that fits transitional kitchens.',
-    finishIds: ['timber', 'nickel', 'dove', 'cobblestone', 'frost', 'linen', 'mocha', 'indigo', 'horizon', 'desert-oak', 'pitch-black', 'pistachio-green', 'truffle', 'sage-green', 'cloud-white', 'denim-blue', 'hunter-green', 'graphite-black', 'cabernet-red', 'forest-green', 'macadamia-beige', 'mint-green', 'orchid-purple', 'izel-blue'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular stocked finishes, ready when you are.',
+        note: 'Stocked finishes with the fastest path from selection to install.',
+        finishIds: ['timber', 'nickel', 'dove', 'cobblestone', 'frost', 'linen', 'mocha', 'indigo', 'horizon', 'desert-oak', 'pitch-black', 'pistachio-green', 'truffle'],
+      },
+      {
+        id: 'designer',
+        kicker: 'Designer Finishes',
+        title: 'Curated, custom colors crafted to inspire, made to order with intention.',
+        note: 'Custom-order paint colors for projects that want a more tailored palette.',
+        finishIds: ['sage-green', 'cloud-white', 'denim-blue', 'hunter-green', 'graphite-black', 'cabernet-red', 'forest-green', 'macadamia-beige', 'mint-green', 'orchid-purple', 'izel-blue'],
+      },
+    ],
   },
   {
     id: 'luna',
@@ -308,7 +353,29 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-slim',
     description: 'A slimmer inside rail for a cleaner, lighter profile that reads a little more modern.',
-    finishIds: ['frost', 'dove', 'latte', 'indigo'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['timber', 'dove', 'indigo', 'kona', 'desert-oak', 'truffle'],
+      },
+      {
+        id: 'signature-select',
+        kicker: 'Signature Select Finishes',
+        title: 'Expanded finish options, made to order with extended lead times.',
+        note: 'Additional made-to-order finishes for broader palette flexibility.',
+        finishIds: ['frost', 'nickel', 'linen', 'stone', 'oyster', 'pitch-black', 'pistachio-green'],
+      },
+      {
+        id: 'designer',
+        kicker: 'Designer Finishes',
+        title: 'Curated designer-inspired colors, made to order.',
+        note: 'Custom-order designer colors for a more expressive Luna palette.',
+        finishIds: ['hunter-green', 'sage-green', 'cloud-white', 'denim-blue', 'graphite-black', 'cabernet-red', 'forest-green', 'macadamia-beige', 'mint-green', 'orchid-purple'],
+      },
+    ],
   },
   {
     id: 'fusion',
@@ -317,7 +384,29 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-std fds-edge-detail',
     description: 'Standard shaker geometry with a more sculpted inner detail for a refined, custom feel.',
-    finishIds: ['frost', 'dove', 'oyster', 'onyx'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['dove', 'kona', 'nickel', 'oyster', 'timber', 'stone'],
+      },
+      {
+        id: 'signature-select',
+        kicker: 'Signature Select Finishes',
+        title: 'Expanded finish options, made to order with extended lead times.',
+        note: 'Additional made-to-order finishes for broader palette flexibility.',
+        finishIds: ['frost', 'indigo', 'linen', 'pitch-black', 'pistachio-green'],
+      },
+      {
+        id: 'designer',
+        kicker: 'Designer Finishes',
+        title: 'Curated designer-inspired colors, made to order.',
+        note: 'Custom-order designer colors for a more expressive Fusion palette.',
+        finishIds: ['sage-green', 'cloud-white', 'denim-blue', 'hunter-green', 'graphite-black', 'cabernet-red', 'forest-green', 'macadamia-beige', 'mint-green', 'orchid-purple', 'izel-blue'],
+      },
+    ],
   },
   {
     id: 'nexus',
@@ -326,7 +415,29 @@ export const DOOR_STYLES = [
     family: 'shaker',
     variant: 'fds-frame-wide fds-edge-bevel',
     description: 'Wide rails and a beveled interior edge that make the door feel substantial and architectural.',
-    finishIds: ['frost', 'oyster', 'latte', 'onyx'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['frost'],
+      },
+      {
+        id: 'signature-select',
+        kicker: 'Signature Select Finishes',
+        title: 'Expanded finish options, made to order with extended lead times.',
+        note: 'Additional made-to-order finishes for broader palette flexibility.',
+        finishIds: ['dove', 'indigo', 'nickel', 'linen', 'stone', 'oyster', 'pitch-black', 'pistachio-green'],
+      },
+      {
+        id: 'designer',
+        kicker: 'Designer Finishes',
+        title: 'Curated designer-inspired colors, made to order.',
+        note: 'Custom-order designer colors for a more expressive Nexus palette.',
+        finishIds: ['sage-green', 'cloud-white', 'denim-blue', 'hunter-green', 'graphite-black', 'cabernet-red', 'forest-green', 'macadamia-beige', 'mint-green', 'orchid-purple', 'izel-blue'],
+      },
+    ],
   },
   {
     id: 'luxe',
@@ -335,7 +446,29 @@ export const DOOR_STYLES = [
     family: 'slab',
     variant: 'fds-slab fds-surface-gloss',
     description: 'A flat slab face for sleek, contemporary kitchens where hardware and finish do the talking.',
-    finishIds: ['frost', 'dove', 'indigo', 'onyx'],
+    finishSections: [
+      {
+        id: 'signature',
+        kicker: 'Signature Finishes',
+        title: 'Our most popular finishes, available with standard lead times.',
+        note: 'Stocked finishes available on standard production timelines.',
+        finishIds: ['frost', 'desert-oak', 'canyon-oak'],
+      },
+      {
+        id: 'signature-select',
+        kicker: 'Signature Select Finishes',
+        title: 'Expanded finish options, made to order with extended lead times.',
+        note: 'Additional made-to-order finishes for broader palette flexibility.',
+        finishIds: ['indigo', 'dove', 'linen', 'nickel', 'oyster', 'pitch-black', 'stone', 'pistachio-green'],
+      },
+      {
+        id: 'designer',
+        kicker: 'Designer Finishes',
+        title: 'Curated designer-inspired colors, made to order.',
+        note: 'Custom-order designer colors for a more expressive Luxe palette.',
+        finishIds: ['cabernet-red', 'cloud-white', 'denim-blue', 'forest-green', 'graphite-black', 'hunter-green', 'izel-blue', 'macadamia-beige', 'mint-green', 'orchid-purple', 'sage-green'],
+      },
+    ],
   },
   {
     id: 'echo',
@@ -402,7 +535,36 @@ export function getFinishesForDoorStyle(style) {
     return []
   }
 
-  return style.finishIds
+  const finishIds = style.finishIds || style.finishSections?.flatMap(section => section.finishIds) || []
+
+  return finishIds
     .map(finishId => DOOR_FINISHES.find(finish => finish.id === finishId))
     .filter(Boolean)
+}
+
+export function getFinishSectionsForDoorStyle(style) {
+  if (!style) {
+    return []
+  }
+
+  if (style.finishSections?.length) {
+    return style.finishSections
+      .map(section => ({
+        ...section,
+        finishes: section.finishIds
+          .map(finishId => DOOR_FINISHES.find(finish => finish.id === finishId))
+          .filter(Boolean),
+      }))
+      .filter(section => section.finishes.length)
+  }
+
+  return [
+    {
+      id: 'all',
+      kicker: 'Available Finishes',
+      title: `Finish options for ${style.name}.`,
+      note: 'Choose a finish and preview it on the selected door profile instantly.',
+      finishes: getFinishesForDoorStyle(style),
+    },
+  ]
 }
