@@ -28,39 +28,67 @@ function buildCabinetFinishVisual(style, finish) {
     return null
   }
 
-  canvas.width = 1200
-  canvas.height = 1200
+  canvas.width = 1000
+  canvas.height = 1500
 
   context.fillStyle = '#f6f2eb'
   context.fillRect(0, 0, canvas.width, canvas.height)
+
+  const stageX = 185
+  const stageY = 110
+  const stageWidth = 630
+  const stageHeight = 1280
 
   const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height)
   gradient.addColorStop(0, finish.door)
   gradient.addColorStop(1, finish.doorDark)
   context.fillStyle = gradient
-  context.fillRect(180, 120, 840, 960)
+  context.fillRect(stageX, stageY, stageWidth, stageHeight)
 
   context.strokeStyle = finish.edge || 'rgba(0,0,0,.14)'
   context.lineWidth = 10
-  context.strokeRect(180, 120, 840, 960)
+  context.strokeRect(stageX, stageY, stageWidth, stageHeight)
+
+  context.strokeStyle = 'rgba(255,255,255,0.2)'
+  context.lineWidth = 16
+  context.strokeRect(stageX + 10, stageY + 10, stageWidth - 20, stageHeight - 20)
 
   if (!style.variant.includes('fds-slab')) {
+    let railInset = 118
+
+    if (style.variant.includes('fds-frame-slim')) {
+      railInset = 78
+    }
+
+    if (style.variant.includes('fds-frame-wide')) {
+      railInset = 158
+    }
+
+    if (style.variant.includes('fds-frame-micro')) {
+      railInset = 52
+    }
+
+    const panelX = stageX + railInset
+    const panelY = stageY + railInset
+    const panelWidth = stageWidth - (railInset * 2)
+    const panelHeight = stageHeight - (railInset * 2)
+
     context.fillStyle = finish.doorDark
-    context.fillRect(300, 240, 600, 720)
+    context.fillRect(panelX, panelY, panelWidth, panelHeight)
     context.strokeStyle = finish.edge || 'rgba(0,0,0,.14)'
     context.lineWidth = 8
-    context.strokeRect(300, 240, 600, 720)
+    context.strokeRect(panelX, panelY, panelWidth, panelHeight)
 
     if (style.variant.includes('fds-edge-detail')) {
       context.strokeStyle = 'rgba(255,255,255,0.28)'
       context.lineWidth = 14
-      context.strokeRect(282, 222, 636, 756)
+      context.strokeRect(panelX - 18, panelY - 18, panelWidth + 36, panelHeight + 36)
     }
   }
 
   context.fillStyle = '#6f6559'
   context.beginPath()
-  context.roundRect(930, 470, 22, 240, 999)
+  context.roundRect(stageX + stageWidth - 42, stageY + (stageHeight / 2) - 150, 24, 300, 999)
   context.fill()
 
   return {
@@ -70,22 +98,89 @@ function buildCabinetFinishVisual(style, finish) {
   }
 }
 
-function loadImageForPdf(src) {
-  return new Promise((resolve, reject) => {
-    const image = new Image()
-    image.crossOrigin = 'anonymous'
-    image.decoding = 'async'
-    image.onload = () => resolve({ dataUrl: src, width: image.naturalWidth || 1200, height: image.naturalHeight || 1200 })
-    image.onerror = reject
-    image.src = src
-  })
+async function captureCabinetDoorPreview(style, finish) {
+  const { default: html2canvas } = await import('html2canvas')
+  const mountNode = document.createElement('div')
+  const previewStage = document.createElement('div')
+  const doorNode = document.createElement('div')
+  const panelNode = document.createElement('div')
+  const pullNode = document.createElement('div')
+
+  mountNode.setAttribute('aria-hidden', 'true')
+  mountNode.style.position = 'fixed'
+  mountNode.style.left = '-10000px'
+  mountNode.style.top = '0'
+  mountNode.style.width = '760px'
+  mountNode.style.height = '1120px'
+  mountNode.style.padding = '80px 100px'
+  mountNode.style.background = '#f7f5f1'
+  mountNode.style.display = 'flex'
+  mountNode.style.alignItems = 'center'
+  mountNode.style.justifyContent = 'center'
+  mountNode.style.setProperty('--fds-door', finish.door)
+  mountNode.style.setProperty('--fds-door-dark', finish.doorDark)
+  mountNode.style.setProperty('--fds-door-edge', finish.edge)
+  mountNode.style.setProperty('--fds-grain', finish.grain)
+
+  previewStage.className = 'fds-detail-preview-stage'
+  previewStage.style.width = '100%'
+  previewStage.style.height = '100%'
+  previewStage.style.padding = '0'
+
+  doorNode.className = `fds-door fds-detail-door ${style.variant}`
+  doorNode.style.width = '360px'
+  doorNode.style.height = '520px'
+
+  panelNode.className = 'fds-panel'
+  pullNode.className = 'fds-pull'
+
+  doorNode.append(panelNode, pullNode)
+  previewStage.appendChild(doorNode)
+  mountNode.appendChild(previewStage)
+  document.body.appendChild(mountNode)
+
+  try {
+    const canvas = await html2canvas(mountNode, {
+      backgroundColor: '#f7f5f1',
+      scale: 2,
+      useCORS: true,
+    })
+
+    return {
+      dataUrl: canvas.toDataURL('image/jpeg', 0.96),
+      width: canvas.width,
+      height: canvas.height,
+    }
+  } finally {
+    mountNode.remove()
+  }
+}
+
+function getPdfImageFormat(src) {
+  if (!src) {
+    return 'JPEG'
+  }
+
+  if (src.startsWith('data:image/png') || /\.png(\?|$)/i.test(src)) {
+    return 'PNG'
+  }
+
+  if (src.startsWith('data:image/webp') || /\.webp(\?|$)/i.test(src)) {
+    return 'WEBP'
+  }
+
+  return 'JPEG'
 }
 
 async function downloadCabinetSpec(style, finish, finishType) {
-  const [{ jsPDF }, previewImage] = await Promise.all([
-    import('jspdf'),
-    finish.media?.image ? loadImageForPdf(finish.media.image) : Promise.resolve(buildCabinetFinishVisual(style, finish)),
-  ])
+  const { jsPDF } = await import('jspdf')
+  let previewImage = null
+
+  try {
+    previewImage = await captureCabinetDoorPreview(style, finish)
+  } catch {
+    previewImage = buildCabinetFinishVisual(style, finish)
+  }
 
   const pdf = new jsPDF({
     orientation: 'portrait',
@@ -128,10 +223,20 @@ async function downloadCabinetSpec(style, finish, finishType) {
   cursorY += 96
 
   if (previewImage) {
-    const imageWidth = contentWidth
-    const imageHeight = Math.min(280, imageWidth * (previewImage.height / previewImage.width))
-    pdf.addImage(previewImage.dataUrl, 'JPEG', CABINET_PDF_MARGIN, cursorY, imageWidth, imageHeight, undefined, 'FAST')
-    cursorY += imageHeight + 28
+    const frameWidth = contentWidth
+    const frameHeight = 360
+    const imageScale = Math.min(frameWidth / previewImage.width, frameHeight / previewImage.height)
+    const imageWidth = previewImage.width * imageScale
+    const imageHeight = previewImage.height * imageScale
+    const imageX = CABINET_PDF_MARGIN + ((frameWidth - imageWidth) / 2)
+    const imageY = cursorY + ((frameHeight - imageHeight) / 2)
+
+    pdf.setFillColor(247, 245, 241)
+    pdf.roundedRect(CABINET_PDF_MARGIN, cursorY, frameWidth, frameHeight, 10, 10, 'F')
+    pdf.setDrawColor(224, 215, 203)
+    pdf.roundedRect(CABINET_PDF_MARGIN, cursorY, frameWidth, frameHeight, 10, 10, 'S')
+    pdf.addImage(previewImage.dataUrl, getPdfImageFormat(previewImage.dataUrl), imageX, imageY, imageWidth, imageHeight, undefined, 'FAST')
+    cursorY += frameHeight + 28
   }
 
   pdf.setDrawColor(224, 215, 203)
