@@ -144,10 +144,12 @@ export default function Hero({ onOpenNewsletter }) {
 
   const handleTouchStart = (event) => {
     touchStartXRef.current = event.touches[0]?.clientX ?? null
+    setIsPaused(true)
   }
 
   const handleTouchEnd = (event) => {
     if (touchStartXRef.current === null) {
+      setIsPaused(false)
       return
     }
 
@@ -163,6 +165,7 @@ export default function Hero({ onOpenNewsletter }) {
     }
 
     touchStartXRef.current = null
+    setIsPaused(false)
   }
 
   const handleKeyDown = (event) => {
@@ -184,6 +187,7 @@ export default function Hero({ onOpenNewsletter }) {
   }
 
   const activeSlide = HERO_SLIDES[currentSlideIndex]
+  const preloadSlideIndex = (currentSlideIndex + 1) % HERO_SLIDES.length
 
   return (
     <section
@@ -193,6 +197,7 @@ export default function Hero({ onOpenNewsletter }) {
       aria-roledescription="carousel"
       aria-label="Classic Stone highlights"
       tabIndex={0}
+      style={{ '--hero-hold-ms': `${HERO_HOLD_MS}ms` }}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetHeroDepth}
       onMouseEnter={() => setIsPaused(true)}
@@ -204,9 +209,14 @@ export default function Hero({ onOpenNewsletter }) {
       onKeyDown={handleKeyDown}
     >
 
+      <p className="sr-only" role="status" aria-live="polite">
+        {activeSlide.progressLabel}
+      </p>
+
       {HERO_SLIDES.map((slide, index) => {
         const isActive = index === currentSlideIndex
         const isLeaving = index === leavingSlideIndex
+        const shouldLoadImage = isActive || isLeaving || index === preloadSlideIndex
 
         return (
           <article
@@ -217,10 +227,17 @@ export default function Hero({ onOpenNewsletter }) {
             aria-label={`${index + 1} of ${HERO_SLIDES.length}`}
             aria-hidden={!isActive}
           >
-            <div
-              className="hero-media"
-              style={{ backgroundImage: `url("${slide.image}")` }}
-            />
+            <div className="hero-media">
+              {shouldLoadImage ? (
+                <img
+                  src={slide.image}
+                  alt=""
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={isActive ? 'high' : 'low'}
+                  decoding="async"
+                />
+              ) : null}
+            </div>
 
             <div className="hero-overlay" />
             <div className="hero-glow" />

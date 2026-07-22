@@ -37,6 +37,18 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--slate-light); border-radius: 99px; }
 
 /* ── Utility ─────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -257,12 +269,18 @@ body {
   --hero-glow-x: 58%;
   --hero-glow-y: 34%;
   --hero-overlay-opacity: 0.5;
+  --hero-hold-ms: 6500ms;
   height: 100svh;
   min-height: 520px;
   background: #26221d;
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
+
+.hero:focus-visible {
+  outline: 2px solid var(--copper-light);
+  outline-offset: -3px;
 }
 
 #about,
@@ -333,14 +351,21 @@ body {
 .hero-media {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  overflow: hidden;
   z-index: 0;
   transform: translate3d(calc(var(--hero-shift-x) * -0.1), calc(var(--hero-shift-y) * -0.1), 0) scale(1);
   transition: transform 180ms ease-out, filter 220ms ease-out;
   filter: saturate(1.08) contrast(1.12) brightness(1.06);
   will-change: transform;
+}
+
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .hero-slide.is-active .hero-media {
@@ -547,7 +572,7 @@ body {
 }
 
 .hero-strip.is-current::after {
-  animation: heroCut 6500ms linear both;
+  animation: heroCut var(--hero-hold-ms) linear both;
 }
 
 .hero.is-paused .hero-strip.is-current::after {
