@@ -49,9 +49,8 @@ export default function Navbar() {
             aria-controls="primary-navigation"
             onClick={() => setMenuOpen(open => !open)}
           >
-            <span />
-            <span />
-            <span />
+            <span className="navbar-menu-btn-icon" aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
+            <span className="navbar-menu-btn-label">{menuOpen ? 'Close' : 'Menu'}</span>
           </button>
           <ul id="primary-navigation" className={`navbar-links${menuOpen ? ' mobile-open' : ''}`}>
             <li><a href={homeHref('#about')} onClick={closeMenu}>About</a></li>
