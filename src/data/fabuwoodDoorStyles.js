@@ -1340,3 +1340,35 @@ export function getFinishSectionsForDoorStyle(style) {
     },
   ]
 }
+
+export function getConstructionSpecsForStyle(style) {
+  const isFrameless = style?.family === 'slab'
+
+  return {
+    materials: {
+      doors: isFrameless
+        ? ['HDF Slab Panel']
+        : ['HDF Frame', 'HDF Center Panel'],
+      cabinetBoxes: isFrameless
+        ? ['1/2" Birch Plywood', 'Frameless Construction']
+        : ['1/2" Birch Plywood', '3/4" x 1-1/2" Solid Wood Face Frames'],
+      drawers: ['5/8" Solid Birch'],
+      shelves: ['3/4" Hardwood'],
+    },
+    features: {
+      cabinetBoxes: [
+        isFrameless ? 'Frameless' : 'Framed',
+        'Adjustable Shelves',
+        'Natural Interior',
+        'Color-Matched Sides',
+      ],
+      doorHinges: ['Soft Close', 'Concealed', '6-way Adjustable'],
+      drawers: ['Soft Close', 'Dovetail', 'Undermount Glides', 'Full Extension Glides'],
+    },
+    details: {
+      overlay: 'Full Overlay',
+      shelfDepths: ['Full Depth in Wall Cabinets', '3/4-Depth in Base Cabinets'],
+      assembly: 'Delivered Fully Assembled',
+    },
+  }
+}

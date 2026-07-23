@@ -3,15 +3,70 @@ import { Link, useParams } from 'react-router-dom'
 import Seo from '../components/Seo'
 import {
   DEFAULT_FINISH,
+  getConstructionSpecsForStyle,
   getDoorStyleById,
   getFinishSectionsForDoorStyle,
   getFinishesForDoorStyle,
 } from '../data/fabuwoodDoorStyles'
 
 const CABINET_PDF_MARGIN = 44
-const CABINET_PDF_TEXT = [37, 34, 29]
-const CABINET_PDF_MUTED = [122, 115, 103]
-const CABINET_PDF_COPPER = [181, 98, 30]
+// Palette pulled directly from src/index.css :root so the PDF matches the live site.
+const CABINET_PDF_TEXT = [30, 40, 48] // --text
+const CABINET_PDF_MUTED = [74, 85, 96] // --muted
+const CABINET_PDF_COPPER = [181, 98, 30] // --copper
+const CABINET_PDF_DARK = [30, 40, 48] // --slate-deep (banner / tile fills)
+const CABINET_PDF_CREAM = [245, 242, 238] // --cream (text-on-dark + swatch backdrop)
+const CABINET_PDF_CREAM_DARK = [236, 231, 224] // --cream-dark (subhead tint)
+const CABINET_PDF_BORDER = [216, 210, 200] // --border
+
+function drawSpecBanner(pdf, text, x, y, width, height = 22) {
+  pdf.setFillColor(...CABINET_PDF_DARK)
+  pdf.rect(x, y, width, height, 'F')
+  pdf.setFont('helvetica', 'bold')
+  pdf.setFontSize(12)
+  pdf.setTextColor(...CABINET_PDF_CREAM)
+  pdf.text(text, x + width / 2, y + height / 2 + 4, { align: 'center' })
+  return y + height
+}
+
+function drawSpecSubheadRow(pdf, labels, x, y, width, gap = 14, height = 20) {
+  const colWidth = (width - gap * (labels.length - 1)) / labels.length
+
+  labels.forEach((label, index) => {
+    const colX = x + index * (colWidth + gap)
+    pdf.setFillColor(...CABINET_PDF_CREAM_DARK)
+    pdf.rect(colX, y, colWidth, height, 'F')
+    pdf.setFont('helvetica', 'bold')
+    pdf.setFontSize(10.5)
+    pdf.setTextColor(...CABINET_PDF_COPPER)
+    pdf.text(label, colX + colWidth / 2, y + height / 2 + 3.5, { align: 'center' })
+  })
+
+  return { rowBottom: y + height, colWidth }
+}
+
+function drawSpecBulletColumns(pdf, columns, x, y, colWidth, gap = 14, lineHeight = 15) {
+  pdf.setFont('helvetica', 'normal')
+  pdf.setFontSize(10)
+  pdf.setTextColor(...CABINET_PDF_TEXT)
+
+  let tallestColumnHeight = 0
+
+  columns.forEach((items, index) => {
+    const colX = x + index * (colWidth + gap)
+    const lines = items.map(item => pdf.splitTextToSize(`• ${item}`, colWidth - 6))
+    let lineCursorY = y + 14
+
+    lines.forEach(itemLines => {
+      pdf.text(itemLines, colX + 4, lineCursorY)
+      lineCursorY += itemLines.length * lineHeight
+    })
+
+    tallestColumnHeight = Math.max(tallestColumnHeight, lineCursorY - y)
+  })
+
+  return y + tallestColumnHeight + 14
+}
 
 function slugify(value) {
   return String(value || '')
@@ -172,14 +227,69 @@ function getPdfImageFormat(src) {
   return 'JPEG'
 }
 
+function getPrintQualityImageUrl(imageUrl) {
+  try {
+    const url = new URL(imageUrl)
+
+    if (url.searchParams.has('w')) {
+      url.searchParams.set('w', '1200')
+    }
+
+    if (url.searchParams.has('h')) {
+      url.searchParams.set('h', '1200')
+    }
+
+    if (url.searchParams.has('q')) {
+      url.searchParams.set('q', '95')
+    }
+
+    return url.toString()
+  } catch {
+    return imageUrl
+  }
+}
+
+async function loadRealFinishImageForPdf(imageUrl) {
+  const response = await fetch(getPrintQualityImageUrl(imageUrl), { mode: 'cors' })
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch finish image: ${response.status}`)
+  }
+
+  const blob = await response.blob()
+  const bitmap = await createImageBitmap(blob)
+  const canvas = document.createElement('canvas')
+  canvas.width = bitmap.width
+  canvas.height = bitmap.height
+
+  const context = canvas.getContext('2d')
+  context.drawImage(bitmap, 0, 0)
+
+  return {
+    dataUrl: canvas.toDataURL('image/png'),
+    width: bitmap.width,
+    height: bitmap.height,
+  }
+}
+
 async function downloadCabinetSpec(style, finish, finishType) {
   const { jsPDF } = await import('jspdf')
   let previewImage = null
 
-  try {
-    previewImage = await captureCabinetDoorPreview(style, finish)
-  } catch {
-    previewImage = buildCabinetFinishVisual(style, finish)
+  if (finish.media?.image) {
+    try {
+      previewImage = await loadRealFinishImageForPdf(finish.media.image)
+    } catch {
+      previewImage = null
+    }
+  }
+
+  if (!previewImage) {
+    try {
+      previewImage = await captureCabinetDoorPreview(style, finish)
+    } catch {
+      previewImage = buildCabinetFinishVisual(style, finish)
+    }
   }
 
   const pdf = new jsPDF({
@@ -189,103 +299,138 @@ async function downloadCabinetSpec(style, finish, finishType) {
     compress: true,
   })
 
+  const specs = getConstructionSpecsForStyle(style)
   const fileName = `${slugify(style.name)}-${slugify(finish.name)}-cabinet-spec.pdf`
   const pageWidth = pdf.internal.pageSize.getWidth()
   const pageHeight = pdf.internal.pageSize.getHeight()
   const contentWidth = pageWidth - CABINET_PDF_MARGIN * 2
-  const details = [
-    ['Door profile', `${style.name} (${style.tag})`],
-    ['Cabinet color', finish.name],
-    ['Finish type', finishType],
-    ['Style family', style.family],
-  ]
 
   pdf.setFillColor(255, 255, 255)
   pdf.rect(0, 0, pageWidth, pageHeight, 'F')
 
-  let cursorY = 52
+  let cursorY = 40
 
   pdf.setFont('times', 'bold')
-  pdf.setFontSize(22)
+  pdf.setFontSize(16)
   pdf.setTextColor(...CABINET_PDF_TEXT)
   pdf.text('Classic Stone Granite & Marble LLC', pageWidth / 2, cursorY, { align: 'center' })
-
-  pdf.setFont('times', 'normal')
-  pdf.setFontSize(24)
-  pdf.setTextColor(...CABINET_PDF_COPPER)
-  pdf.text(`${style.name} Cabinet Profile`, pageWidth / 2, cursorY + 40, { align: 'center' })
+  cursorY += 18
 
   pdf.setFont('helvetica', 'normal')
-  pdf.setFontSize(12)
-  pdf.setTextColor(...CABINET_PDF_MUTED)
-  pdf.text(`Finish selection: ${finish.name}`, pageWidth / 2, cursorY + 66, { align: 'center' })
+  pdf.setFontSize(10.5)
+  pdf.setTextColor(...CABINET_PDF_COPPER)
+  pdf.text(`${style.name} Cabinet Profile  ·  ${style.tag}`, pageWidth / 2, cursorY, { align: 'center' })
+  cursorY += 16
 
-  cursorY += 96
+  pdf.setDrawColor(...CABINET_PDF_BORDER)
+  pdf.line(CABINET_PDF_MARGIN, cursorY, pageWidth - CABINET_PDF_MARGIN, cursorY)
+  cursorY += 18
+
+  const columnGap = 18
+  const leftColWidth = contentWidth * 0.34
+  const rightColWidth = contentWidth - leftColWidth - columnGap
+  const leftX = CABINET_PDF_MARGIN
+  const rightX = leftX + leftColWidth + columnGap
+  const columnsTopY = cursorY
+
+  // Left sidebar: style name tile, finish tile, door swatch, series tile
+  let leftY = columnsTopY
+
+  const titleTileHeight = 40
+  pdf.setFillColor(...CABINET_PDF_DARK)
+  pdf.rect(leftX, leftY, leftColWidth, titleTileHeight, 'F')
+  pdf.setFont('helvetica', 'bold')
+  pdf.setFontSize(13)
+  pdf.setTextColor(...CABINET_PDF_CREAM)
+  const titleLines = pdf.splitTextToSize(style.name.toUpperCase(), leftColWidth - 14)
+  pdf.text(titleLines, leftX + leftColWidth / 2, leftY + titleTileHeight / 2 - ((titleLines.length - 1) * 6) + 4, { align: 'center' })
+  leftY += titleTileHeight + 6
+
+  const finishTileHeight = 24
+  pdf.setFillColor(...CABINET_PDF_CREAM_DARK)
+  pdf.rect(leftX, leftY, leftColWidth, finishTileHeight, 'F')
+  pdf.setFont('helvetica', 'bold')
+  pdf.setFontSize(10)
+  pdf.setTextColor(...CABINET_PDF_COPPER)
+  pdf.text(finish.name.toUpperCase(), leftX + leftColWidth / 2, leftY + finishTileHeight / 2 + 3.5, { align: 'center' })
+  leftY += finishTileHeight + 8
 
   if (previewImage) {
-    const frameWidth = contentWidth
-    const frameHeight = 360
-    const imageScale = Math.min(frameWidth / previewImage.width, frameHeight / previewImage.height)
+    const swatchHeight = 260
+    const imageScale = Math.min(leftColWidth / previewImage.width, swatchHeight / previewImage.height)
     const imageWidth = previewImage.width * imageScale
     const imageHeight = previewImage.height * imageScale
-    const imageX = CABINET_PDF_MARGIN + ((frameWidth - imageWidth) / 2)
-    const imageY = cursorY + ((frameHeight - imageHeight) / 2)
+    const imageX = leftX + ((leftColWidth - imageWidth) / 2)
+    const imageY = leftY + ((swatchHeight - imageHeight) / 2)
 
-    pdf.setFillColor(247, 245, 241)
-    pdf.roundedRect(CABINET_PDF_MARGIN, cursorY, frameWidth, frameHeight, 10, 10, 'F')
-    pdf.setDrawColor(224, 215, 203)
-    pdf.roundedRect(CABINET_PDF_MARGIN, cursorY, frameWidth, frameHeight, 10, 10, 'S')
-    pdf.addImage(previewImage.dataUrl, getPdfImageFormat(previewImage.dataUrl), imageX, imageY, imageWidth, imageHeight, undefined, 'FAST')
-    cursorY += frameHeight + 28
+    pdf.setFillColor(...CABINET_PDF_CREAM)
+    pdf.rect(leftX, leftY, leftColWidth, swatchHeight, 'F')
+    pdf.setDrawColor(...CABINET_PDF_BORDER)
+    pdf.rect(leftX, leftY, leftColWidth, swatchHeight, 'S')
+    pdf.addImage(previewImage.dataUrl, getPdfImageFormat(previewImage.dataUrl), imageX, imageY, imageWidth, imageHeight, undefined, 'NONE')
+    leftY += swatchHeight + 8
   }
 
-  pdf.setDrawColor(224, 215, 203)
-  pdf.line(CABINET_PDF_MARGIN, cursorY, pageWidth - CABINET_PDF_MARGIN, cursorY)
-  cursorY += 24
-
-  details.forEach(([label, value]) => {
-    pdf.setFont('helvetica', 'bold')
-    pdf.setFontSize(11)
-    pdf.setTextColor(...CABINET_PDF_MUTED)
-    pdf.text(label.toUpperCase(), CABINET_PDF_MARGIN, cursorY)
-
-    pdf.setFont('helvetica', 'normal')
-    pdf.setFontSize(12)
-    pdf.setTextColor(...CABINET_PDF_TEXT)
-    pdf.text(String(value), CABINET_PDF_MARGIN + 132, cursorY)
-    cursorY += 22
-  })
-
-  cursorY += 8
+  const seriesTileHeight = 28
+  pdf.setFillColor(...CABINET_PDF_DARK)
+  pdf.rect(leftX, leftY, leftColWidth, seriesTileHeight, 'F')
   pdf.setFont('helvetica', 'bold')
-  pdf.setFontSize(11)
-  pdf.setTextColor(...CABINET_PDF_MUTED)
-  pdf.text('STYLE NOTES', CABINET_PDF_MARGIN, cursorY)
-  cursorY += 18
+  pdf.setFontSize(10.5)
+  pdf.setTextColor(...CABINET_PDF_CREAM)
+  const seriesLabel = `${style.family.charAt(0).toUpperCase()}${style.family.slice(1)} Series`
+  pdf.text(seriesLabel, leftX + leftColWidth / 2, leftY + seriesTileHeight / 2 + 3.5, { align: 'center' })
+  leftY += seriesTileHeight
 
-  pdf.setFont('helvetica', 'normal')
-  pdf.setFontSize(12)
-  pdf.setTextColor(...CABINET_PDF_TEXT)
-  const styleDescriptionLines = pdf.splitTextToSize(style.description, contentWidth)
-  pdf.text(styleDescriptionLines, CABINET_PDF_MARGIN, cursorY)
-  cursorY += styleDescriptionLines.length * 16 + 12
+  // Right column: MATERIALS / FEATURES / DETAILS
+  let rightY = columnsTopY
 
-  pdf.setFont('helvetica', 'bold')
-  pdf.setFontSize(11)
-  pdf.setTextColor(...CABINET_PDF_MUTED)
-  pdf.text('FINISH NOTES', CABINET_PDF_MARGIN, cursorY)
-  cursorY += 18
+  rightY = drawSpecBanner(pdf, 'MATERIALS', rightX, rightY, rightColWidth)
+  rightY += 8
 
-  pdf.setFont('helvetica', 'normal')
-  pdf.setFontSize(12)
-  pdf.setTextColor(...CABINET_PDF_TEXT)
-  const finishNoteLines = pdf.splitTextToSize(finish.note, contentWidth)
-  pdf.text(finishNoteLines, CABINET_PDF_MARGIN, cursorY)
+  let row = drawSpecSubheadRow(pdf, ['Doors', 'Cabinet Boxes'], rightX, rightY, rightColWidth)
+  rightY = drawSpecBulletColumns(pdf, [specs.materials.doors, specs.materials.cabinetBoxes], rightX, row.rowBottom, row.colWidth)
+
+  row = drawSpecSubheadRow(pdf, ['Drawers', 'Shelves'], rightX, rightY, rightColWidth)
+  rightY = drawSpecBulletColumns(pdf, [specs.materials.drawers, specs.materials.shelves], rightX, row.rowBottom, row.colWidth)
+  rightY += 14
+
+  rightY = drawSpecBanner(pdf, 'FEATURES', rightX, rightY, rightColWidth)
+  rightY += 8
+
+  row = drawSpecSubheadRow(pdf, ['Cabinet Boxes', 'Door Hinges', 'Drawers'], rightX, rightY, rightColWidth)
+  rightY = drawSpecBulletColumns(
+    pdf,
+    [specs.features.cabinetBoxes, specs.features.doorHinges, specs.features.drawers],
+    rightX,
+    row.rowBottom,
+    row.colWidth,
+  )
+  rightY += 14
+
+  rightY = drawSpecBanner(pdf, 'DETAILS', rightX, rightY, rightColWidth)
+  rightY += 8
+
+  row = drawSpecSubheadRow(pdf, ['Overlay', 'Finish'], rightX, rightY, rightColWidth)
+  rightY = drawSpecBulletColumns(
+    pdf,
+    [[specs.details.overlay], [`${finishType} — ${finish.name}`]],
+    rightX,
+    row.rowBottom,
+    row.colWidth,
+  )
+
+  row = drawSpecSubheadRow(pdf, ['Shelf Depths', 'Assembly'], rightX, rightY, rightColWidth)
+  rightY = drawSpecBulletColumns(pdf, [specs.details.shelfDepths, [specs.details.assembly]], rightX, row.rowBottom, row.colWidth)
 
   pdf.setFont('helvetica', 'italic')
-  pdf.setFontSize(10)
+  pdf.setFontSize(9)
   pdf.setTextColor(...CABINET_PDF_MUTED)
-  pdf.text('Finish availability and final selections are confirmed during your Classic Stone design consultation.', CABINET_PDF_MARGIN, pageHeight - 34)
+  pdf.text(
+    'Finish availability and final selections are confirmed during your Classic Stone design consultation.',
+    pageWidth / 2,
+    pageHeight - 26,
+    { align: 'center' },
+  )
 
   pdf.save(fileName)
 }
