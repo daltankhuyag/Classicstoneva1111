@@ -233,7 +233,7 @@ export default function Hero({ onOpenNewsletter }) {
             aria-label={`${index + 1} of ${HERO_SLIDES.length}`}
             aria-hidden={!isActive}
           >
-            <div className="hero-media">
+            <div className={`hero-media${slide.video ? ' hero-media--video' : ''}`}>
               {shouldLoadImage ? (
                 slide.video ? (
                   <video

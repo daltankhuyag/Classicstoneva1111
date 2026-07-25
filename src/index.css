@@ -621,6 +621,14 @@ body {
   animation: heroDrift 14s ease-out both;
 }
 
+.hero-media--video {
+  filter: none;
+}
+
+.hero-slide.is-active .hero-media--video {
+  animation: none;
+}
+
 @keyframes heroDrift {
   from {
     transform: translate3d(calc(var(--hero-shift-x) * -0.14), calc(var(--hero-shift-y) * -0.14), 0) scale(1.015);
