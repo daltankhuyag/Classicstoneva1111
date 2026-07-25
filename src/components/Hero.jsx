@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 const HERO_HOLD_MS = 6500
 const HERO_TRANSITION_MS = 900
 
+const HERO_VIDEO_SRC = encodeURI('/Hero video/Generated Video July 24, 2026 - 10_23PM.mp4')
+
 const HERO_SLIDES = [
   {
     id: 'stone-yard',
@@ -13,6 +15,7 @@ const HERO_SLIDES = [
     ctaLabel: 'Browse our stone',
     ctaHref: '/stone-gallery#stone-gallery',
     image: '/Inspiration Gallery/hermitage-kitchen-alex-lukey-soda-pop-design-001-25_IG-1240x1240.avif',
+    video: HERO_VIDEO_SRC,
     progressLabel: 'Slide 1: Stone gallery',
   },
   {
@@ -46,6 +49,9 @@ export default function Hero({ onOpenNewsletter }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [leavingSlideIndex, setLeavingSlideIndex] = useState(null)
   const [isPaused, setIsPaused] = useState(false)
+  const [prefersReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
 
   useEffect(() => {
     if (isPaused) {
@@ -229,13 +235,25 @@ export default function Hero({ onOpenNewsletter }) {
           >
             <div className="hero-media">
               {shouldLoadImage ? (
-                <img
-                  src={slide.image}
-                  alt=""
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  fetchPriority={isActive ? 'high' : 'low'}
-                  decoding="async"
-                />
+                slide.video ? (
+                  <video
+                    src={slide.video}
+                    poster={slide.image}
+                    autoPlay={!prefersReducedMotion}
+                    muted
+                    loop
+                    playsInline
+                    preload={index === 0 ? 'auto' : 'none'}
+                  />
+                ) : (
+                  <img
+                    src={slide.image}
+                    alt=""
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={isActive ? 'high' : 'low'}
+                    decoding="async"
+                  />
+                )
               ) : null}
             </div>
 

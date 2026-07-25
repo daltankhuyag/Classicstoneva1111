@@ -607,7 +607,8 @@ body {
   will-change: transform;
 }
 
-.hero-media img {
+.hero-media img,
+.hero-media video {
   position: absolute;
   inset: 0;
   width: 100%;
