@@ -9,6 +9,8 @@ export default function FabuwoodDoorStyles() {
     ? DOOR_STYLES
     : DOOR_STYLES.filter(style => style.family === activeFilter)
 
+  const activeFilterLabel = FILTERS.find(filter => filter.id === activeFilter)?.label
+
   return (
     <section
       id="door-profiles"
@@ -35,9 +37,12 @@ export default function FabuwoodDoorStyles() {
         <div className="fds-controls">
           <div>
             <p className="fds-control-label">Door Family</p>
-            <div className="fds-filters" role="tablist" aria-label="Door style filters">
+            <div className="fds-filters" role="group" aria-label="Filter door styles by family">
               {FILTERS.map(filter => {
                 const isActive = filter.id === activeFilter
+                const count = filter.id === 'all'
+                  ? DOOR_STYLES.length
+                  : DOOR_STYLES.filter(style => style.family === filter.id).length
 
                 return (
                   <button
@@ -48,6 +53,7 @@ export default function FabuwoodDoorStyles() {
                     aria-pressed={isActive}
                   >
                     {filter.label}
+                    <span className="fds-filter-count">{count}</span>
                   </button>
                 )
               })}
@@ -55,30 +61,45 @@ export default function FabuwoodDoorStyles() {
           </div>
         </div>
 
-        <div className="fds-grid">
-          {visibleStyles.map(style => (
-              <Link
-                key={style.id}
-                to={`/door-styles/${style.id}`}
-                className="fds-door-card"
-              >
-                <div className="fds-door-stage">
-                  <div className={`fds-door ${style.variant}`} aria-hidden="true">
-                    <div className="fds-panel" />
-                    <div className="fds-pull" />
+        {visibleStyles.length > 0 ? (
+          <div className="fds-grid">
+            {visibleStyles.map((style, index) => (
+                <Link
+                  key={style.id}
+                  to={`/door-styles/${style.id}`}
+                  className="fds-door-card"
+                  style={{ '--fds-card-index': index }}
+                >
+                  <div className="fds-door-stage">
+                    <div className={`fds-door ${style.variant}`} aria-hidden="true">
+                      <div className="fds-panel" />
+                      <div className="fds-pull" />
+                    </div>
                   </div>
-                </div>
-                <div className="fds-door-meta">
-                  <div className="fds-meta-row">
-                    <h3 className="fds-door-name">{style.name}</h3>
-                    <span className="fds-door-tag">{style.tag}</span>
+                  <div className="fds-door-meta">
+                    <div className="fds-meta-row">
+                      <h3 className="fds-door-name">{style.name}</h3>
+                      <span className="fds-door-tag">{style.tag}</span>
+                    </div>
+                    <p className="fds-door-desc">{style.description}</p>
+                    <span className="fds-card-hint">
+                      Open finishes for {style.name}
+                      <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                        <path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
                   </div>
-                  <p className="fds-door-desc">{style.description}</p>
-                  <span className="fds-card-hint">Open finishes for {style.name}</span>
-                </div>
-              </Link>
-          ))}
-        </div>
+                </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="fds-empty-state" role="status">
+            <p>No door profiles found for “{activeFilterLabel}” yet.</p>
+            <button type="button" className="fds-empty-reset" onClick={() => setActiveFilter('all')}>
+              View all door styles
+            </button>
+          </div>
+        )}
 
         <p className="fds-note">
           Door shapes above are visual references for profile comparison. Final finish,
