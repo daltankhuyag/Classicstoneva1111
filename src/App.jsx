@@ -18,6 +18,7 @@ import HomeRemodelingPage from './pages/HomeRemodelingPage'
 import SchedulingPage from './pages/SchedulingPage'
 import StoneGalleryPage from './pages/StoneGalleryPage'
 import DoorStylePage from './pages/DoorStylePage'
+import AdUnit from './components/AdUnit'
 
 const NEWSLETTER_DISMISS_KEY = 'classicstone.newsletter.dismissed'
 const NEWSLETTER_AUTO_DELAY_MS = 12000
@@ -135,6 +136,7 @@ export default function App() {
         <Route path="/stone-gallery" element={<StoneGalleryPage />} />
         <Route path="/door-styles/:styleId" element={<DoorStylePage />} />
       </Routes>
+      <AdUnit />
       <Footer />
       <NewsletterPopup
         isOpen={isNewsletterOpen}
