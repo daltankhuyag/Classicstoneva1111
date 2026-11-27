@@ -86,7 +86,7 @@ export default function HomeShowcase() {
             Premium stone surfaces, custom cabinetry, and exceptional craftsmanship.
           </p>
           <a className="showcase-button" href="/stone-gallery">
-            Explore our work <span aria-hidden="true">→</span>
+            Explore Stone Gallery <span aria-hidden="true">→</span>
           </a>
         </div>
         <a className="showcase-scroll" href="#featured-projects">Discover Classic Stone</a>
