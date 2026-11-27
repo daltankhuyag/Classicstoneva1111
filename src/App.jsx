@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Features from './components/Features'
-import HowItWorks from './components/HowItWorks'
-import CtaBanner from './components/CtaBanner'
-import FabuwoodDoorStyles from './components/FabuwoodDoorStyles'
 import { trackAnalyticsEvent } from './components/AnalyticsTracker'
 import NewsletterPopup from './components/NewsletterPopup'
-import StonePartners from './components/StonePartners'
+import HomeShowcase from './components/HomeShowcase'
 import Footer from './components/Footer'
 import Seo from './components/Seo'
 import { getPageSeo } from './data/seo'
+import CabinetryPage from './pages/CabinetryPage'
 import FloorPlansPage from './pages/FloorPlansPage'
 import GalleryPage from './pages/GalleryPage'
 import HomeRemodelingPage from './pages/HomeRemodelingPage'
@@ -23,7 +19,7 @@ import AdUnit from './components/AdUnit'
 const NEWSLETTER_DISMISS_KEY = 'classicstone.newsletter.dismissed'
 const NEWSLETTER_AUTO_DELAY_MS = 12000
 
-function HomePage({ onOpenNewsletter }) {
+function HomePage() {
   const homeSeo = getPageSeo('/')
 
   return (
@@ -47,12 +43,7 @@ function HomePage({ onOpenNewsletter }) {
           },
         }}
       />
-      <Hero onOpenNewsletter={onOpenNewsletter} />
-      <Features />
-      <FabuwoodDoorStyles />
-      <CtaBanner onOpenNewsletter={onOpenNewsletter} />
-      <HowItWorks />
-      <StonePartners />
+      <HomeShowcase />
     </>
   )
 }
@@ -128,7 +119,8 @@ export default function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage onOpenNewsletter={openNewsletter} />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/cabinetry" element={<CabinetryPage />} />
         <Route path="/floor-plans" element={<FloorPlansPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/remodeling" element={<HomeRemodelingPage />} />

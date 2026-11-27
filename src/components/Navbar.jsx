@@ -5,7 +5,7 @@ import PreviewFrame from './NavPreviews'
 
 const MENU_ITEMS = [
   { id: 'about', num: '01', word: 'About', tag: 'Our story · in-house crew', kind: 'hash', hash: '#about', previewId: 'pv-about' },
-  { id: 'services', num: '02', word: 'Services', tag: 'Cabinetry · countertops · design', kind: 'hash', hash: '#services', previewId: 'pv-services' },
+  { id: 'cabinetry', num: '02', word: 'Cabinetry', tag: 'Door styles · finishes · specs', kind: 'route', to: '/cabinetry', previewId: 'pv-services' },
   { id: 'floor-plans', num: '03', word: 'Floor Plans', tag: 'Custom Virginia home designs', kind: 'route', to: '/floor-plans', previewId: 'pv-floorplans' },
   { id: 'remodeling', num: '04', word: 'Remodeling', tag: 'Renovations & additions', kind: 'route', to: '/remodeling', previewId: 'pv-remodeling' },
   { id: 'gallery', num: '05', word: 'Gallery', tag: 'Finished project work', kind: 'route', to: '/gallery', previewId: 'pv-gallery' },
@@ -19,6 +19,7 @@ export default function Navbar() {
   const [activePreview, setActivePreview] = useState(MENU_ITEMS[0].previewId)
   const { pathname } = useLocation()
   const activeItem = MENU_ITEMS.find(item => item.previewId === activePreview) ?? MENU_ITEMS[0]
+  const homeHref = (hash) => pathname === '/' ? hash : `/${hash}`
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 30)
@@ -66,7 +67,6 @@ export default function Navbar() {
     })
   }, [menuOpen, activePreview])
 
-  const homeHref = (hash) => pathname === '/' ? hash : `/${hash}`
   const closeMenu = () => setMenuOpen(false)
 
   const openMenu = () => {
@@ -76,7 +76,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className={`navbar-wrap ${scrolled ? 'scrolled' : ''}${menuOpen ? ' menu-open' : ''}`}>
+      <div className={`navbar-wrap ${scrolled ? 'scrolled' : ''}${menuOpen ? ' menu-open' : ''}${pathname !== '/' ? ' page-nav' : ''}`}>
         <div className="topbar">
           <div className="topbar-inner">
             <a className="topbar-item" href="tel:+12022270788">
@@ -94,9 +94,18 @@ export default function Navbar() {
         <nav className="navbar-bar">
           <div className="navbar-inner">
             <a className="navbar-logo" href="/">
-              Classic Stone
-              <span>Design &amp; Build</span>
+              Classic Stone VA
+              <span>Stone · Cabinetry · Design</span>
             </a>
+            <nav className="navbar-desktop-links" aria-label="Main navigation">
+              <a href={homeHref('#home')}>Home</a>
+              <a href="/stone-gallery">Stone gallery</a>
+              <a href={homeHref('#featured-projects')}>Projects</a>
+              <a href="/cabinetry">Cabinetry</a>
+              <a href={homeHref('#about')}>Inspiration</a>
+              <a href={homeHref('#contact')}>Contact</a>
+            </nav>
+            <a className="navbar-quote-link" href="/schedule">Request a quote <span aria-hidden="true">→</span></a>
             <button
               type="button"
               className="navbar-menu-btn"

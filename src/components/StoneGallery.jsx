@@ -2,11 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const TYPE_COLORS = {
-  granite: { bg: '#2c2c2a', fg: '#d3d1c7', pill: '#f1efe8', pillFg: '#444441' },
-  quartz: { bg: '#185fa5', fg: '#e6f1fb', pill: '#e6f1fb', pillFg: '#0c447c' },
-  quartzite: { bg: '#7f77dd', fg: '#eeedfe', pill: '#eeedfe', pillFg: '#3c3489' },
-  marble: { bg: '#993556', fg: '#fbeaf0', pill: '#fbeaf0', pillFg: '#72243e' },
-  soapstone: { bg: '#0f6e56', fg: '#e1f5ee', pill: '#e1f5ee', pillFg: '#085041' },
+  bg: 'var(--slate-deep)',
+  fg: 'var(--cream)',
+  pill: 'var(--cream-dark)',
+  pillFg: 'var(--copper-dark)',
 }
 
 export const STONES = [
@@ -917,8 +916,6 @@ export default function StoneGallery() {
           {paginatedStones.length > 0 ? (
             <div className="stone-gallery-grid">
               {paginatedStones.map((stone) => {
-              const typeColors = TYPE_COLORS[stone.type]
-
               return (
                 <button
                   key={stone.name}
@@ -944,7 +941,7 @@ export default function StoneGallery() {
                     <span className="stone-gallery-card-origin">{stone.origin}</span>
                     <span
                       className="stone-gallery-card-type"
-                      style={{ backgroundColor: typeColors.pill, color: typeColors.pillFg }}
+                      style={{ backgroundColor: TYPE_COLORS.pill, color: TYPE_COLORS.pillFg }}
                     >
                       {formatType(stone.type)}
                     </span>
@@ -1037,8 +1034,8 @@ export default function StoneGallery() {
               <span
                 className="stone-gallery-modal-badge"
                 style={{
-                  backgroundColor: TYPE_COLORS[selectedStone.type].bg,
-                  color: TYPE_COLORS[selectedStone.type].fg,
+                  backgroundColor: TYPE_COLORS.bg,
+                  color: TYPE_COLORS.fg,
                 }}
               >
                 {formatType(selectedStone.type)}

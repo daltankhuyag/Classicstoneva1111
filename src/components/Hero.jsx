@@ -25,7 +25,7 @@ const HERO_SLIDES = [
     description:
       'Compare shaker and slab cabinet profiles, then open each style to review the real finish collections before making your final selection.',
     ctaLabel: 'Explore door profiles',
-    ctaHref: '/#door-profiles',
+    ctaHref: '/cabinetry#door-profiles',
     image: '/Inspiration Gallery/inverness-bristol-bay-kitchen-modern-001-23_IG-1240x1240.avif',
     progressLabel: 'Slide 2: Door profiles',
   },

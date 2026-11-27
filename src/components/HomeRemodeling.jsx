@@ -109,7 +109,7 @@ export default function HomeRemodeling() {
       <section className="hr-process-section">
         <div className="container">
           <p className="section-label" style={{ color: 'var(--copper-light)' }}>How It Works</p>
-          <h2 className="section-title" style={{ color: '#f5f2ee' }}>
+          <h2 className="section-title" style={{ color: 'var(--cream)' }}>
             Our remodeling process.
           </h2>
           <div className="divider" />

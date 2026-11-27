@@ -11,13 +11,13 @@ import {
 
 const CABINET_PDF_MARGIN = 44
 // Palette pulled directly from src/index.css :root so the PDF matches the live site.
-const CABINET_PDF_TEXT = [30, 40, 48] // --text
-const CABINET_PDF_MUTED = [74, 85, 96] // --muted
-const CABINET_PDF_COPPER = [181, 98, 30] // --copper
-const CABINET_PDF_DARK = [30, 40, 48] // --slate-deep (banner / tile fills)
-const CABINET_PDF_CREAM = [245, 242, 238] // --cream (text-on-dark + swatch backdrop)
-const CABINET_PDF_CREAM_DARK = [236, 231, 224] // --cream-dark (subhead tint)
-const CABINET_PDF_BORDER = [216, 210, 200] // --border
+const CABINET_PDF_TEXT = [41, 37, 33] // --text
+const CABINET_PDF_MUTED = [101, 91, 80] // --muted
+const CABINET_PDF_COPPER = [143, 98, 59] // --copper
+const CABINET_PDF_DARK = [33, 30, 27] // --slate-deep (banner / tile fills)
+const CABINET_PDF_CREAM = [245, 238, 229] // --cream (text-on-dark + swatch backdrop)
+const CABINET_PDF_CREAM_DARK = [233, 223, 210] // --cream-dark (subhead tint)
+const CABINET_PDF_BORDER = [217, 205, 191] // --border
 
 function drawSpecBanner(pdf, text, x, y, width, height = 22) {
   pdf.setFillColor(...CABINET_PDF_DARK)
@@ -489,7 +489,7 @@ export default function DoorStylePage() {
         </div>
         <section className="fds-detail-section">
           <div className="container">
-            <Link to="/" className="btn btn-dark">Back To Home</Link>
+            <Link to="/cabinetry#door-profiles" className="btn btn-dark">Back to Cabinetry</Link>
           </div>
         </section>
       </>
@@ -500,6 +500,7 @@ export default function DoorStylePage() {
   const pagePath = `/door-styles/${style.id}`
   const selectedFinishType = getFinishType(selectedFinish.label)
   const selectedFinishImage = selectedFinish.media?.image
+  const constructionSpecs = getConstructionSpecsForStyle(style)
 
   return (
     <>
@@ -529,7 +530,7 @@ export default function DoorStylePage() {
       >
         <div className="container">
           <div className="fds-detail-topbar">
-            <a href="/#door-profiles" className="fds-back-link">Back to door profiles</a>
+            <Link to="/cabinetry#door-profiles" className="fds-back-link">Back to cabinet styles</Link>
             <span className="fds-detail-tag">{style.tag}</span>
           </div>
 
@@ -643,6 +644,44 @@ export default function DoorStylePage() {
                   </div>
                 ))}
               </div>
+              <section className="fds-specs-panel" aria-labelledby="fds-specs-title">
+                <div className="fds-finish-section-head">
+                  <p className="section-label">Construction specifications</p>
+                  <h3 id="fds-specs-title" className="fds-finish-section-title">
+                    {style.name} cabinet details
+                  </h3>
+                  <p className="fds-finish-section-note">
+                    Review the construction materials, hardware, and build details for this profile.
+                  </p>
+                </div>
+                <div className="fds-specs-grid">
+                  <section className="fds-spec-card" aria-label="Cabinet materials">
+                    <h4>Materials</h4>
+                    <dl className="fds-spec-list">
+                      <div><dt>Doors</dt><dd>{constructionSpecs.materials.doors.join(', ')}</dd></div>
+                      <div><dt>Cabinet boxes</dt><dd>{constructionSpecs.materials.cabinetBoxes.join(', ')}</dd></div>
+                      <div><dt>Drawers</dt><dd>{constructionSpecs.materials.drawers.join(', ')}</dd></div>
+                      <div><dt>Shelves</dt><dd>{constructionSpecs.materials.shelves.join(', ')}</dd></div>
+                    </dl>
+                  </section>
+                  <section className="fds-spec-card" aria-label="Cabinet features">
+                    <h4>Features</h4>
+                    <dl className="fds-spec-list">
+                      <div><dt>Cabinet boxes</dt><dd>{constructionSpecs.features.cabinetBoxes.join(', ')}</dd></div>
+                      <div><dt>Door hinges</dt><dd>{constructionSpecs.features.doorHinges.join(', ')}</dd></div>
+                      <div><dt>Drawers</dt><dd>{constructionSpecs.features.drawers.join(', ')}</dd></div>
+                    </dl>
+                  </section>
+                  <section className="fds-spec-card" aria-label="Cabinet build details">
+                    <h4>Build details</h4>
+                    <dl className="fds-spec-list">
+                      <div><dt>Overlay</dt><dd>{constructionSpecs.details.overlay}</dd></div>
+                      <div><dt>Shelf depths</dt><dd>{constructionSpecs.details.shelfDepths.join(', ')}</dd></div>
+                      <div><dt>Assembly</dt><dd>{constructionSpecs.details.assembly}</dd></div>
+                    </dl>
+                  </section>
+                </div>
+              </section>
             </div>
           </div>
         </div>

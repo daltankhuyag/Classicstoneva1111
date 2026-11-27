@@ -25,6 +25,14 @@ export const SEO_PAGES = [
     priority: '0.9',
   },
   {
+    path: '/cabinetry',
+    title: 'Cabinetry & Door Styles | Classic Stone',
+    description:
+      'Explore Classic Stone cabinet door profiles, available finishes, construction details, and downloadable cabinet specifications.',
+    changeFrequency: 'monthly',
+    priority: '0.8',
+  },
+  {
     path: '/gallery',
     title: 'Project Gallery | Classic Stone',
     description:

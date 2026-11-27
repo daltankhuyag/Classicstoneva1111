@@ -2,13 +2,16 @@ import { useEffect, useRef } from 'react'
 
 export default function AdUnit({ className = '' }) {
   const adRef = useRef(null)
+  const hasRequestedAdRef = useRef(false)
 
   useEffect(() => {
-    if (!adRef.current) return
+    if (!adRef.current || hasRequestedAdRef.current) return
 
+    hasRequestedAdRef.current = true
     try {
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
     } catch (error) {
+      hasRequestedAdRef.current = false
       console.warn('AdSense could not initialize.', error)
     }
   }, [])
