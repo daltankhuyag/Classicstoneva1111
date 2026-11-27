@@ -4,13 +4,13 @@ import { animate, stagger, svg } from 'animejs'
 import PreviewFrame from './NavPreviews'
 
 const MENU_ITEMS = [
-  { id: 'about', num: '01', word: 'About', tag: 'Our story · in-house crew', kind: 'hash', hash: '#about', previewId: 'pv-about' },
-  { id: 'cabinetry', num: '02', word: 'Cabinetry', tag: 'Door styles · finishes · specs', kind: 'route', to: '/cabinetry', previewId: 'pv-services' },
-  { id: 'floor-plans', num: '03', word: 'Floor Plans', tag: 'Custom Virginia home designs', kind: 'route', to: '/floor-plans', previewId: 'pv-floorplans' },
-  { id: 'remodeling', num: '04', word: 'Remodeling', tag: 'Renovations & additions', kind: 'route', to: '/remodeling', previewId: 'pv-remodeling' },
-  { id: 'gallery', num: '05', word: 'Gallery', tag: 'Finished project work', kind: 'route', to: '/gallery', previewId: 'pv-gallery' },
+  { id: 'home', num: '01', word: 'Home', tag: 'Classic stone · design & build', kind: 'hash', hash: '#home', previewId: 'pv-about' },
+  { id: 'stone-gallery', num: '02', word: 'Stone Gallery', tag: 'Natural stone · materials & surfaces', kind: 'route', to: '/stone-gallery', previewId: 'pv-gallery' },
+  { id: 'projects', num: '03', word: 'Projects', tag: 'Kitchens · baths · interiors', kind: 'hash', hash: '#featured-projects', previewId: 'pv-remodeling' },
+  { id: 'cabinetry', num: '04', word: 'Cabinetry', tag: 'Door styles · finishes · specs', kind: 'route', to: '/cabinetry', previewId: 'pv-services' },
+  { id: 'inspiration', num: '05', word: 'Inspiration', tag: 'Ideas · stone · design', kind: 'hash', hash: '#about', previewId: 'pv-floorplans' },
   { id: 'contact', num: '06', word: 'Contact', tag: 'Arlington · Fairfax, VA', kind: 'hash', hash: '#contact', previewId: 'pv-contact' },
-  { id: 'schedule', num: '07', word: 'Book a Visit', tag: 'Free consultation', kind: 'route', to: '/schedule', previewId: 'pv-schedule' },
+  { id: 'quote', num: '07', word: 'Request a Quote', tag: 'Free consultation', kind: 'route', to: '/schedule', previewId: 'pv-schedule', isPrimary: true },
 ]
 
 export default function Navbar() {
@@ -19,6 +19,7 @@ export default function Navbar() {
   const [activePreview, setActivePreview] = useState(MENU_ITEMS[0].previewId)
   const { pathname } = useLocation()
   const activeItem = MENU_ITEMS.find(item => item.previewId === activePreview) ?? MENU_ITEMS[0]
+  const primaryMenuItem = MENU_ITEMS.find(item => item.isPrimary)
   const homeHref = (hash) => pathname === '/' ? hash : `/${hash}`
 
   useEffect(() => {
@@ -98,14 +99,22 @@ export default function Navbar() {
               <span>Stone · Cabinetry · Design</span>
             </a>
             <nav className="navbar-desktop-links" aria-label="Main navigation">
-              <a href={homeHref('#home')}>Home</a>
-              <a href="/stone-gallery">Stone gallery</a>
-              <a href={homeHref('#featured-projects')}>Projects</a>
-              <a href="/cabinetry">Cabinetry</a>
-              <a href={homeHref('#about')}>Inspiration</a>
-              <a href={homeHref('#contact')}>Contact</a>
+              {MENU_ITEMS.filter(item => !item.isPrimary).map((item) => {
+                const href = item.kind === 'route' ? item.to : homeHref(item.hash)
+
+                return (
+                  <a
+                    href={href}
+                    key={item.id}
+                  >
+                    {item.word}
+                  </a>
+                )
+              })}
             </nav>
-            <a className="navbar-quote-link" href="/schedule">Request a quote <span aria-hidden="true">→</span></a>
+            <a className="navbar-quote-link" href={primaryMenuItem.to}>
+              {primaryMenuItem.word} <span aria-hidden="true">→</span>
+            </a>
             <button
               type="button"
               className="navbar-menu-btn"
@@ -144,15 +153,16 @@ export default function Navbar() {
                       <span className="nav-menu-word-inner">{item.word}</span>
                     </span>
                     <span className="nav-menu-tag">{item.tag}</span>
+                    {item.isPrimary && <span className="nav-menu-arrow" aria-hidden="true">→</span>}
                   </>
                 )
 
                 return (
-                  <li className="nav-menu-item" key={item.id}>
+                  <li className={`nav-menu-item${item.isPrimary ? ' nav-menu-item--primary' : ''}`} key={item.id}>
                     {item.kind === 'route' ? (
                       <Link
                         to={item.to}
-                        className={`nav-menu-link${pathname === item.to ? ' nav-active' : ''}`}
+                        className={`nav-menu-link${item.isPrimary ? ' nav-menu-link--primary' : ''}${pathname === item.to ? ' nav-active' : ''}`}
                         onClick={closeMenu}
                         onMouseEnter={handleFocusPreview}
                         onFocus={handleFocusPreview}
@@ -162,7 +172,7 @@ export default function Navbar() {
                     ) : (
                       <a
                         href={homeHref(item.hash)}
-                        className="nav-menu-link"
+                        className={`nav-menu-link${item.isPrimary ? ' nav-menu-link--primary' : ''}`}
                         onClick={closeMenu}
                         onMouseEnter={handleFocusPreview}
                         onFocus={handleFocusPreview}
